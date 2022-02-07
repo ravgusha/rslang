@@ -1,0 +1,16 @@
+*,
+h1 {
+  margin: 0;
+  padding: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+@import 'main';
+@font-face {
+  font-family: Big-Book;
+  src: url('../assets/fonts/big-book-heavy.otf');
+}
+
+body {
+  background-color: #000000;
+}

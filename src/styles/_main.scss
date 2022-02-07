@@ -1,0 +1,328 @@
+$color-orange: #ff931e;
+$color-darkblue: #00507d;
+$color-blue: #3fa9f5;
+$color-yellow: #edc200;
+$color-red: #ff3d43;
+$color-green: #a2e19f;
+$color-greenacid: #55d800;
+$color-violet: #c340f4;
+$color-white: #ffffff;
+
+.container {
+  width: 100%;
+  height: calc(100vh - 70px);
+  background-color: #000000;
+}
+
+h2 {
+  font-family: Big-book;
+  font-size: 42px;
+  text-align: center;
+  padding-top: 25px;
+}
+
+.header {
+  width: 100%;
+  height: 80px;
+  background-color: $color-white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+}
+.main-title {
+  width: 660px;
+  font-family: Big-Book;
+  font-size: 48px;
+  color: $color-orange;
+  padding-left: 100px;
+  -webkit-text-stroke: 3px $color-yellow;
+  &:first-letter {
+    font-size: 57px;
+  }
+  span {
+    display: inline-block;
+    &:first-letter {
+      font-size: 57px;
+    }
+  }
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  width: 225px;
+  margin-left: auto;
+  margin-right: 30px;
+  div {
+    width: 50px;
+    height: 50px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    transition: 0.3s transform, box-shadow;
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px 5px $color-yellow;
+      transition: 0.3s transform, box-shadow;
+    }
+  }
+}
+.to-main {
+  background-image: url('../assets/images/svg/Asset\ 14300.svg');
+}
+.to-statistic {
+  background-image: url('../assets/images/svg/Asset\ 13300.svg');
+}
+.to-logout {
+  background-image: url('../assets/images/svg/Asset\ 12300.svg');
+}
+.main {
+  height: calc(100vh - 150px);
+  background-color: $color-violet;
+  width: inherit;
+  display: flex;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  background-color: $color-white;
+  height: 70px;
+  width: 100%;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+.main-wide {
+  width: 50%;
+  height: 100%;
+  background-color: $color-blue;
+  div {
+    height: 50%;
+  }
+}
+.about {
+  background-color: $color-blue;
+  h2 {
+    font-size: 52px;
+    color: $color-orange;
+    -webkit-text-stroke: 2px $color-white;
+  }
+}
+p {
+  font-size: 32px;
+  width: 80%;
+  padding-left: 100px;
+  padding-top: 15px;
+  font-family: 'Segoe UI';
+  font-weight: 400;
+}
+.e-book {
+  background-color: $color-darkblue;
+
+  p {
+    color: $color-white;
+    padding-top: 50px;
+  }
+  .button {
+    display: block;
+    width: 200px;
+    height: 65px;
+    background-color: $color-orange;
+    font-size: 42px;
+    font-family: 'Segoe UI';
+    color: $color-white;
+    border: none;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 45px;
+    border-radius: 7px;
+    transition: box-shadow 0.3s;
+    cursor: pointer;
+    &:hover {
+      // background-color: $color-yellow;
+      box-shadow: 0 0 15px 5px $color-white;
+      transition: box-shadow 0.3s;
+    }
+    &:active {
+      transform: scale(0.96);
+    }
+  }
+}
+.main-quad {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 32px;
+  font-family: 'Segoe UI';
+  div {
+    height: 50%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    h2 {
+      color: $color-red;
+    }
+  }
+}
+
+.audio-call,
+.team {
+  background-color: $color-darkblue;
+}
+.sprint {
+  background-color: $color-blue;
+}
+.sign-in {
+  background-color: $color-yellow;
+  color: $color-orange;
+  font-weight: bold;
+  padding-top: 45px;
+
+  input {
+    font-size: 32px;
+    line-height: 45px;
+    font-family: 'Segoe UI';
+    text-align: center;
+    width: 258px;
+    border-radius: 29px;
+    border: solid 3px $color-orange;
+    font-style: italic;
+    margin-bottom: 20px;
+    margin-top: 8px;
+  }
+  button {
+    @extend input;
+    background-color: $color-orange;
+    color: $color-white;
+    font-style: normal;
+    margin-top: 15px;
+    margin-bottom: 0;
+    font-weight: bold;
+    cursor: pointer;
+    &:hover {
+      box-shadow: 0 0 15px 5px $color-white;
+      transition: box-shadow 0.3s;
+    }
+    &:active {
+      transform: scale(0.96);
+    }
+  }
+  .btn-span {
+    color: #404040;
+    font-weight: normal;
+    font-size: 18px;
+  }
+}
+.note {
+  color: $color-white;
+}
+.game-ico {
+  margin-top: 35px;
+  width: 160px;
+  height: 160px;
+}
+
+.audio-call,
+.sprint {
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0 0 10px 5px $color-white;
+
+    z-index: 2;
+  }
+  &:active {
+    transform: scale(0.99);
+  }
+}
+
+.team {
+  color: $color-yellow;
+  h3 {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-weight: normal;
+  }
+}
+.team img {
+  height: 80px;
+  width: 80px;
+}
+ul {
+  width: 85%;
+  color: $color-white;
+  display: flex;
+  flex-direction: column;
+}
+li {
+  list-style-type: none;
+  height: 85px;
+  width: 100%;
+  display: flex;
+  margin-bottom: 25px;
+  h4 {
+    font-weight: normal;
+    margin: 0;
+    font-size: 20px;
+    line-height: 24px;
+  }
+  p {
+    width: 250px;
+    font-size: 16px;
+    margin: 0;
+    padding-top: 0px;
+    padding-left: 115px;
+  }
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+a {
+  width: 120px;
+  display: block;
+  padding-top: 5px;
+  padding-left: 20px;
+  transition: transform 0.3s;
+}
+a img {
+  height: 55px;
+  &:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s;
+  }
+}
+.gh-links {
+  margin-right: 30px;
+  width: 550px;
+
+  a {
+    font-family: 'Segoe UI';
+    text-decoration: none;
+    display: inline;
+    font-size: 24px;
+    position: relative;
+    margin-left: 50px;
+    color: $color-blue;
+    &::before {
+      position: absolute;
+      left: -25px;
+      top: 2px;
+      content: ' ';
+      width: 40px;
+      height: 40px;
+      background-image: url('../assets/images/svg/Asset\ 15300.svg');
+    }
+    &:hover {
+      color: $color-darkblue;
+    }
+  }
+}

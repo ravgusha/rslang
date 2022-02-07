@@ -1,3 +1,6 @@
+/* eslint-disable no-useless-escape */
+/* eslint-disable no-shadow */
+/* eslint-disable no-param-reassign */
 const fs = require('fs');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -9,7 +12,7 @@ const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 const htmlFile = /^([-_\d\w]+).html$/i;
 const srcPath = path.resolve(__dirname, 'src');
 
-const devServer = (isDev) => !isDev ? {} : {
+const devServer = (isDev) => (!isDev ? {} : {
   devServer: {
     open: true,
     port: 'auto',
@@ -18,43 +21,47 @@ const devServer = (isDev) => !isDev ? {} : {
       watch: true,
     },
   },
-};
+});
 
 const getRelative = (absolutePath) => path.relative(srcPath, absolutePath);
-const makePath = (relativePath) => './' + relativePath.replace(/\\+/g, '/');
+const makePath = (relativePath) => `./${relativePath.replace(/\\+/g, '/')}`;
 
 const getPages = (dir, n) => {
   const dirContent = fs.readdirSync(dir);
   const pages = dirContent
-    .filter(f => htmlFile.test(f))
+    .filter((f) => htmlFile.test(f))
     .reduce((res, f, i) => {
       const name = path.basename(f, path.extname(f));
       res.push({
         name: `p${n += i}`,
         dir: getRelative(dir),
         html: makePath(getRelative(path.join(dir, f))),
-        script: dirContent.find(f => new RegExp(`^${name}\.js$`, 'i').test(f)),
-        style: dirContent.find(f => new RegExp(`^${name}\.s(c|a)ss$`, 'i').test(f)),
+        script: dirContent.find((f) => new RegExp(`^${name}\.js$`, 'i').test(f)),
+        style: dirContent.find((f) => new RegExp(`^${name}\.s(c|a)ss$`, 'i').test(f)),
       });
       return res;
     }, [])
     .concat(dirContent
-      .filter(f => fs.lstatSync(path.resolve(dir, f)).isDirectory())
-      .reduce((res, f) => [...res, ...getPages(path.resolve(dir, f), n + 1)], [])
-    );
+      .filter((f) => fs.lstatSync(path.resolve(dir, f)).isDirectory())
+      .reduce((res, f) => [...res, ...getPages(path.resolve(dir, f), n + 1)], []));
 
   return pages;
 };
 
-const getEntryPoints = (pages) => pages.reduce((entry, {name, dir, script, style}) => Object.assign(entry,
+const getEntryPoints = (pages) => pages.reduce((entry, {
+  name, dir, script, style,
+}) => Object.assign(
+  entry,
   script ? { [name]: makePath(path.join(dir, script)) } : {},
   style ? { [`${name}-styles`]: makePath(path.join(dir, style)) } : {},
 ), {});
 
-const getHtmlPlugins = (pages) => pages.map(({html, name, script, style}) => new HtmlWebpackPlugin({
+const getHtmlPlugins = (pages) => pages.map(({
+  html, name, script, style,
+}) => new HtmlWebpackPlugin({
   template: html,
   filename: html,
-  chunks: [ script ? name : null, style ? `${name}-styles` : null ].filter(c => !!c),
+  chunks: [script ? name : null, style ? `${name}-styles` : null].filter((c) => !!c),
 }));
 
 module.exports = ({ development }) => {
@@ -86,12 +93,12 @@ module.exports = ({ development }) => {
         },
         {
           test: /\.css$/i,
-          use: [{loader: MiniCssExtractPlugin.loader, options: { publicPath: '../' }}, 'css-loader'],
+          use: [{ loader: MiniCssExtractPlugin.loader, options: { publicPath: '../' } }, 'css-loader'],
         },
         {
           test: /\.s[ac]ss$/i,
-          use: [{loader: MiniCssExtractPlugin.loader, options: { publicPath: '../' }}, 'css-loader', 'sass-loader']
-        }
+          use: [{ loader: MiniCssExtractPlugin.loader, options: { publicPath: '../' } }, 'css-loader', 'sass-loader'],
+        },
       ],
     },
     plugins: [
@@ -113,7 +120,7 @@ module.exports = ({ development }) => {
             },
             noErrorOnMissing: true,
             force: true,
-          }
+          },
         ],
       }),
       new CleanWebpackPlugin(),
@@ -122,6 +129,6 @@ module.exports = ({ development }) => {
     resolve: {
       extensions: ['.js'],
     },
-    ...devServer(development)
+    ...devServer(development),
   };
-}
+};
