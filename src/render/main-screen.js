@@ -1,7 +1,7 @@
 const containerHtmlData = `<div class="container">
     <div class="header">
       <h1 class="main-title">
-        Play whith
+        Play with
         <span>English</span>
       </h1>
       <div class="nav">
@@ -50,11 +50,13 @@ const containerHtmlData = `<div class="container">
           />
         </div>
         <div class="sign-in">
+        <form>
           <span class="sign-label">E-mail</span>
-          <input type="text" placeholder="E-mail:" />
+          <input id="email" type="text" placeholder="E-mail:" />
           <span class="sign-label">Password</span>
-          <input type="password" placeholder="Password" />
+          <input id="password" type="password" placeholder="Password" />
           <button class="sign-btn">Sign in</button>
+          </form>
           <span class="btn-span">Not registered? Sign up</span>
         </div>
         <div class="team">
