@@ -20,8 +20,6 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
 }
 .main-title {
   font-family: Big-Book;
@@ -80,9 +78,6 @@ h2 {
 .footer {
   background-color: const.$color-white;
   height: 70px;
-  width: 100%;
-  border-bottom-left-radius: 25px;
-  border-bottom-right-radius: 25px;
 }
 .main-wide {
   width: 45%;
