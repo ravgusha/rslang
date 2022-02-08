@@ -1,7 +1,7 @@
 const containerHtmlData = `<div class="container">
     <div class="header">
       <h1 class="main-title">
-        Play whith
+        Play with
         <span>English</span>
       </h1>
       <div class="nav">
@@ -14,15 +14,15 @@ const containerHtmlData = `<div class="container">
       <div class="main-wide">
         <div class="about">
           <h2>About</h2>
-          <p>
+          <p class="main-wide-text">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis
             reprehenderit adipisci cupiditate ex voluptatem. Repellendus,
             accusamus veniam sint incidunt quia ab mollitia omnis, facere ex
-            sequi officia .
+            .
           </p>
         </div>
         <div class="e-book">
-          <p>
+          <p class="main-wide-text">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis
             reprehenderit adipisci officia reiciendis impedit cupiditate ex
             voluptatem. Repellendus, a.
@@ -51,13 +51,13 @@ const containerHtmlData = `<div class="container">
         </div>
         <div class="sign-in">
           <span class="sign-label">E-mail</span>
-          <input type="text" placeholder="E-mail:" />
+          <input type="email" placeholder="E-mail:" />
           <span class="sign-label">Password</span>
           <input type="password" placeholder="Password" />
           <button class="sign-btn">Sign in</button>
           <span class="btn-span">Not registered? Sign up</span>
         </div>
-        <div class="team">
+        <div class="team-wrapper">
           <h3 class="team-title">Dev Team</h3>
           <ul>
             <li>
@@ -67,8 +67,8 @@ const containerHtmlData = `<div class="container">
               />
               <div class="team-member">
                 <h4>Sergey</h4>
-                <p>
-                  Lorem ipsum ipsum amet consectetur amet consectetur
+                <p class="team-member-text">
+                  Lorem ipsum ipsum amet conse ctetur amet consectetur
                   adipisicing elit.
                 </p>
               </div>
@@ -80,8 +80,8 @@ const containerHtmlData = `<div class="container">
               />
               <div class="team-member">
                 <h4>Ravganiyat</h4>
-                <p>
-                  Lorem ipsum ipsum amet consectetur amet consectetur
+                <p class="team-member-text">
+                  Lorem ipsum ipsum amet conse ctetur amet consectetur
                   adipisicing elit.
                 </p>
               </div>
@@ -93,8 +93,8 @@ const containerHtmlData = `<div class="container">
               />
               <div class="team-member">
                 <h4>Natalia</h4>
-                <p>
-                  Lorem ipsum ipsum amet consectetur amet consectetur
+                <p class="team-member-text">
+                  Lorem ipsum ipsum amet conse ctetur amet consectetur
                   adipisicing elit.
                 </p>
               </div>
@@ -106,12 +106,15 @@ const containerHtmlData = `<div class="container">
 
     <footer class="footer">
       <a href="#"
-        ><img src="./assets/images/svg/Asset 16300.svg" alt="rs logo"
+        ><img class="rs-logo" src="./assets/images/svg/Asset 16300.svg" alt="rs logo"
       /></a>
       <div class="gh-links">
-        <a href="#">sergeykagal</a>
-        <a href="#">ravgusha</a>
-        <a href="#">angietune</a>
+        <a href="#"><img src="./assets/images/svg/Asset 15300.svg" alt="gh logo"
+      />sergeykagal</a>
+        <a href="#"><img src="./assets/images/svg/Asset 15300.svg" alt="gh logo"
+        />ravgusha</a>
+        <a href="#"><img src="./assets/images/svg/Asset 15300.svg" alt="gh logo"
+        />angietune</a>
       </div>
     </footer>
   </div>`;
