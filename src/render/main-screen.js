@@ -13,20 +13,20 @@ const containerHtmlData = `
   </div>
   <main class="main">
     <div class="main-top-wrapper">
-      <div class="about">
+      <div class="about pad">
         <h2>about</h2>
         <p>
           Fugit nobis voluptatibus obcaecati dicta optio! Ipsum! ipsum dolor, sit amet consectetur
           adipisicing elit. Omnis reprehenderit adipisci cupiditate ex voluptatem. Repellendus,
-          fghgh ffgfghf accusamus veniam sint incidunt quia ab mollitia omnis, facere ex .
+         int incidunt quia ab mollitia omnis, facere ex .
         </p>
       </div>
-      <div class="audio-call">
+      <div class="audio-call pad">
         <h2>audiocall</h2>
         <span class="note">mini game</span>
         <img src="./assets/images/svg/audiocall.svg" alt="sprint-ico" class="game-ico" />
       </div>
-      <div class="sprint">
+      <div class="sprint pad">
         <h2>sprint</h2>
         <span class="note">mini game</span>
         <img src="./assets/images/svg/sprint.svg" alt="sprint-ico" class="game-ico" />
@@ -34,14 +34,14 @@ const containerHtmlData = `
     </div>
 
     <div class="main-bottom-wrapper">
-      <div class="e-book">
+      <div class="e-book pad">
         <p class="main-wide-text">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis reprehenderit adipisci
           officia reiciendis impedit cupiditate ex voluptatem. Repellendus, a.
         </p>
         <button class="button">E-book</button>
       </div>
-      <div class="sign-in">
+      <div class="sign-in pad">
         <span class="sign-label">E-mail</span>
         <input type="email" placeholder="E-mail:" />
         <span class="sign-label">Password</span>
@@ -49,7 +49,7 @@ const containerHtmlData = `
         <button class="sign-btn">Sign in</button>
         <span class="btn-span">Not registered? Sign up</span>
       </div>
-      <div class="team-wrapper">
+      <div class="team-wrapper pad">
         <h3 class="team-title">Dev Team</h3>
         <ul>
           <li>

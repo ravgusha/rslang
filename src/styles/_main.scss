@@ -189,8 +189,7 @@ h2 {
 .team-wrapper {
   color: const.$color-yellow;
   background-color: const.$color-darkblue;
-  padding: 20px;
-  box-sizing: border-box;
+
   h3 {
     font-weight: normal;
     font-size: 32px;
@@ -282,8 +281,6 @@ footer {
 .about,
 .e-book {
   width: 40%;
-  padding: 40p;
-  padding: 40px;
 }
 .audio-call,
 .sprint,
@@ -296,7 +293,9 @@ footer {
   align-items: center;
   gap: 20px;
 }
-
+.pad {
+  padding: 40px;
+}
 .team-wrapper {
   gap: 15px;
 }
@@ -384,6 +383,6 @@ footer {
   }
   .main-top-wrapper,
   .main-bottom-wrapper {
-    min-height: calc(50vh - 50px);
+    min-height: calc(50vh - 100px);
   }
 }
