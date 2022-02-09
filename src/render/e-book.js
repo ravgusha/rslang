@@ -3,8 +3,11 @@ const containerHtmlData = `<div class="ebook">
         <div class="ebook__header">
           <div class="ebook__pag tui-pagination" id="tui-pagination-container"></div>
           <div class="ebook__menu">
-            <button class="ebook__audiocall">Audiocall</button>
-            <button class="ebook__sprint">Sprint</button>
+            <button class="ebook__audiocall">
+            Audiocall
+            <img src="../assets/images/svg/audiocall.svg"/></button>
+            <button class="ebook__sprint">Sprint
+            <img src="../assets/images/svg/sprint.svg"/></button>
             <button class="ebook__settings">Settings</button>
           </div>
         </div>
