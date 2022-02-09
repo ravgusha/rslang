@@ -1,3 +1,4 @@
+
 .ebook {
   font-family: "Source Sans Variable";
   background-color: #00507d;
@@ -18,6 +19,7 @@
 }
 
 .ebook__pag {
+  font-family: "Segoe UI";
   background-color: #c340f4;
   padding: 0 27px;
   border-radius: 30px 30px 0 0;
@@ -93,7 +95,7 @@
     color: #fff;
     font-weight: 700;
     position: relative;
-    padding: 8px 30px 13px 20px;
+    padding: 8px 30px 15px 20px;
     font-size: 25px;
     border-radius: 37px 27px 0 0;
   }
@@ -110,7 +112,7 @@
 
   .ebook__settings {
     background-color: #ff971a;
-    padding: 19px 43px 13px 43px;
+    padding: 19px 43px 15px 43px;
     z-index: 2;
   }
 
@@ -212,7 +214,7 @@
 }
 
 .content {
-  font-family: "AGOpus Normal";
+  font-family: "Segoe UI";
   padding: 5%;
 }
 
@@ -271,5 +273,6 @@
   }
 }
 
-
-// box-shadow: 15px 10px 0 rgb(228 63 14);
+.difficult {
+  box-shadow: 15px 10px 0 rgb(228 63 14);
+}

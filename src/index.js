@@ -16,7 +16,7 @@ const pagination = new Pagination(
     itemsPerPage: 20,
     visiblePages: 5,
     centerAlign: true,
-  },
+  }
 );
 
 const BASE_URL = 'https://rslangteam.herokuapp.com';
@@ -25,9 +25,14 @@ const tabs = document.getElementById('tabs');
 const contents = document.querySelectorAll('.content');
 
 async function getWords(group, page) {
+  // Если юзер не авторизован, показать все слова
   const res = await axios(`${BASE_URL}/words?group=${group}&page=${page}}`);
   const data = await res.data;
-  //   console.log(res)
+
+  // Если юзер авторизован, показать его слова
+  // const res = await axios(`${BASE_URL}/users/1/words`);
+  // const data = await res.data;
+  console.log(res);
 
   contents[group].innerHTML = '';
   data.forEach((card) => {
@@ -69,9 +74,17 @@ async function getWords(group, page) {
             </p>
           </div>
         </div>
-      </div>`,
+      </div>`
     );
   });
+}
+
+function addToDifficult(e) {
+  // mark difficult word
+  const currentCard = e.target.closest(".card");
+  const image = currentCard.querySelector("img");
+//   console.log()
+  image.classList.add('difficult');
 }
 
 let currentGroup = 0;
@@ -130,5 +143,9 @@ const conContainer = document.querySelector('.content__container');
 conContainer.addEventListener('click', (e) => {
   if (e.target.classList.contains('card__audio')) {
     playAudio(e);
+  }
+
+  if (e.target.classList.contains('card__list')) {
+    addToDifficult(e);
   }
 });
