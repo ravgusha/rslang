@@ -1,9 +1,9 @@
 import axios from "axios";
-
+import { BASE_URL } from "../constants";
 
 
 export const createUser = async user => {
-    const rawResponse = await axios.post('https://rslangteam.herokuapp.com/users', user).then(response => {
+    const rawResponse = await axios.post(`${BASE_URL}/users`, user).then(response => {
             const addedUser = response.data;
             console.log(`POST: user is added`, addedUser);
         })
@@ -12,17 +12,7 @@ export const createUser = async user => {
 }
 
 export const loginUser = async user => {
-  const rawResponse = await fetch('https://rslangteam.herokuapp.com/signin', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(user)
-  });
-  const content = await rawResponse.json();
-
-  console.log(content);
+  await axios.post(`${BASE_URL}/signin`, user);
 };
 
 export const formRegister = () => {
