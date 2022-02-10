@@ -39,7 +39,7 @@ const containerHtmlData = `
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis reprehenderit adipisci
           officia reiciendis impedit cupiditate ex voluptatem. Repellendus, a.
         </p>
-        <button class="button">E-book</button>
+        <button class="button e-book-btn">E-book</button>
       </div>
       <div class="sign-in pad">
         <span class="sign-label">E-mail</span>
