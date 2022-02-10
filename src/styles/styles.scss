@@ -1,5 +1,10 @@
-@import 'main';
-@import 'e-book';
+@use 'const';
+@use 'main';
+
+@font-face {
+  font-family: Big-Book;
+  src: url('../assets/fonts/big-book-heavy.otf');
+}
 
 *,
 h1 {
@@ -7,40 +12,6 @@ h1 {
   padding: 0;
   margin-block-start: 0;
   margin-block-end: 0;
-}
-
-@font-face {
-  font-family: Big-Book;
-  src: url('../assets/fonts/big-book-heavy.otf');
-}
-
-@font-face {
-  font-family: "BigBook Heavy";
-  font-style: normal;
-  font-weight: normal;
-  src: url("../assets/fonts/BigBook-Heavy.woff2") format("woff2"),
-    url("../assets/fonts/BigBook-Heavy.woff") format("woff");
-}
-@font-face {
-  font-family: "Source Sans Variable";
-  font-style: normal;
-  font-weight: normal;
-  src: url("../assets/fonts/SourceSans3VF-Roman.ttf.woff2") format("woff2"),
-    url("../assets/fonts/SourceSans3VF-Roman.ttf.woff") format("woff");
-}
-@font-face {
-  font-family: "Source Sans Variable";
-  font-style: italic;
-  font-weight: normal;
-  src: url("../assets/fonts/SourceSans3VF-Italic.ttf.woff2") format("woff2"),
-    url("../assets/fonts/SourceSans3VF-Italic.ttf.woff") format("woff");
-}
-@font-face {
-  font-family: "Segoe UI";
-  font-style: normal;
-  font-weight: normal;
-  src: url("../assets/fonts/SegoeUI.woff2") format("woff2"),
-    url("../assets/fonts/SegoeUI.woff") format("woff");
 }
 
 body {
