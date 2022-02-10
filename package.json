@@ -26,6 +26,7 @@
     "webpack-remove-empty-scripts": "^0.7.1"
   },
   "dependencies": {
-    "axios": "^0.25.0"
+    "axios": "^0.25.0",
+    "tui-pagination": "^3.4.1"
   }
 }

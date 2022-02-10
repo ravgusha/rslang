@@ -1,0 +1,282 @@
+.ebook {
+  font-family: 'Source Sans Variable';
+  background-color: #00507d;
+}
+
+.ebook__container {
+  margin: 0 8.8% 0 9.8%;
+  padding-top: 26px;
+}
+
+.ebook__header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 34px;
+  font-weight: 700;
+  padding-left: 140px;
+  color: #fff;
+}
+
+.ebook__pag {
+  font-family: 'Segoe UI';
+  background-color: #c340f4;
+  padding: 0 27px;
+  border-radius: 30px 30px 0 0;
+  font-size: 32px;
+  height: fit-content;
+  margin: 15px 0 0 0;
+
+  .tui-page-btn {
+    border: none;
+    font-size: 32px;
+    font-weight: 700;
+    color: white;
+    padding: 8px 6px 6px;
+  }
+
+  .tui-page-btn:hover {
+    background-color: transparent;
+  }
+
+  .tui-ico-ellip,
+  .tui-ico-first,
+  .tui-ico-last,
+  .tui-ico-next,
+  .tui-ico-prev {
+    width: 30px;
+    height: 30px;
+    background-position: 0% 0% !important;
+    background-size: contain;
+    filter: invert(100%);
+  }
+  .tui-ico-ellip {
+    background-image: url('../assets/images/svg/dots.svg');
+    margin-top: 8px;
+  }
+
+  .tui-ico-prev {
+    background-image: url('../assets/images/svg/arrow-left.svg');
+  }
+
+  .tui-ico-next {
+    background-image: url('../assets/images/svg/arrow-left.svg');
+    transform: rotate(180deg);
+  }
+
+  .tui-ico-first {
+    background-image: url('../assets/images/svg/double-arrow-left.svg');
+  }
+
+  .tui-ico-last {
+    background-image: url('../assets/images/svg/double-arrow-left.svg');
+    filter: invert(100%);
+    transform: rotate(180deg);
+  }
+
+  .tui-is-selected {
+    background-color: transparent;
+    color: #3fa9f5;
+  }
+
+  .tui-is-selected:hover {
+    background-color: transparent;
+  }
+
+  .tui-first-child.tui-is-selected,
+  .tui-last-child.tui-is-selected {
+    border: none;
+  }
+}
+
+.ebook__menu {
+  button {
+    border: 1px;
+    color: #fff;
+    font-weight: 700;
+    position: relative;
+    padding: 8px 30px 17px 20px;
+    font-size: 25px;
+    border-radius: 37px 27px 0 0;
+  }
+
+  .ebook__audiocall {
+    background-color: #3fa9f5;
+    left: 33px;
+  }
+
+  .ebook__sprint {
+    background-color: #e84e10;
+    left: 19px;
+  }
+
+  .ebook__settings {
+    background-color: #ff971a;
+    padding: 19px 43px 17px 43px;
+    z-index: 2;
+  }
+
+  img {
+    width: 34px;
+    height: 34px;
+    position: relative;
+    top: 10px;
+  }
+
+  .ebook__sprint img {
+    top: 6px;
+  }
+}
+
+.ebook__main {
+  display: flex;
+}
+
+.tabs__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.tabs__container {
+  height: 108px;
+  width: 43px;
+
+  :first-child {
+    background-color: #edc201;
+  }
+
+  :nth-child(2) {
+    bottom: 8px;
+    background-color: #3fa8f9;
+  }
+
+  :nth-child(3) {
+    bottom: 13px;
+    background-color: #55d800;
+  }
+
+  :nth-child(4) {
+    bottom: 23px;
+    background-color: #e84e10;
+  }
+
+  :nth-child(5) {
+    bottom: 34px;
+    background-color: #c340f4;
+  }
+
+  :nth-child(6) {
+    bottom: 45px;
+    background-color: #ff971a;
+  }
+  
+  :nth-child(7) {
+    bottom: 55px;
+    background-color: #e43f37;
+  }
+}
+
+.tab {
+  cursor: pointer;
+  font-family: 'Source Sans Variable';
+  color: white;
+  font-size: 19px;
+  font-weight: 700;
+  writing-mode: tb-rl;
+  transform: rotate(-180deg);
+  white-space: nowrap;
+  padding: 13px 5px 15px 10px;
+  border-radius: 0 15px 19px 0;
+  position: relative;
+}
+
+.content__container {
+  width: 100%;
+
+  > :first-child {
+    background-color: #edc201;
+  }
+
+  > :nth-child(2) {
+    background-color: #3fa8f9;
+  }
+
+  > :nth-child(3) {
+    background-color: #55d800;
+  }
+
+  > :nth-child(4) {
+    background-color: #e84e10;
+  }
+
+  > :nth-child(5) {
+    background-color: #c340f4;
+  }
+
+  > :nth-child(6) {
+    background-color: #ff971a;
+  }
+}
+
+.content {
+  font-family: 'Segoe UI';
+  padding: 5%;
+}
+
+.active {
+  z-index: 150;
+}
+
+.hidden {
+  display: none;
+}
+
+.card {
+  display: flex;
+  margin: 0 0 40px 0;
+  height: 158px;
+  background-color: transparent;
+  font-weight: 900;
+  font-size: 22px;
+
+  img {
+    width: 220px;
+  }
+
+  button {
+    width: 52px;
+    height: 52px;
+    border: none;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    margin: 0 15px;
+  }
+
+  .card__header {
+    display: flex;
+  }
+
+  .card__header_left {
+    display: flex;
+    padding-top: 3px;
+  }
+
+  .card__audio {
+    background-image: url('../assets/images/svg/audio.svg');
+  }
+
+  .card__list {
+    background-image: url('../assets/images/svg/list.svg');
+  }
+
+  .card__text {
+    padding-left: 25px;
+  }
+
+  .card__description {
+    font-size: 19px;
+  }
+}
+
+.difficult {
+  box-shadow: 15px 10px 0 rgb(228 63 14);
+}
