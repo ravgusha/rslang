@@ -19,10 +19,12 @@ const containerHtmlData = `<div class="ebook">
             <div class="tab" data-group="3" role="tab">Chapter 4</div>
             <div class="tab" data-group="4" role="tab">Chapter 5</div>
             <div class="tab" data-group="5" role="tab">Chapter 6</div>
+            <div class="tab" data-group="6" role="tab">Difficult</div>
           </div>
           <div class="content__container">
             <div class="content">
             </div>
+            <div class="content hidden"></div>
             <div class="content hidden"></div>
             <div class="content hidden"></div>
             <div class="content hidden"></div>

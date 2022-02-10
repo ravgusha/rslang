@@ -16,10 +16,21 @@ const pagination = new Pagination(
     itemsPerPage: 20,
     visiblePages: 5,
     centerAlign: true,
-  }
+  },
 );
 
 const BASE_URL = 'https://rslangteam.herokuapp.com';
+let token;
+async function signIn() {
+  const res = await axios.post(`${BASE_URL}/signin`, {
+    email: 'raya@raya.ru',
+    password: '12345678',
+  });
+  token = await res.data.token;
+  localStorage.setItem('token', token);
+}
+
+signIn();
 
 const tabs = document.getElementById('tabs');
 const contents = document.querySelectorAll('.content');
@@ -74,17 +85,65 @@ async function getWords(group, page) {
             </p>
           </div>
         </div>
-      </div>`
+      </div>`,
     );
   });
 }
 
-function addToDifficult(e) {
+const userId = '6204b6a9fe00730016ee6fe6';
+
+async function addToDifficult(e) {
   // mark difficult word
-  const currentCard = e.target.closest(".card");
-  const image = currentCard.querySelector("img");
-//   console.log()
+  const currentCard = e.target.closest('.card');
+  const image = currentCard.querySelector('img');
+  const wordId = currentCard.id;
+  //   console.log(currentCard, wordId);
+
   image.classList.add('difficult');
+
+  const res = await axios.post(
+    `${BASE_URL}/users/${userId}/words/${wordId}`,
+    {
+      difficulty: 'string',
+      optional: {},
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    },
+  );
+
+  const data = await res.data;
+
+  //   const createUserWord = async ({ userId, wordId, word }) => {
+  //     const rawResponse = await fetch(
+  //       `${BASE_URL}/users/${userId}/words/${wordId}`,
+  //       {
+  //         method: 'POST',
+  //         withCredentials: true,
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //           Accept: 'application/json',
+  //           'Content-Type': 'application/json',
+  //         },
+  //         body: JSON.stringify(word),
+  //       }
+  //     );
+  //     const content = await rawResponse.json();
+
+  //   };
+
+  //   createUserWord({
+  //     userId: `${userId}`,
+  //     wordId: `${wordId}`,
+  //     word: {
+  //       difficulty: 'weak',
+  //       optional: { testFieldString: 'test', testFieldBoolean: true },
+  //     },
+  //   });
 }
 
 let currentGroup = 0;
