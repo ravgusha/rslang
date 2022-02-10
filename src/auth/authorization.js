@@ -1,28 +1,22 @@
 import axios from "axios";
+import { BASE_URL } from "../constants";
 
-
+export const validateUser = async user => {
+  return axios.get(`${BASE_URL}/users`, user)
+}
 
 export const createUser = async user => {
-    const rawResponse = await axios.post('https://rslangteam.herokuapp.com/users', user).then(response => {
-            const addedUser = response.data;
-            console.log(`POST: user is added`, addedUser);
-        })
-        .catch(error => console.error(error));
-    return rawResponse;
+  await validateUser(user).then(response => {
+    if (response.status === 'ok') {
+      alert('The user already exists')
+    } else {
+      await axios.post(`${BASE_URL}/users`, user)
+    }
+  }).catch(error => console.error(error));
 }
 
 export const loginUser = async user => {
-  const rawResponse = await fetch('https://rslangteam.herokuapp.com/signin', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(user)
-  });
-  const content = await rawResponse.json();
-
-  console.log(content);
+  await axios.post(`${BASE_URL}/signin`, user);
 };
 
 export const formRegister = () => {
