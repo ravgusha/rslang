@@ -1,14 +1,21 @@
 import renderEbookScreen from '../render/e-book';
+import renderMainScreen from '../render/main-screen';
 import eBookContent from './e-book-content';
 
-function screenListener() {
-  const screen = document.querySelector('.wrapper');
-  screen.addEventListener('click', (event) => {
-    const { classList } = event.target;
-    if (classList.contains('e-book-btn')) {
-      renderEbookScreen();
-      eBookContent();
-    }
+function eBookBtnHndl() {
+  document.querySelector('.e-book-btn').addEventListener('click', () => {
+    renderEbookScreen();
+    eBookContent();
   });
+}
+function toMainScrHndl() {
+  document.querySelector('.to-main').addEventListener('click', () => {
+    renderMainScreen();
+    screenListener();
+  });
+}
+function screenListener() {
+  eBookBtnHndl();
+  toMainScrHndl();
 }
 export default screenListener;
