@@ -21,6 +21,9 @@
             "error",
             "always"
         ],
-        "no-console":"warn"
+        "no-console":"warn",
+        "no-plusplus":"off",
+        "no-alert":"off",
+        "no-use-before-define":"off"
     }
 }

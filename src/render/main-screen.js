@@ -1,6 +1,7 @@
 const containerHtmlData = `
 <div class="wrapper">
   <div class="header">
+
     <h1 class="main-title">
       Play with
       <span>English</span>
@@ -9,6 +10,7 @@ const containerHtmlData = `
       <div class="to-main"></div>
       <div class="to-statistic"></div>
       <div class="to-logout"></div>
+      <div class="menu-on"></div>
     </div>
   </div>
   <main class="main">
@@ -39,7 +41,7 @@ const containerHtmlData = `
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis reprehenderit adipisci
           officia reiciendis impedit cupiditate ex voluptatem. Repellendus, a.
         </p>
-        <button class="button">E-book</button>
+        <button class="button e-book-btn">E-book</button>
       </div>
       <div class="sign-in pad">
         <span class="sign-label">E-mail</span>

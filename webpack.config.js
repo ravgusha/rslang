@@ -57,6 +57,7 @@ const getHtmlPlugins = (pages) => pages.map(({
   html, name, script, style,
 }) => new HtmlWebpackPlugin({
   template: html,
+  favicon: 'favicon.ico',
   filename: html,
   chunks: [script ? name : null, style ? `${name}-styles` : null].filter((c) => !!c),
 }));
