@@ -21,12 +21,16 @@ const pagination = new Pagination(
 
 const BASE_URL = 'https://rslangteam.herokuapp.com';
 let token;
+let userId;
+
 async function signIn() {
   const res = await axios.post(`${BASE_URL}/signin`, {
     email: 'raya@raya.ru',
     password: '12345678',
   });
   token = await res.data.token;
+  userId = await res.data.userId;
+
   localStorage.setItem('token', token);
 }
 
@@ -36,14 +40,29 @@ const tabs = document.getElementById('tabs');
 const contents = document.querySelectorAll('.content');
 
 async function getWords(group, page) {
-  // Если юзер не авторизован, показать все слова
-  const res = await axios(`${BASE_URL}/words?group=${group}&page=${page}}`);
-  const data = await res.data;
+  let data;
+  let res;
+  // Show diffucult words
+  if (group === '6') {
+    console.log('there');
+    res = await axios(
+      `${BASE_URL}/users/${userId}/aggregatedWords?filter={"$and":[{"userWord.difficulty":"hard"}]}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+    data = await res.data[0].paginatedResults;
+    console.log(res, data);
+  } else {
+    res = await axios(`${BASE_URL}/words?group=${group}&page=${page}}`);
+    data = await res.data;
+  }
 
-  // Если юзер авторизован, показать его слова
-  // const res = await axios(`${BASE_URL}/users/1/words`);
-  // const data = await res.data;
-  console.log(res);
+  // console.log(res);
 
   contents[group].innerHTML = '';
   data.forEach((card) => {
@@ -90,7 +109,8 @@ async function getWords(group, page) {
   });
 }
 
-const userId = '6204b6a9fe00730016ee6fe6';
+let currentGroup = 0;
+let currentPage = 0;
 
 async function addToDifficult(e) {
   // mark difficult word
@@ -104,8 +124,8 @@ async function addToDifficult(e) {
   const res = await axios.post(
     `${BASE_URL}/users/${userId}/words/${wordId}`,
     {
-      difficulty: 'string',
-      optional: {},
+      difficulty: 'hard',
+      optional: { page: `${currentPage}`, group: `${currentGroup}` },
     },
     {
       headers: {
@@ -117,39 +137,11 @@ async function addToDifficult(e) {
   );
 
   const data = await res.data;
-
-  //   const createUserWord = async ({ userId, wordId, word }) => {
-  //     const rawResponse = await fetch(
-  //       `${BASE_URL}/users/${userId}/words/${wordId}`,
-  //       {
-  //         method: 'POST',
-  //         withCredentials: true,
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //           Accept: 'application/json',
-  //           'Content-Type': 'application/json',
-  //         },
-  //         body: JSON.stringify(word),
-  //       }
-  //     );
-  //     const content = await rawResponse.json();
-
-  //   };
-
-  //   createUserWord({
-  //     userId: `${userId}`,
-  //     wordId: `${wordId}`,
-  //     word: {
-  //       difficulty: 'weak',
-  //       optional: { testFieldString: 'test', testFieldBoolean: true },
-  //     },
-  //   });
+  console.log(data);
 }
 
-let currentGroup = 0;
-
 pagination.on('beforeMove', (event) => {
-  const currentPage = event.page - 1;
+  currentPage = event.page - 1;
   getWords(currentGroup, currentPage);
 });
 
@@ -168,6 +160,8 @@ function chooseChapter(e) {
   // Up choosen tab
   e.target.classList.add('active');
   pagination.movePageTo(0);
+
+  console.log(currentGroup);
   getWords(currentGroup, 0);
 }
 
