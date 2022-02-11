@@ -3,11 +3,11 @@ menuElement.classList.add('menu-wrapper');
 
 menuElement.innerHTML = `<button class="close-menu-btn"></button>
 <ul class="menu-list">
-  <li class="menu-list-item"><img src="../assets/images/svg/home-logo.svg" alt="Home">Home</li>
-  <li class="menu-list-item"><img src="../assets/images/svg/stat-logo.svg" alt="Stat">Stat</li>
-  <li class="menu-list-item"><img src="../assets/images/svg/audiocall.svg" alt="Audiocall">Audiocall</li>
-  <li class="menu-list-item"><img src="../assets/images/svg/sprint.svg" alt="Sprint">Sprint</li>
-  <li class="menu-list-item"><img src="../assets/images/png/book.png" alt="E-book">E-book </li>
+  <li class="menu-list-item menu-home"><img src="../assets/images/svg/home-logo.svg" alt="Home">Home</li>
+  <li class="menu-list-item menu-stat"><img src="../assets/images/svg/stat-logo.svg" alt="Stat">Stat</li>
+  <li class="menu-list-item menu-audio"><img src="../assets/images/svg/audiocall.svg" alt="Audiocall">Audiocall</li>
+  <li class="menu-list-item menu-sprint"><img src="../assets/images/svg/sprint.svg" alt="Sprint">Sprint</li>
+  <li class="menu-list-item menu-book"><img src="../assets/images/png/book.png" alt="E-book">E-book </li>
   <ul class="e-book-chapters-list">
 <li class="e-book-chapters-list-item">Chapter 1</li>
 <li class="e-book-chapters-list-item">Chapter 2</li>
