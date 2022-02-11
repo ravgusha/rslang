@@ -9,6 +9,9 @@ import './styles/styles.scss';
 
 renderEbookScreen();
 
+let currentGroup = 0;
+let currentPage = 0;
+
 const pagination = new Pagination(
   document.getElementById('tui-pagination-container'),
   {
@@ -32,21 +35,22 @@ async function signIn() {
   userId = await res.data.userId;
 
   localStorage.setItem('token', token);
+  ex();
 }
 
-signIn();
+async function createUserWords() {
+  const res = await axios(`${BASE_URL}/words?group=${currentGroup}&page=${currentPage}}`);
+  const data = await res.data;
 
-const tabs = document.getElementById('tabs');
-const contents = document.querySelectorAll('.content');
+  data.forEach((word) => {
+    const { id } = word;
 
-async function getWords(group, page) {
-  let data;
-  let res;
-  // Show diffucult words
-  if (group === '6') {
-    console.log('there');
-    res = await axios(
-      `${BASE_URL}/users/${userId}/aggregatedWords?filter={"$and":[{"userWord.difficulty":"hard"}]}`,
+    const response = axios.post(
+      `${BASE_URL}/users/${userId}/words/${id}`,
+      {
+        difficulty: 'easy',
+        optional: { page: `${currentPage}`, group: `${currentGroup}` },
+      },
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -55,38 +59,56 @@ async function getWords(group, page) {
         },
       },
     );
-    data = await res.data[0].paginatedResults;
-    console.log(res, data);
-  } else {
-    res = await axios(`${BASE_URL}/words?group=${group}&page=${page}}`);
-    data = await res.data;
-  }
+    console.log(response, data);
+  });
+}
 
-  // console.log(res);
 
-  contents[group].innerHTML = '';
+const tabs = document.getElementById('tabs');
+const contents = document.querySelectorAll('.content');
+
+async function getDifficultWords() {
+  const res = await axios(
+    `${BASE_URL}/users/${userId}/aggregatedWords?filter={"$and":[{"userWord.difficulty":"hard"}]}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    },
+  );
+  const data = await res.data[0].paginatedResults;
+  console.log(data);
+
+  contents[6].innerHTML = '';
+
   data.forEach((card) => {
     const {
-      id,
+      _id,
       image,
       word,
-      transcription,
+      transcription,git 
+      wordTranslate,
       audio,
       audioMeaning,
       audioExample,
       textMeaning,
+      textMeaningTranslate,
       textExample,
+      textExampleTranslate,
     } = card;
 
-    contents[group].insertAdjacentHTML(
+    contents[6].insertAdjacentHTML(
       'beforeend',
-      `<div class="card" id=${id}>
+      `<div class="card" id=${_id}>
         <img class="card__image" src="${BASE_URL}/${image}"/>
         <div class="card__text">
           <div class="card__header">
             <div class="card__header_left">
               <p class="card__word">${word}</p>
               <p class="card__transcription">&nbsp- ${transcription}</p>
+              <p class="card__translate">&nbsp- ${wordTranslate}</p>
             </div>
             <button class="card__audio">
             <audio class="card__audio-transcription" src="${BASE_URL}/${audio}"></audio>
@@ -99,8 +121,14 @@ async function getWords(group, page) {
             <p class="card__meaning">
             ${textMeaning}
             </p>
+            <p class="card__meaning-translate">
+            ${textMeaningTranslate}
+            </p>
             <p class="card__example">
             ${textExample}
+            </p>
+            <p class="card__example-translate">
+            ${textExampleTranslate}
             </p>
           </div>
         </div>
@@ -109,8 +137,79 @@ async function getWords(group, page) {
   });
 }
 
-let currentGroup = 0;
-let currentPage = 0;
+async function getWords(group, page) {
+  await signIn();
+  // Для неавторизованных пользователей
+  // const res = await axios(`${BASE_URL}/words?group=${group}&page=${page}}`);
+  // const data = await res.data;
+
+  // Для авторизованных
+  const res = await axios(
+    `${BASE_URL}/users/${userId}/aggregatedWords?group=${group}&page=${page}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    },
+  );
+  const data = await res.data[0].paginatedResults;
+
+  contents[group].innerHTML = '';
+  data.forEach((card) => {
+    const {
+      id,
+      image,
+      word,
+      transcription,
+      wordTranslate,
+      audio,
+      audioMeaning,
+      audioExample,
+      textMeaning,
+      textMeaningTranslate,
+      textExample,
+      textExampleTranslate,
+    } = card;
+
+    contents[group].insertAdjacentHTML(
+      'beforeend',
+      `<div class="card" id=${id}>
+        <img class="card__image" src="${BASE_URL}/${image}"/>
+        <div class="card__text">
+          <div class="card__header">
+            <div class="card__header_left">
+              <p class="card__word">${word}</p>
+              <p class="card__transcription">&nbsp- ${transcription}</p>
+              <p class="card__translate">&nbsp- ${wordTranslate}</p>
+            </div>
+            <button class="card__audio">
+            <audio class="card__audio-transcription" src="${BASE_URL}/${audio}"></audio>
+            <audio class="card__audio-meaning" src="${BASE_URL}/${audioMeaning}"></audio>
+            <audio class="card__audio-example" src="${BASE_URL}/${audioExample}"></audio>
+            </button>
+            <button class="card__list"></button>
+          </div>
+          <div class="card__description">
+            <p class="card__meaning">
+            ${textMeaning}
+            </p>
+            <p class="card__meaning-translate">
+            ${textMeaningTranslate}
+            </p>
+            <p class="card__example">
+            ${textExample}
+            </p>
+            <p class="card__example-translate">
+            ${textExampleTranslate}
+            </p>
+          </div>
+        </div>
+      </div>`,
+    );
+  });
+}
 
 async function addToDifficult(e) {
   // mark difficult word
@@ -145,6 +244,19 @@ pagination.on('beforeMove', (event) => {
   getWords(currentGroup, currentPage);
 });
 
+async function ex() {
+  const res2 = await axios(`${BASE_URL}/users/${userId}/aggregatedWords`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  });
+  const data2 = await res2.data;
+
+  console.log(data2);
+}
+
 function chooseChapter(e) {
   currentGroup = e.target.getAttribute('data-group');
 
@@ -161,8 +273,9 @@ function chooseChapter(e) {
   e.target.classList.add('active');
   pagination.movePageTo(0);
 
-  console.log(currentGroup);
-  getWords(currentGroup, 0);
+  if (currentGroup === '6') {
+    getDifficultWords();
+  } else getWords(currentGroup, 0);
 }
 
 tabs.addEventListener('click', (e) => {
