@@ -1,6 +1,7 @@
 const containerHtmlData = `
 <div class="wrapper">
   <div class="header">
+
     <h1 class="main-title">
       Play with
       <span>English</span>
@@ -9,6 +10,7 @@ const containerHtmlData = `
       <div class="to-main"></div>
       <div class="to-statistic"></div>
       <div class="to-logout"></div>
+      <div class="menu-on"></div>
     </div>
   </div>
   <main class="main">
