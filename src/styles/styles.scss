@@ -1,11 +1,12 @@
-@use 'const';
-@use 'main';
-@use 'e-book';
-@use 'menu';
+@use "const";
+@use "main";
+@use "e-book";
+@use "menu";
+@use "error";
 
 @font-face {
   font-family: Big-Book;
-  src: url('../assets/fonts/big-book-heavy.otf');
+  src: url("../assets/fonts/big-book-heavy.otf");
 }
 
 *,
@@ -16,6 +17,13 @@ h1 {
   margin-block-end: 0;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+html,
 body {
   background-color: #000000;
+  height: 100%;
 }
