@@ -2,6 +2,7 @@
 // import renderMainScreen from '../render/main-screen';
 import menuOnRender from '../render/menu';
 import eBookContent from './e-book-content';
+import audiocall from '../Audiocall/audiocall';
 
 function menuOnHndl() {
   const menu = document.querySelector('.menu-on');
@@ -22,16 +23,18 @@ function eBookBtnHndl() {
     });
   }
 }
-// function toMainScrHndl() {
-//   document.querySelector('.to-main').addEventListener('click', () => {
-//     renderMainScreen();
-//     screenListener();
-//   });
-// }
+
+function toAudiocall() {
+  document.querySelector('.audio-call').addEventListener('click', () => {
+    audiocall();
+  });
+}
+
 function screenListener() {
   eBookBtnHndl();
   // toMainScrHndl();
   menuOnHndl();
+  toAudiocall();
 }
 export default screenListener;
 
