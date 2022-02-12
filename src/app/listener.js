@@ -5,15 +5,24 @@ import eBookContent from './e-book-content';
 import { Game } from '../constants';
 
 function menuListener() {
-  if (document.querySelector('.menu-book')) {
-    document.querySelector('.menu-book').addEventListener('click', () => {
-      if (document.querySelector('.menu-wrapper')) {
-        document.querySelector('.menu-wrapper').remove();
+  if (document.querySelector('.menu-wrapper')) {
+    document.querySelector('.menu-wrapper').addEventListener('click', (event) => {
+      // ---------------- menu-book handler
+      if (event.target.classList.contains('menu-book')) {
+        if (document.querySelector('.menu-wrapper')) {
+          document.querySelector('.menu-wrapper').remove();
+        }
+        if (Game.mode !== 'e-book') {
+          renderEbookScreen();
+          eBookContent();
+          Game.mode = 'e-book';
+        }
       }
-      if (Game.mode !== 'e-book') {
-        renderEbookScreen();
-        eBookContent();
-        Game.mode = 'e-book';
+      // ----------------- menu-home handler
+      if (event.target.classList.contains('menu-home') && Game.mode !== 'main') {
+        renderMainScreen();
+        screenListener();
+        Game.mode = 'main';
       }
     });
   }

@@ -1,33 +1,31 @@
-import axios from "axios";
-import { BASE_URL } from "../constants";
+import axios from 'axios';
+import BASE_URL from '../constants';
 
-export const validateUser = async user => {
-  return axios.get(`${BASE_URL}/users`, user)
-}
+export const validateUser = async (user) => axios.get(`${BASE_URL}/users`, user);
 
-export const createUser = async user => {
-  await validateUser(user).then(response => {
+export const createUser = async (user) => {
+  await validateUser(user).then((response) => {
     if (response.status === 'ok') {
-      alert('The user already exists')
+      alert('The user already exists');
     } else {
-      await axios.post(`${BASE_URL}/users`, user)
+      axios.post(`${BASE_URL}/users`, user);
     }
-  }).catch(error => console.error(error));
-}
+  }).catch((error) => console.error(error));
+};
 
-export const loginUser = async user => {
+export const loginUser = async (user) => {
   await axios.post(`${BASE_URL}/signin`, user);
 };
 
 export const formRegister = () => {
-const loginForm = document.querySelector('form');
-const formEvent = loginForm.addEventListener('submit', event => {
-    event.preventDefault();
+  // const loginForm = document.querySelector('form');
+  // const formEvent = loginForm.addEventListener('submit', (event) => {
+  //   event.preventDefault();
 
-    const email = document.querySelector('#email').value;
-    const password = document.querySelector('#password').value;
+  //   const email = document.querySelector('#email').value;
+  //   const password = document.querySelector('#password').value;
 
-    const user = { email, password };
-    createUser(user);
-});
-}
+  //   const user = { email, password };
+  //   createUser(user);
+  // });
+};
