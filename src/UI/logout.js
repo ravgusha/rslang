@@ -1,3 +1,3 @@
-export const logout = document.createElement('div');
+const logout = document.createElement('div');
 logout.className = 'logout';
-logout.style.backgroundImage = ''
+logout.style.backgroundImage = '';
