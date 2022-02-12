@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
-import './audiocall.scss'
+import './audiocall.scss';
 
-const audiocall = (user = null) => {
+const audiocall = () => {
   const container = document.createElement('div');
   container.className = 'container';
   const title = document.createElement('h1');
@@ -17,11 +17,11 @@ const audiocall = (user = null) => {
   buttonWrapper.className = 'button-wrapper';
   const option = document.createElement('button');
   option.className = 'option-btn';
-  for (let i = 0; i <= 4; i += 1) {
-    option.innerHTML = `${word[i]}`;
-    buttonWrapper.append(option);
-  }
-  document.body.append(container);
+  // for (let i = 0; i <= 4; i += 1) {
+  //   option.innerHTML = `${word[i]}`;
+  //   buttonWrapper.append(option);
+  // }
+  document.body.innerHTML = container;
 };
 
 export default audiocall;

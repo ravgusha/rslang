@@ -2,6 +2,7 @@ import renderEbookScreen from '../render/e-book';
 import renderMainScreen from '../render/main-screen';
 import menuOnRender from '../render/menu';
 import eBookContent from './e-book-content';
+import audiocall from '../Audiocall/audiocall';
 
 function menuOnHndl() {
   document.querySelector('.menu-on').addEventListener('click', () => {
@@ -22,10 +23,18 @@ function toMainScrHndl() {
     screenListener();
   });
 }
+
+function toAudiocall() {
+  document.querySelector('.audio-call').addEventListener('click', () => {
+    audiocall();
+  });
+}
+
 function screenListener() {
   eBookBtnHndl();
   toMainScrHndl();
   menuOnHndl();
+  toAudiocall();
 }
 export default screenListener;
 
