@@ -140,19 +140,21 @@ function eBookContent() {
       } = card;
       let difficulty = 'easy';
       let hidden = 'hidden';
+      let showed = null;
       if (userWord) {
         difficulty = card.userWord.difficulty;
-        console.log(difficulty);
+        // console.log(difficulty);
       }
       if (userWord) {
-        hidden = card.userWord.isLearnt;
+        hidden = card.userWord.optional.isLearnt;
 
         if (hidden) {
           hidden = null;
+          showed = 'hidden';
         }
       }
 
-      // console.log(card.userWord.difficulty);
+      // console.log(card.userWord.optional.isLearnt);
 
       contents[group].insertAdjacentHTML(
         'beforeend',
@@ -169,7 +171,7 @@ function eBookContent() {
                 <audio class="card__audio-meaning" src="${BASE_URL}/${audioMeaning}"></audio>
                 <audio class="card__audio-example" src="${BASE_URL}/${audioExample}"></audio>
                 <button class="card__list"></button>
-                <button class="card__todone">В изученные</button>
+                <button class="card__todone ${showed}">В изученные</button>
                 </button>
               </div>
               <div class="card__header_right">
@@ -208,7 +210,7 @@ function eBookContent() {
       difficulty = 'hard';
     }
 
-    const res = await axios.put(
+    const res = await axios.post(
       `${BASE_URL}/users/${userId}/words/${wordId}`,
       {
         difficulty: `${difficulty}`,
