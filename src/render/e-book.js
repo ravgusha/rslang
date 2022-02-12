@@ -36,6 +36,6 @@ const containerHtmlData = `<div class="ebook">
     </div>`;
 
 function renderEbookScreen() {
-  document.body.innerHTML = containerHtmlData;
+  document.querySelector('.main').innerHTML = containerHtmlData;
 }
 export default renderEbookScreen;

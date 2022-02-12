@@ -1,3 +1,7 @@
+button {
+  cursor: pointer;
+}
+
 .ebook {
   font-family: 'Source Sans Variable';
   background-color: #00507d;
@@ -168,7 +172,7 @@
     bottom: 45px;
     background-color: #ff971a;
   }
-  
+
   :nth-child(7) {
     bottom: 55px;
     background-color: #e43f37;
@@ -237,13 +241,13 @@
 .card {
   display: flex;
   margin: 0 0 40px 0;
-  height: 158px;
+  // height: 180px;
   background-color: transparent;
-  font-weight: 900;
   font-size: 22px;
 
   img {
-    width: 220px;
+    width: 260px;
+    height: 180px;
   }
 
   button {
@@ -257,6 +261,8 @@
 
   .card__header {
     display: flex;
+    justify-content: space-between;
+    font-weight: 700;
   }
 
   .card__header_left {
@@ -272,15 +278,34 @@
     background-image: url('../assets/images/svg/list.svg');
   }
 
+  .card__list-delete {
+    background-image: url('../assets/images/svg/delete.svg');
+    background-size: cover;
+  }
+
   .card__text {
     padding-left: 25px;
+    width: 100%;
   }
 
   .card__description {
     font-size: 19px;
   }
+
+  .card__meaning-translate {
+    padding-bottom: 15px;
+  }
+  .card__done {
+    // background-image: url('../assets/images/svg/done.svg');
+    width: 48px;
+    height: 48px;
+  }
 }
 
-.difficult {
+.hard {
   box-shadow: 15px 10px 0 rgb(228 63 14);
+}
+
+.hidden {
+  opacity: 0;
 }
