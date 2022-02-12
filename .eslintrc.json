@@ -13,10 +13,6 @@
             "error",
             2
         ],
-        "linebreak-style": [
-            "error",
-            "windows"
-        ],
         "quotes": [
             "error",
             "single"
@@ -26,6 +22,8 @@
             "always"
         ],
         "no-console":"warn",
-        "import/no-relative-packages": "off"
+        "no-plusplus":"off",
+        "no-alert":"off",
+        "no-use-before-define":"off"
     }
 }

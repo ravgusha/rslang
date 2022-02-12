@@ -1,6 +1,3 @@
-/* eslint-disable no-useless-escape */
-/* eslint-disable no-shadow */
-/* eslint-disable no-param-reassign */
 const fs = require('fs');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -60,6 +57,7 @@ const getHtmlPlugins = (pages) => pages.map(({
   html, name, script, style,
 }) => new HtmlWebpackPlugin({
   template: html,
+  favicon: 'favicon.ico',
   filename: html,
   chunks: [script ? name : null, style ? `${name}-styles` : null].filter((c) => !!c),
 }));
