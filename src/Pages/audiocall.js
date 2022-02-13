@@ -13,6 +13,11 @@ const audiocall = () => {
   button.innerHTML = 'start';
   container.append(button);
 
+  const progress = document.createElement('div');
+  progress.className = 'audiocall-progress';
+  progress.innerHTML = '0/20';
+  container.append(progress);
+
   const icon = document.createElement('img');
   icon.className = 'audiocall-icon';
   icon.src = '../assets/images/svg/sound.svg';
