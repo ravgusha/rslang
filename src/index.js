@@ -3,7 +3,6 @@
 import 'tui-pagination/dist/tui-pagination.min.css';
 // import containerHtmlData from './render/main-screen';
 import './styles/styles.scss';
-import screenListener from './app/listener';
 import Routing from './Routing/routing';
 
 const Game = {
@@ -13,7 +12,3 @@ const Game = {
 export default Game;
 // renderMainScreen();
 Routing();
-
-window.onload = () => {
-  screenListener();
-};

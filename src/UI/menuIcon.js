@@ -1,4 +1,4 @@
 const menuIcon = document.createElement('div');
-menuIcon.className = 'menu-icon';
+menuIcon.className = 'menu-on';
 
 export default menuIcon;
