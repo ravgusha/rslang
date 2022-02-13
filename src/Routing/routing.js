@@ -1,5 +1,6 @@
 import errorPage from '../Pages/errorPage';
 import routes from './routes';
+import eBookContent from '../app/e-book-content';
 
 const Routing = () => {
 // eslint-disable-next-line no-restricted-globals
@@ -11,6 +12,7 @@ const Routing = () => {
     const path = parseLocation();
     const { component = errorPage } = findComponentByPath(path) || {};
     document.body.innerHTML = component.render;
+    if (path === '/ebook') { eBookContent(); }
   };
 
   window.addEventListener('hashchange', router);
