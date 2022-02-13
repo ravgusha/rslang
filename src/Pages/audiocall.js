@@ -1,6 +1,7 @@
 import gameHeader from '../UI/miniGamesHeader';
 
 const audiocall = () => {
+  const gameWrapper = document.createElement('div');
   const container = document.createElement('div');
   container.className = 'audiocall-container';
   container.append(gameHeader);
@@ -33,8 +34,8 @@ const audiocall = () => {
     buttonWrapper.append(option);
   }
   container.append(buttonWrapper);
-  document.body.appendChild(container);
-  return document.body.innerHTML;
+  gameWrapper.append(container);
+  return gameWrapper.innerHTML;
 };
 
 const renderAudiocall = {

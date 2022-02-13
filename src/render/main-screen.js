@@ -17,12 +17,12 @@ const renderMainScreen = {
             int incidunt quia ab mollitia omnis, facere ex .
             </p>
           </div>
-          <a class="audio-call pad" href="/#/audiocall">
+          <a class="audio-call pad" href="#/audiocall">
             <h2>audiocall</h2>
             <span class="note">mini game</span>
             <img src="./assets/images/svg/audiocall.svg" alt="sprint-ico" class="game-ico" />
           </a>
-          <a class="sprint pad" href="/#/sprint">
+          <a class="sprint pad" href="#/sprint">
             <h2>sprint</h2>
             <span class="note">mini game</span>
             <img src="./assets/images/svg/sprint.svg" alt="sprint-ico" class="game-ico" />
@@ -35,7 +35,7 @@ const renderMainScreen = {
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis reprehenderit adipisci
               officia reiciendis impedit cupiditate ex voluptatem. Repellendus, a.
             </p>
-            <a href="/#/ebook"><button class="button e-book-btn">E-book</button></a>
+            <a href="#/ebook"><button class="button e-book-btn">E-book</button></a>
           </div>
           <div class="sign-in pad">
             <span class="sign-label">E-mail</span>
