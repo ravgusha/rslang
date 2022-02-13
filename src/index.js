@@ -16,7 +16,7 @@ renderMainScreen();
 screenListener();
 
 // createUser({
-//   "name": 'Raya',
-//   "email": 'raya2@raya.ru',
+//   "name": 'Raya123456',
+//   "email": 'raya123456@raya.ru',
 //   "password": '12345678',
 // });

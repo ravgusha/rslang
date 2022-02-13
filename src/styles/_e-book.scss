@@ -32,6 +32,7 @@ button {
 
   .tui-page-btn {
     border: none;
+    width: auto;
     font-size: 32px;
     font-weight: 700;
     color: white;
@@ -110,13 +111,6 @@ button {
 
   .ebook__sprint {
     background-color: #e84e10;
-    left: 19px;
-  }
-
-  .ebook__settings {
-    background-color: #ff971a;
-    padding: 19px 43px 17px 43px;
-    z-index: 2;
   }
 
   img {

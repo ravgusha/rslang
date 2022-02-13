@@ -1,31 +1,30 @@
 import axios from 'axios';
 import Pagination from 'tui-pagination';
+import { BASE_URL } from '../constants';
 
 function eBookContent() {
-  let currentGroup = 0;
-  let currentPage = 0;
+  let currentGroup = localStorage.getItem('group') || 0;
+  let currentPage = localStorage.getItem('page') || 0;
 
   const pagination = new Pagination(document.getElementById('tui-pagination-container'), {
     totalItems: 600,
     itemsPerPage: 20,
     visiblePages: 5,
     centerAlign: true,
+    page: Number(currentPage) + 1, // Поменять?
   });
-
-  const BASE_URL = 'https://rslangteam.herokuapp.com';
   let token;
   let userId;
 
   async function signIn() {
     const res = await axios.post(`${BASE_URL}/signin`, {
-      email: 'raya2@raya.ru',
+      email: 'raya123456@raya.ru',
       password: '12345678',
     });
     token = await res.data.token;
     userId = await res.data.userId;
 
     localStorage.setItem('token', token);
-    // ex();
   }
 
   const tabs = document.getElementById('tabs');
@@ -40,7 +39,7 @@ function eBookContent() {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-      },
+      }
     );
     const data = await res.data[0].paginatedResults;
     console.log(data);
@@ -96,15 +95,16 @@ function eBookContent() {
               </p>
             </div>
           </div>
-        </div>`,
+        </div>`
       );
     });
   }
 
   async function getWords(group, page) {
+    console.log(group, page);
     await signIn();
     // Для неавторизованных пользователей
-    // const res = await axios(`${BASE_URL}/words?group=${group}&page=${page}}`);
+    // const res = await axios(`${BASE_URL}/words?group=${group}&page=${page}`);
     // const data = await res.data;
 
     // Для авторизованных
@@ -116,13 +116,14 @@ function eBookContent() {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-      },
+      }
     );
     const data = await res.data[0].paginatedResults;
     console.log(res.data);
 
     contents[group].innerHTML = '';
     data.forEach((card) => {
+      console.log(card);
       const {
         _id,
         image,
@@ -138,23 +139,11 @@ function eBookContent() {
         textExampleTranslate,
         userWord,
       } = card;
+
       let difficulty = 'easy';
-      let hidden = 'hidden';
-      let showed = null;
       if (userWord) {
         difficulty = card.userWord.difficulty;
-        // console.log(difficulty);
       }
-      if (userWord) {
-        hidden = card.userWord.optional.isLearnt;
-
-        if (hidden) {
-          hidden = null;
-          showed = 'hidden';
-        }
-      }
-
-      // console.log(card.userWord.optional.isLearnt);
 
       contents[group].insertAdjacentHTML(
         'beforeend',
@@ -170,12 +159,12 @@ function eBookContent() {
                 <audio class="card__audio-transcription" src="${BASE_URL}/${audio}"></audio>
                 <audio class="card__audio-meaning" src="${BASE_URL}/${audioMeaning}"></audio>
                 <audio class="card__audio-example" src="${BASE_URL}/${audioExample}"></audio>
-                <button class="card__list"></button>
-                <button class="card__todone ${showed}">В изученные</button>
+                <button title="To difficult" class="card__list"></button>
+                <button title="To learnt" class="card__todone">В изученные</button>
                 </button>
               </div>
               <div class="card__header_right">
-              <img src=${require('../assets/images/svg/done.svg')} class="card__done ${hidden}"></img>
+              <img src=${require('../assets/images/svg/done.svg')} class="card__done hidden"></img>
               </div>
             </div>
             <div class="card__description">
@@ -193,8 +182,18 @@ function eBookContent() {
               </p>
             </div>
           </div>
-        </div>`,
+        </div>`
       );
+
+      // if word is learnt, hide add to learnt button
+      if (userWord) {
+        const { status } = card.userWord.optional;
+        console.log(typeof status, status);
+        if (status) {
+          document.getElementById(`${_id}`).querySelector('.card__done').classList.remove('hidden');
+          document.getElementById(`${_id}`).querySelector('.card__todone').classList.add('hidden');
+        }
+      }
     });
   }
   async function addToLearnt(e) {
@@ -206,54 +205,101 @@ function eBookContent() {
     currentCard.querySelector('.card__todone').classList.add('hidden');
     currentCard.querySelector('.card__done').classList.remove('hidden');
 
+    let res;
     if (image.classList.contains('hard')) {
       difficulty = 'hard';
     }
 
-    const res = await axios.post(
-      `${BASE_URL}/users/${userId}/words/${wordId}`,
-      {
-        difficulty: `${difficulty}`,
-        optional: { page: `${currentPage}`, group: `${currentGroup}`, isLearnt: true },
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
+    res = await axios
+      .post(
+        `${BASE_URL}/users/${userId}/words/${wordId}`,
+        {
+          difficulty: `${difficulty}`,
+          optional: { page: `${currentPage}`, group: `${currentGroup}`, status: 'isLearnt' },
         },
-      },
-    );
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+      .catch((error) => {
+        if (error.response.status !== 200) {
+          res = axios.put(
+            `${BASE_URL}/users/${userId}/words/${wordId}`,
+            {
+              difficulty: `${difficulty}`,
+              optional: { page: `${currentPage}`, group: `${currentGroup}`, status: 'isLearnt' },
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+              },
+            }
+          );
+        }
+      });
 
-    const data = await res.data;
+    const { data } = res;
     console.log(data);
   }
 
   async function addToDifficult(e) {
-    // mark difficult word
     const currentCard = e.target.closest('.card');
     const image = currentCard.querySelector('img');
     const wordId = currentCard.id;
-    //   console.log(currentCard, wordId);
 
+    // mark difficult word
     image.classList.add('hard');
+    // delete add to difficult button
+    currentCard.querySelector('.card__list').classList.add('hidden');
 
-    const res = await axios.post(
-      `${BASE_URL}/users/${userId}/words/${wordId}`,
-      {
-        difficulty: 'hard',
-        optional: { page: `${currentPage}`, group: `${currentGroup}` },
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
+    let res;
+    let status;
+
+    if (currentCard.querySelector('.card__todone').classList.contains('hidden')) {
+      status = 'isLearnt';
+    }
+
+    res = await axios
+      .post(
+        `${BASE_URL}/users/${userId}/words/${wordId}`,
+        {
+          difficulty: 'hard',
+          optional: { page: `${currentPage}`, group: `${currentGroup}`, status: `${status}` },
         },
-      },
-    );
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+      .catch((error) => {
+        if (error.response.status !== 200) {
+          res = axios.put(
+            `${BASE_URL}/users/${userId}/words/${wordId}`,
+            {
+              difficulty: 'hard',
+              optional: { page: `${currentPage}`, group: `${currentGroup}`, status: `${status}` },
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+              },
+            }
+          );
+        }
+      });
 
-    const data = await res.data;
+    const { data } = res;
     console.log(data);
   }
 
@@ -278,6 +324,10 @@ function eBookContent() {
   pagination.on('beforeMove', (event) => {
     currentPage = event.page - 1;
     if (currentGroup === '6') return;
+
+    localStorage.setItem('page', currentPage);
+    localStorage.setItem('group', currentGroup);
+
     getWords(currentGroup, currentPage);
   });
 
@@ -305,7 +355,10 @@ function eBookContent() {
     chooseChapter(e);
   });
 
-  getWords(0, 0);
+  getWords(currentGroup, currentPage);
+
+  let prevPlayedAudioId;
+  let isPlayed = false;
 
   function playAudio(e) {
     const sounds = document.getElementsByTagName('audio');
@@ -314,16 +367,26 @@ function eBookContent() {
       sounds[i].currentTime = 0.0;
     }
 
+    const currentAudioId = e.target.closest('.card').id;
+    if (prevPlayedAudioId === currentAudioId && isPlayed) {
+      isPlayed = false;
+      return;
+    }
+    prevPlayedAudioId = currentAudioId;
     const audio1 = e.target.querySelector('.card__audio-transcription');
     const audio2 = e.target.querySelector('.card__audio-meaning');
     const audio3 = e.target.querySelector('.card__audio-example');
     audio1.play();
+    isPlayed = true;
 
     audio1.onended = () => {
       audio2.play();
     };
     audio2.onended = () => {
       audio3.play();
+    };
+    audio2.onended = () => {
+      isPlayed = false;
     };
   }
 
