@@ -1,7 +1,7 @@
 // import renderEbookScreen from '../render/e-book';
 // import renderMainScreen from '../render/main-screen';
 import menuOnRender from '../render/menu';
-import eBookContent from './e-book-content';
+// import eBookContent from './e-book-content';
 
 function menuOnHndl() {
   const menu = document.querySelector('.menu-on');
@@ -13,15 +13,15 @@ function menuOnHndl() {
   }
 }
 
-function eBookBtnHndl() {
-  const book = document.querySelector('.e-book-btn');
-  if (book) {
-    book.addEventListener('click', () => {
-    // renderEbookScreen();
-      eBookContent();
-    });
-  }
-}
+// function eBookBtnHndl() {
+//   const book = document.querySelector('.e-book-btn');
+//   if (book) {
+//     book.addEventListener('click', () => {
+//     // renderEbookScreen();
+//       eBookContent();
+//     });
+//   }
+// }
 // function toMainScrHndl() {
 //   document.querySelector('.to-main').addEventListener('click', () => {
 //     renderMainScreen();
@@ -29,7 +29,7 @@ function eBookBtnHndl() {
 //   });
 // }
 function screenListener() {
-  eBookBtnHndl();
+  // eBookBtnHndl();
   // toMainScrHndl();
   menuOnHndl();
 }
