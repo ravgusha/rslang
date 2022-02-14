@@ -13,7 +13,9 @@ const Routing = () => {
     const path = parseLocation();
     const { component = errorPage } = findComponentByPath(path) || {};
     document.body.innerHTML = component.render;
-    if (path === '/ebook') { eBookContent(); }
+    if (path === '/ebook') {
+      eBookContent();
+    }
     screenListener();
   };
 

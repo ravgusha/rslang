@@ -1,16 +1,16 @@
 import axios from 'axios';
-import BASE_URL from '../constants';
+import { BASE_URL } from '../constants';
 
 export const validateUser = async (user) => axios.get(`${BASE_URL}/users`, user);
 
 export const createUser = async (user) => {
-  await validateUser(user).then((response) => {
-    if (response.status === 'ok') {
-      alert('The user already exists');
-    } else {
-      axios.post(`${BASE_URL}/users`, user);
-    }
-  }).catch((error) => console.error(error));
+  // await validateUser(user).then((response) => {
+  //   if (response.status === 'ok') {
+  //     alert('The user already exists');
+  //   } else {
+  axios.post(`${BASE_URL}/users`, user);
+  // }
+  // }).catch((error) => console.error(error));
 };
 
 export const loginUser = async (user) => {
@@ -19,7 +19,8 @@ export const loginUser = async (user) => {
 
 export const formRegister = () => {
   const loginForm = document.querySelector('form');
-  loginForm.addEventListener('submit', (event) => {
+  // eslint-disable-next-line no-unused-vars
+  const formEvent = loginForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
     const email = document.querySelector('#email').value;
@@ -29,3 +30,5 @@ export const formRegister = () => {
     createUser(user);
   });
 };
+
+export default createUser;

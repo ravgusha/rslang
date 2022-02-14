@@ -1,14 +1,15 @@
-@use "const";
-@use "main";
-@use "e-book";
-@use "menu";
-@use "error";
-@use "audiocall";
-@use "games";
+@use 'const';
+@use 'main';
+@use 'e-book';
+@use 'menu';
+@use 'error';
+@use 'audiocall';
+@use 'games';
+@use 'sprint';
 
 @font-face {
   font-family: Big-Book;
-  src: url("../assets/fonts/big-book-heavy.otf");
+  src: url('../assets/fonts/big-book-heavy.otf');
 }
 
 *,

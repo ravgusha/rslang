@@ -17,12 +17,12 @@ const renderMainScreen = {
             int incidunt quia ab mollitia omnis, facere ex .
             </p>
           </div>
-          <a class="audio-call pad" href="/#/audiocall">
+          <a class="audio-call pad" href="#/audiocall">
             <h2>audiocall</h2>
             <span class="note">mini game</span>
             <img src="./assets/images/svg/audiocall.svg" alt="sprint-ico" class="game-ico" />
           </a>
-          <a class="sprint pad" href="/#/sprint">
+          <a class="sprint pad" href="#/sprint">
             <h2>sprint</h2>
             <span class="note">mini game</span>
             <img src="./assets/images/svg/sprint.svg" alt="sprint-ico" class="game-ico" />
@@ -84,7 +84,4 @@ const renderMainScreen = {
 
     </div>`,
 };
-// function renderMainScreen() {
-//   document.body.innerHTML = containerHtmlData;
-// }
 export default renderMainScreen;

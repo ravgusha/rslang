@@ -1,60 +1,60 @@
 .audiocall {
-    &-container {
-        width: 100%;
-        height: 100%;
-        background-color: #00507d;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+  &-container {
+    width: 100%;
+    height: 100%;
+    background-color: #00507d;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  &-title {
+    font-family: Big-Book;
+    font-size: 35px;
+    color: #ff931e;
+    margin-bottom: 50px;
+  }
+  &-icon {
+    width: 60px;
+    margin-bottom: 30px;
+    cursor: pointer;
+    transition: 0.3s transform;
+    &:hover {
+      transform: scale(0.9);
     }
-    &-title {
-        font-family: Big-Book;
-        font-size: 35px;
-        color: #ff931e;
-        margin-bottom: 50px;
+  }
+  &-button {
+    font-family: 'Segoe UI';
+    background-color: #ff931e;
+    width: 300px;
+    height: 70px;
+    font-size: 25px;
+    color: white;
+    border-radius: 8px;
+    margin-bottom: 50px;
+    transition: 0.3s transform;
+    cursor: pointer;
+    &:hover {
+      transform: scale(0.9);
     }
-    &-icon {
-        width: 60px;
-        margin-bottom: 30px;
-        cursor: pointer;
-        transition: 0.3s transform;
-        &:hover {
-            transform: scale(0.9);
-        }
+  }
+  &-button-wrapper {
+    margin: 30px;
+    width: 520px;
+  }
+  &-option-btn {
+    font-family: 'Segoe UI';
+    background-color: #3fa9f5;
+    width: 240px;
+    height: 60px;
+    font-size: 25px;
+    color: white;
+    border-radius: 8px;
+    margin: 10px;
+    transition: 0.3s transform;
+    cursor: pointer;
+    &:hover {
+      transform: scale(0.9);
     }
-    &-button {
-        font-family: "Segoe UI";
-        background-color: #ff931e;
-        width: 300px;
-        height: 70px;
-        font-size: 25px;
-        color: white;
-        border-radius: 8px;
-        margin-bottom: 50px;
-        transition: 0.3s transform;
-        cursor: pointer;
-        &:hover {
-            transform: scale(0.9);
-        }
-    }
-    &-button-wrapper {
-        margin: 30px;
-        width: 520px;
-    }
-    &-option-btn {
-        font-family: "Segoe UI";
-        background-color: #3fa9f5;
-        width: 240px;
-        height: 60px;
-        font-size: 25px;
-        color: white;
-        border-radius: 8px;
-        margin: 10px;
-        transition: 0.3s transform;
-        cursor: pointer;
-        &:hover {
-            transform: scale(0.9);
-        }
-    }
+  }
 }
