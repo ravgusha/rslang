@@ -4,7 +4,7 @@ import menuOnRender from '../render/menu';
 // import eBookContent from './e-book-content';
 
 function menuOnHndl() {
-  const menu = document.querySelector('.menu-on');
+  const menu = document.querySelector('.menu-on')||document.querySelector('.sprint-menu-on');
   if (menu) {
     menu.addEventListener('click', () => {
       menuOnRender();
