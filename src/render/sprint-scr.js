@@ -24,6 +24,18 @@ const headerElement = `<div class="sprint-wrapper">
   
   <div class="sprint-score">Score: <span>100</span></div>
 </div>
+<div class="sprint-action-wrapper">
+  <h3 class="sprint-word">alcohol</h3>
+  <h4 class="sprint-translate">алкоголь</h4>
+  <div class="sprint-button-wrapper">
+    <button class="spring-btn spring-wrong">No</button>
+    <button class="spring-btn spring-correct">Yes</button>
+  </div>
+  <div class="spring-arrow-wrapper">
+    <img src="../assets/images/svg/Arrow-L.svg" alt="arrow left">
+    <img src="../assets/images/svg/Arrow-R.svg" alt="arrow right">
+  </div>
+</div>
 </div>`;
 
 const sprint = () => {
