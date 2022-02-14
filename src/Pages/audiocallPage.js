@@ -1,4 +1,6 @@
 import gameHeader from '../UI/miniGamesHeader';
+// eslint-disable-next-line import/named
+import { getWords } from '../app/audiocall';
 
 const audiocall = () => {
   const gameWrapper = document.createElement('div');
@@ -15,26 +17,29 @@ const audiocall = () => {
   container.append(button);
 
   const progress = document.createElement('div');
-  progress.className = 'audiocall-progress';
+  progress.className = 'audiocall-progress off';
   progress.innerHTML = '0/20';
   container.append(progress);
 
   const icon = document.createElement('img');
-  icon.className = 'audiocall-icon';
-  icon.src = '../assets/images/svg/sound.svg';
+  icon.className = 'audiocall-icon off';
+  icon.src = 'assets/images/svg/sound.svg';
   container.append(icon);
 
   const buttonWrapper = document.createElement('div');
-  buttonWrapper.className = 'audiocall-button-wrapper';
-  container.append(buttonWrapper);
-  for (let i = 0; i < 4; i += 1) {
+  buttonWrapper.className = 'audiocall-button-wrapper off';
+  for (let i = 0; i <= 3; i++) {
     const option = document.createElement('button');
     option.className = 'audiocall-option-btn';
-    option.innerHTML = `${i + 1}`;
+    option.innerHTML = ' ';
     buttonWrapper.append(option);
   }
+
   container.append(buttonWrapper);
+
   gameWrapper.append(container);
+  getWords();
+
   return gameWrapper.innerHTML;
 };
 

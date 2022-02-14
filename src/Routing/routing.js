@@ -14,6 +14,7 @@ const Routing = () => {
     const { component = errorPage } = findComponentByPath(path) || {};
     document.body.innerHTML = component.render;
     if (path === '/ebook') { eBookContent(); }
+
     screenListener();
   };
 
