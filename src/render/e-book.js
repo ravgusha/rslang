@@ -51,7 +51,4 @@ const renderEbookScreen = {
 
 </div>`,
 };
-// function renderEbookScreen() {
-//   document.querySelector('.main').innerHTML = containerHtmlData;
-// }
 export default renderEbookScreen;

@@ -31,7 +31,6 @@ const sprint = () => {
   const sprintWrapper = document.createElement('div');
   sprintWrapper.classList.add('sprint-wrapper');
   sprintWrapper.innerHTML = headerElement;
-  // document.body.appendChild(sprintWrapper);
   return sprintWrapper.innerHTML;
 };
 

@@ -10,5 +10,5 @@ export default [
   { path: '/error', component: errorPage },
   // { path: '/statistics', component: renderStatistics },
   { path: '/audiocall', component: renderAudiocall },
-   { path: '/sprint', component: renderSprint },
+  { path: '/sprint', component: renderSprint },
 ];

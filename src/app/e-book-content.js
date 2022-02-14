@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import axios from 'axios';
 import Pagination from 'tui-pagination';
 import { BASE_URL } from '../constants';
@@ -198,8 +199,10 @@ function eBookContent() {
         const { status } = card.userWord.optional;
         if (status) {
           learntWordsOnPage++;
-          document.getElementById(`${_id}`).querySelector('.card__done').classList.remove('hidden');
-          document.getElementById(`${_id}`).querySelector('.card__todone').classList.add('hidden');
+          if (document.getElementById(`${_id}`)) {
+            document.getElementById(`${_id}`).querySelector('.card__done').classList.remove('hidden');
+            document.getElementById(`${_id}`).querySelector('.card__todone').classList.add('hidden');
+          }
         }
       }
     });
