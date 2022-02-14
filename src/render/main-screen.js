@@ -35,7 +35,7 @@ const renderMainScreen = {
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis reprehenderit adipisci
               officia reiciendis impedit cupiditate ex voluptatem. Repellendus, a.
             </p>
-            <a href="/#/ebook"><button class="button e-book-btn">E-book</button></a>
+            <a href="#/ebook"><button class="button e-book-btn">E-book</button></a>
           </div>
           <div class="sign-in pad">
             <span class="sign-label">E-mail</span>
