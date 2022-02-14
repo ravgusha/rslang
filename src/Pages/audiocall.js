@@ -21,7 +21,7 @@ const audiocall = () => {
 
   const icon = document.createElement('img');
   icon.className = 'audiocall-icon';
-  icon.src = '../assets/images/svg/sound.svg';
+  icon.src = 'assets/images/svg/sound.svg';
   container.append(icon);
 
   const buttonWrapper = document.createElement('div');

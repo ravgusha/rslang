@@ -1,4 +1,4 @@
-@use "const";
+@use 'const';
 .wrapper {
   background-color: #000000;
   margin-left: auto;
@@ -55,16 +55,16 @@ h2 {
   }
 }
 .to-main {
-  background-image: url("../assets/images/svg/home-logo.svg");
+  background-image: url('../assets/images/svg/home-logo.svg');
 }
 .to-statistic {
-  background-image: url("../assets/images/svg/stat-logo.svg");
+  background-image: url('../assets/images/svg/stat-logo.svg');
 }
 .to-logout {
-  background-image: url("../assets/images/svg/sign-logo.svg");
+  background-image: url('../assets/images/svg/sign-logo.svg');
 }
 .menu-on {
-  background-image: url("../assets/images/svg/burger.svg");
+  background-image: url('../assets/images/svg/burger.svg');
 }
 .main {
   background-color: const.$color-violet;
@@ -101,7 +101,7 @@ h2 {
     height: 65px;
     background-color: const.$color-orange;
     font-size: 42px;
-    font-family: "Segoe UI";
+    font-family: 'Segoe UI';
     color: const.$color-white;
     border: none;
     margin-right: auto;
@@ -136,7 +136,7 @@ h2 {
   input {
     font-size: 32px;
 
-    font-family: "Segoe UI";
+    font-family: 'Segoe UI';
     text-align: center;
     width: 258px;
     border-radius: 29px;
@@ -252,7 +252,7 @@ footer {
   justify-content: space-between;
 
   a {
-    font-family: "Segoe UI";
+    font-family: 'Segoe UI';
     text-decoration: none;
     font-size: 24px;
     color: const.$color-blue;
@@ -272,7 +272,7 @@ footer {
 .main-top-wrapper,
 .main-bottom-wrapper {
   display: flex;
-  font-family: "Segoe UI";
+  font-family: 'Segoe UI';
   min-height: calc(50vh - 75px);
 
   p,
