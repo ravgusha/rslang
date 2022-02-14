@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
 import axios from 'axios';
 import Pagination from 'tui-pagination';
-import { BASE_URL } from '../constants';
+import BASE_URL from '../constants';
 
 function eBookContent() {
   let currentGroup = localStorage.getItem('group') || 0;
