@@ -1,4 +1,15 @@
-const containerHtmlData = `<div class="ebook">
+import Header from '../Pages/layout/header';
+import Footer from '../Pages/layout/footer';
+
+const renderEbookScreen = {
+  render: `
+  <div class="wrapper">
+  
+  ${Header.render}
+
+  <main class="main">
+
+  <div class="ebook">
       <div class="ebook__container">
         <div class="ebook__header">
           <div class="ebook__pag tui-pagination" id="tui-pagination-container"></div>
@@ -33,9 +44,15 @@ const containerHtmlData = `<div class="ebook">
           </div>
         </div>
       </div>
-    </div>`;
+    </div>
+    
+    </main>
 
-function renderEbookScreen() {
-  document.querySelector('.main').innerHTML = containerHtmlData;
-}
+    ${Footer.render}
+
+</div>`,
+};
+// function renderEbookScreen() {
+//   document.querySelector('.main').innerHTML = containerHtmlData;
+// }
 export default renderEbookScreen;

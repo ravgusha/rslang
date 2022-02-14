@@ -1,30 +1,36 @@
-import renderEbookScreen from '../render/e-book';
-import renderMainScreen from '../render/main-screen';
+// import renderEbookScreen from '../render/e-book';
+// import renderMainScreen from '../render/main-screen';
 import menuOnRender from '../render/menu';
 import eBookContent from './e-book-content';
 
 function menuOnHndl() {
-  document.querySelector('.menu-on').addEventListener('click', () => {
-    menuOnRender();
-    closeMenu();
-  });
+  const menu = document.querySelector('.menu-on');
+  if (menu) {
+    menu.addEventListener('click', () => {
+      menuOnRender();
+      closeMenu();
+    });
+  }
 }
 
 function eBookBtnHndl() {
-  document.querySelector('.e-book-btn').addEventListener('click', () => {
-    renderEbookScreen();
-    eBookContent();
-  });
+  const book = document.querySelector('.e-book-btn');
+  if (book) {
+    book.addEventListener('click', () => {
+    // renderEbookScreen();
+      eBookContent();
+    });
+  }
 }
-function toMainScrHndl() {
-  document.querySelector('.to-main').addEventListener('click', () => {
-    renderMainScreen();
-    screenListener();
-  });
-}
+// function toMainScrHndl() {
+//   document.querySelector('.to-main').addEventListener('click', () => {
+//     renderMainScreen();
+//     screenListener();
+//   });
+// }
 function screenListener() {
   eBookBtnHndl();
-  toMainScrHndl();
+  // toMainScrHndl();
   menuOnHndl();
 }
 export default screenListener;

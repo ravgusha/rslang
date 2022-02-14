@@ -1,0 +1,35 @@
+.game-header {
+    position: absolute;
+    top: 0;
+    height: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.menu {
+    &-on {
+        width: 25px;
+        height: 25px;
+        margin-left: 30px;
+        background: url("../assets/images/svg/game-burger.svg") no-repeat;
+        cursor: pointer;
+        transition: 0.3s transform;
+        &:hover {
+            transform: scale(0.9);
+        }
+    }
+}
+.user-icon {
+    width: 100px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    height: 30px;
+    font-size: 22px;
+    color: #3fa9f5;
+    background-image: url("../assets/images/svg/sign-logo.svg");
+    background-size: 68px 31px;
+    background-repeat: no-repeat;
+    background-position: 45px 0;
+    margin-right: 30px;
+    cursor: pointer;
+}
