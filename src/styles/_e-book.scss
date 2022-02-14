@@ -1,3 +1,5 @@
+@use 'const';
+
 button {
   cursor: pointer;
 }
@@ -224,6 +226,7 @@ button {
 .content {
   font-family: 'Segoe UI';
   padding: 5%;
+  min-height: 586px;
 }
 
 .active {

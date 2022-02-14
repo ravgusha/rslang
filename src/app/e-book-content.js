@@ -52,7 +52,6 @@ function eBookContent() {
       },
     );
     const data = await res.data[0].paginatedResults;
-    console.log(data);
 
     contents[6].innerHTML = '';
 
@@ -112,7 +111,6 @@ function eBookContent() {
 
   async function getWords(group, page) {
     learntWordsOnPage = 0;
-    console.log(group, page);
     await signIn();
     // Для неавторизованных пользователей
     // const res = await axios(`${BASE_URL}/words?group=${group}&page=${page}`);
@@ -130,12 +128,10 @@ function eBookContent() {
       },
     );
     const data = await res.data[0].paginatedResults;
-    console.log(res.data);
 
     contents[group].classList.remove('hide');
     contents[group].innerHTML = '<p class="done-page hidden">Страница изучена</p>';
     data.forEach((card) => {
-      console.log(card);
       const {
         _id,
         image,
@@ -200,7 +196,6 @@ function eBookContent() {
       // if word is learnt, hide add to learnt button
       if (userWord) {
         const { status } = card.userWord.optional;
-        console.log(typeof status, status);
         if (status) {
           learntWordsOnPage++;
           document.getElementById(`${_id}`).querySelector('.card__done').classList.remove('hidden');
@@ -208,13 +203,11 @@ function eBookContent() {
         }
       }
     });
-    console.log(learntWordsOnPage);
     checkLeantWords();
   }
-const audioCallBtn = document.querySelector('.ebook__audiocall');
-const sprintBtn = document.querySelector('.ebook__sprint');
+  const audioCallBtn = document.querySelector('.ebook__audiocall');
+  const sprintBtn = document.querySelector('.ebook__sprint');
   function checkLeantWords() {
-    console.log(learntWordsOnPage, currentPage);
     if (learntWordsOnPage === 10) {
       document.querySelector('.done-page').classList.remove('hidden');
 
@@ -224,14 +217,12 @@ const sprintBtn = document.querySelector('.ebook__sprint');
       sprintBtn.style.backgroundColor = 'grey';
       sprintBtn.disabled = true;
 
-
-      if (learntPagesInChapter[currentGroup].indexOf(currentPage + 1) === -1) {
-        console.log(learntPagesInChapter[currentGroup]);
+      if (learntPagesInChapter[currentGroup].indexOf(1 + Number(currentPage)) === -1) {
         learntPagesInChapter[currentGroup].push(1 + Number(currentPage));
         localStorage.setItem('learntPagesInChapter', JSON.stringify(learntPagesInChapter));
       }
     } else {
-    audioCallBtn.style.backgroundColor = '#3fa9f5';
+      audioCallBtn.style.backgroundColor = '#3fa9f5';
       audioCallBtn.disabled = false;
 
       sprintBtn.style.backgroundColor = '#e84e10';
@@ -239,10 +230,11 @@ const sprintBtn = document.querySelector('.ebook__sprint');
     }
 
     const navButtons = Array.from(document.querySelectorAll('.tui-page-btn'));
-    console.log(learntPagesInChapter, navButtons);
     learntPagesInChapter[currentGroup].forEach((num) => {
       const button = navButtons.find((el) => el.textContent === num.toString());
-      button.classList.add('underline');
+      if (button) {
+        button.classList.add('underline');
+      }
     });
   }
   async function addToLearnt(e) {
@@ -254,12 +246,11 @@ const sprintBtn = document.querySelector('.ebook__sprint');
     currentCard.querySelector('.card__todone').classList.add('hidden');
     currentCard.querySelector('.card__done').classList.remove('hidden');
 
-    let res;
     if (image.classList.contains('hard')) {
       difficulty = 'hard';
     }
     learntWordsOnPage++;
-    res = await axios
+    await axios
       .post(
         `${BASE_URL}/users/${userId}/words/${wordId}`,
         {
@@ -276,7 +267,7 @@ const sprintBtn = document.querySelector('.ebook__sprint');
       )
       .catch((error) => {
         if (error.response.status !== 200) {
-          res = axios.put(
+          axios.put(
             `${BASE_URL}/users/${userId}/words/${wordId}`,
             {
               difficulty: `${difficulty}`,
@@ -306,14 +297,13 @@ const sprintBtn = document.querySelector('.ebook__sprint');
     // delete add to difficult button
     currentCard.querySelector('.card__list').classList.add('hidden');
 
-    let res;
     let status;
 
     if (currentCard.querySelector('.card__todone').classList.contains('hidden')) {
       status = 'isLearnt';
     }
 
-    res = await axios
+    await axios
       .post(
         `${BASE_URL}/users/${userId}/words/${wordId}`,
         {
@@ -330,7 +320,7 @@ const sprintBtn = document.querySelector('.ebook__sprint');
       )
       .catch((error) => {
         if (error.response.status !== 200) {
-          res = axios.put(
+          axios.put(
             `${BASE_URL}/users/${userId}/words/${wordId}`,
             {
               difficulty: 'hard',
@@ -346,9 +336,6 @@ const sprintBtn = document.querySelector('.ebook__sprint');
           );
         }
       });
-
-    const { data } = res;
-    console.log(data);
   }
 
   async function removeFromDifficult(e) {
@@ -356,7 +343,7 @@ const sprintBtn = document.querySelector('.ebook__sprint');
     const currentCard = e.target.closest('.card');
     const wordId = currentCard.id;
 
-    const res = await axios.delete(`${BASE_URL}/users/${userId}/words/${wordId}`, {
+    await axios.delete(`${BASE_URL}/users/${userId}/words/${wordId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
         Accept: 'application/json',
@@ -364,9 +351,6 @@ const sprintBtn = document.querySelector('.ebook__sprint');
       },
     });
     getDifficultWords();
-
-    const data = await res.data;
-    console.log(data);
   }
 
   pagination.on('beforeMove', (event) => {
