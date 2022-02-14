@@ -79,8 +79,10 @@ button {
   }
 
   .tui-is-selected {
+    text-decoration: underline;
+    text-decoration-color: #3fa9f5;
     background-color: transparent;
-    color: #3fa9f5;
+
   }
 
   .tui-is-selected:hover {
@@ -228,8 +230,14 @@ button {
   z-index: 150;
 }
 
-.hidden {
+.hide {
   display: none;
+}
+
+.done-page {
+  font-weight: 700;
+  font-size: 22px;
+  color: green;
 }
 
 .card {
@@ -257,6 +265,10 @@ button {
     display: flex;
     justify-content: space-between;
     font-weight: 700;
+  }
+
+  .difficult {
+    justify-content: start;
   }
 
   .card__header_left {
@@ -302,4 +314,8 @@ button {
 
 .hidden {
   opacity: 0;
+}
+
+.underline {
+  color: green !important;
 }
