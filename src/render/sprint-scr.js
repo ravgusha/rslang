@@ -45,11 +45,11 @@ const headerElement = `<div class="sprint-wrapper">
     <div class="circle cr-default cr4"></div>
   </div></div>
   
-  <div class="sprint-score">Score: <span>100</span></div>
+  <div class="sprint-score">Score: <span>0</span></div>
 </div>
 <div class="sprint-action-wrapper">
-  <h3 class="sprint-word">alcohol</h3>
-  <h4 class="sprint-translate">алкоголь</h4>
+  <h3 class="sprint-word"></h3>
+  <h4 class="sprint-translate"></h4>
   <div class="sprint-button-wrapper">
     <button class="spring-btn spring-wrong">No</button>
     <button class="spring-btn spring-correct">Yes</button>

@@ -1,5 +1,5 @@
 // Начинаем с исходного значения в 20 секунд
-const TIME_LIMIT = 10;
+const TIME_LIMIT = 60;
 // Оповещение на 10 секунде
 const WARNING_THRESHOLD = 10;
 // Предупреждение на 5 секунде
@@ -27,9 +27,6 @@ let timeLeft = TIME_LIMIT;
 export const remainingPathColor = COLOR_CODES.info.color;
 
 function formatTimeLeft(time) {
-  // Наибольшее целое число меньше или равно результату деления времени на 60.
-  const minutes = Math.floor(time / 60);
-
   // Секунды – это остаток деления времени на 60 (оператор модуля)
   let seconds = time % 60;
 
@@ -38,7 +35,7 @@ function formatTimeLeft(time) {
     seconds = `0${seconds}`;
   }
   // Вывод в формате MM:SS
-  return `${minutes}:${seconds}`;
+  return `${seconds}`;
 }
 
 export default formatTimeLeft;
