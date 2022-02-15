@@ -1,5 +1,5 @@
 // Начинаем с исходного значения в 20 секунд
-const TIME_LIMIT = 60;
+const TIME_LIMIT = 10;
 // Оповещение на 10 секунде
 const WARNING_THRESHOLD = 10;
 // Предупреждение на 5 секунде
@@ -52,7 +52,7 @@ export function startTimer() {
     );
     setCircleDasharray();
     setRemainingPathColor(timeLeft);
-
+    window.addEventListener('hashchange', onTimesUp);
     if (timeLeft === 0) {
       onTimesUp();
     }
@@ -67,6 +67,8 @@ function calculateTimeFraction() {
 
 function onTimesUp() {
   clearInterval(timerInterval);
+  window.removeEventListener('hashchange', onTimesUp);
+  timePassed = 0;
 }
 
 // Обновляем значение свойства dasharray, начиная с 283
