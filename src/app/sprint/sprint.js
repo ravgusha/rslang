@@ -14,7 +14,6 @@ function sprintRun() {
       if (xNum === yNum) {
         score += 10;
         document.querySelector('.sprint-score span').textContent = score;
-        console.log(xNum, yNum);
       }
     }
     if (event.target.classList.contains('spring-wrong')) {
