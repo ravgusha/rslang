@@ -26,9 +26,6 @@ function sprintRun() {
     yNum = rndNumberWord(words);
     drawWords(xNum, yNum);
   });
-  // document.querySelector('.spring-wrong').addEventListener('click', () => {
-  //   console.log('No');
-  // });
 }
 
 function drawWords(wordNum, transNum) {
