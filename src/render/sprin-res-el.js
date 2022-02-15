@@ -9,36 +9,42 @@ const sounButtonImg = `<svg width="38" height="31" viewBox="0 0 38 31" fill="non
 <path d="M35.7563 22.8582C37.252 20.6112 37.9999 18.1571 37.9999 15.499C37.9999 12.8419 37.252 10.3899 35.7563 8.13971C34.2605 5.89271 32.2811 4.25452 29.819 3.23039C29.591 3.14417 29.362 3.10001 29.1329 3.10001C28.6759 3.10001 28.2796 3.26509 27.9451 3.59525C27.6105 3.92541 27.4443 4.31551 27.4443 4.76764C27.4443 5.44479 27.7874 5.95685 28.4735 6.30489C29.4579 6.80855 30.1269 7.19023 30.4785 7.45099C31.7803 8.38891 32.7967 9.56445 33.5265 10.9797C34.2562 12.395 34.6216 13.9007 34.6216 15.5C34.6216 17.0972 34.2562 18.6039 33.5265 20.0203C32.7967 21.4356 31.7803 22.6111 30.4785 23.549C30.1269 23.8098 29.4579 24.1915 28.4735 24.6951C27.7874 25.0432 27.4443 25.5542 27.4443 26.2324C27.4443 26.6835 27.6116 27.0746 27.9451 27.4048C28.2785 27.7349 28.6833 27.9 29.1585 27.9C29.3694 27.9 29.59 27.8558 29.818 27.7696C32.28 26.7444 34.2605 25.1084 35.7552 22.8593L35.7563 22.8582Z" fill="#9c9343"/>
 </svg>`;
 
-const roundResultElement = `<div class="sprint-result">
-<h3 class="res-title">your results</h3>
-<div class="words-wrapper">
-<h4 class="learned">Learned words</h4>
-<div class="res-row">
+const resRowRight=`<div class="res-row">
   <button>${sounButtonImg}</button>
   <span class="res-word">Alcohol</span>
   <span class="res-translate">алкоголь</span>
   ${answerIcon[0]}
-</div>
-<div class="res-row">
-  <button>
-  ${sounButtonImg}
-</button>
-  <span class="res-word">Alcohol</span>
-  <span class="res-translate">вода</span>
-  ${answerIcon[0]}
-</div>
-<h4 class="wrong-answ">Wrong answers</h4><div class="res-row">
-<button>${sounButtonImg}</button>
-<span class="res-word">Alcohol</span>
-<span class="res-translate">вода</span>
-${answerIcon[1]}
-</div><div class="res-row">
+</div>`;
+const resRowWrong=`<div class="res-row">
 <button>${sounButtonImg}</button>
 <span class="res-word">Alcohol</span>
 <span class="res-translate">алкоголь</span>
 ${answerIcon[1]}
-</div>
-</div>
+</div>`
+
+const roundResultElement = `<div class="sprint-result">
+<h3 class="res-title">your results</h3>
+<h4 class="score">Score: <span class="score-points">150</span></h4>
+<div class="words-wrapper">
+<h4 class="learned">Learned words</h4>
+${resRowRight}
+${resRowRight}
+<h4 class="wrong-answ">Wrong answers</h4>
+${resRowWrong}
+${resRowWrong}
+${resRowWrong}
+${resRowWrong}
+${resRowWrong}
+${resRowWrong}
+${resRowWrong}
+${resRowWrong}
+${resRowWrong}
+${resRowWrong}
+${resRowWrong}
+${resRowWrong}
+${resRowWrong}
+${resRowWrong}
+${resRowWrong}
 <div class="res-buttons-wrapper">
   <h4 class="res-btn-txt">Play another round ?</h4>
   <button class=" res-btn-repeat">Repeat</button>

@@ -32,13 +32,24 @@
   font-size: 28px;
 }
 .words-wrapper {
-  button {
-    position: relative;
+  overflow-y: auto;
+  width: 80%;
+  height: 48vh;
+  &::-webkit-scrollbar {
+    width: 4px;
+    background-color: #b3a176;
     border: none;
+    box-shadow: 0 0 20px 5px #6d644e;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #363021;
+  }
+
+  button {
+    border: none;
+    width: 27px;
+    height: 27px;
     svg {
-      position: absolute;
-      top: calc(50% - 11px);
-      left: -27px;
       width: 25px;
       height: 25px;
       &:hover {
