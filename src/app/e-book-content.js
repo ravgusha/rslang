@@ -14,6 +14,7 @@ function eBookContent() {
     centerAlign: true,
     page: Number(currentPage) + 1, // Pagination starts from 0
   });
+
   let token;
   let userId;
 
@@ -28,16 +29,6 @@ function eBookContent() {
     localStorage.setItem('token', token);
   }
 
-  // Count of learnt words on the page
-  let learntWordsOnPage = 0;
-  const learntPagesInChapter = JSON.parse(localStorage.getItem('learntPagesInChapter')) || [
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-  ];
   const tabs = document.getElementById('tabs');
   const contents = document.querySelectorAll('.content');
 
@@ -110,6 +101,17 @@ function eBookContent() {
     });
   }
 
+  // Count of learnt words on the page
+  let learntWordsOnPage = 0;
+  const learntPagesInChapter = JSON.parse(localStorage.getItem('learntPagesInChapter')) || [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+  ];
+
   async function getWords(group, page) {
     learntWordsOnPage = 0;
     await signIn();
@@ -157,7 +159,12 @@ function eBookContent() {
       contents[group].insertAdjacentHTML(
         'beforeend',
         `<div class="card" id=${_id}>
+
           <img class="card__image ${difficulty}" src="${BASE_URL}/${image}"/>
+          <div class="card__score">
+          <p class="card__hit">0</p>
+          <span>/</span>
+          <p class="card__miss">1</p></div>
           <div class="card__text">
             <div class="card__header">
               <div class="card__header_left">
@@ -240,6 +247,7 @@ function eBookContent() {
       }
     });
   }
+
   async function addToLearnt(e) {
     const currentCard = e.target.closest('.card');
     const wordId = currentCard.id;
