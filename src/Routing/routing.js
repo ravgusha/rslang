@@ -1,7 +1,8 @@
 import errorPage from '../Pages/errorPage';
 import routes from './routes';
 import eBookContent from '../app/e-book-content';
-import screenListener from '../app/listener';
+// import screenListener from '../app/listener';
+import sprintRun from '../app/sprint/sprint';
 
 const Routing = () => {
 // eslint-disable-next-line no-restricted-globals
@@ -16,7 +17,10 @@ const Routing = () => {
     if (path === '/ebook') {
       eBookContent();
     }
-    screenListener();
+    if (path === '/sprint') {
+      sprintRun();
+    }
+    // screenListener();
   };
 
   window.addEventListener('hashchange', router);
