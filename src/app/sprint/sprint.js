@@ -1,14 +1,18 @@
 // eslint-disable-next-line import/no-cycle
+import requestUnreg from './spr-request';
+// eslint-disable-next-line import/no-cycle
 import { startTimer } from './timer';
 
 let seriesCounter = 0;
-const words = ['alcohol', 'water', 'go', 'she', 'he'];
-const translate = ['алкоголь', 'вода', 'идти', 'она', 'он'];
+let words = ['alcohol', 'water', 'go', 'she', 'he'];
+
 let score = 0;
 let xNum = 0;
 let yNum = 0;
 
-function sprintRun() {
+async function sprintRun() {
+  words = await requestUnreg();
+
   startTimer();
   removeSeries();
   xNum = rndNumberWord(words);
@@ -16,13 +20,13 @@ function sprintRun() {
   score = 0;
   seriesCounter = 0;
   drawWords(xNum, yNum);
-
+  document.querySelector('.sprint-score span').textContent = score;
   document.querySelector('.sprint-button-wrapper').addEventListener('click', btnLsnr);
 }
 
 function drawWords(wordNum, transNum) {
-  document.querySelector('.sprint-word').textContent = `${words[wordNum]}`;
-  document.querySelector('.sprint-translate').textContent = `${translate[transNum]}`;
+  document.querySelector('.sprint-word').textContent = `${words[wordNum].word}`;
+  document.querySelector('.sprint-translate').textContent = `${words[transNum].wordTranslate}`;
 }
 
 function rndNumberWord(arr) {
