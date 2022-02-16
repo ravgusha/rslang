@@ -71,28 +71,29 @@
 }
 .sprint-series {
   display: flex;
-  width: 70px;
+  width: 90px;
   flex-wrap: wrap;
   gap: 10px;
 }
 .circle {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }
 .cr-default {
   background-color: #000000;
-  opacity: 0.3;
+  background-color: rgba($color: #000000, $alpha: 0.5);
 }
-.cr1 {
+.cr0 {
   background-color: const.$color-blue;
 }
-.cr2 {
+.cr1 {
   background-color: const.$color-red;
 }
-.cr3 {
+.cr2 {
   background-color: const.$color-greenacid;
 }
-.cr4 {
+.cr3 {
   background-color: const.$color-yellow;
 }
 .sprint-action-wrapper {

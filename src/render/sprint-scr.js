@@ -39,10 +39,10 @@ const headerElement = `<div class="sprint-wrapper">
   </div></div>
   
   <div class="sprint-series-wrapper"><div class="sprint-series">
-    <div class="circle cr-default cr1"></div>
-    <div class="circle cr-default cr2"></div>
-    <div class="circle cr-default cr3"></div>
-    <div class="circle cr-default cr4"></div>
+    <div class="circle cr-default "></div>
+    <div class="circle cr-default "></div>
+    <div class="circle cr-default "></div>
+    <div class="circle cr-default "></div>
   </div></div>
   
   <div class="sprint-score">Score: <span>0</span></div>

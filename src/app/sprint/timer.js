@@ -2,7 +2,7 @@
 import resultRender from './sprint-res';
 
 // Начинаем с исходного значения в 20 секунд
-const TIME_LIMIT = 20;
+const TIME_LIMIT = 300;
 // Оповещение на 10 секунде
 const WARNING_THRESHOLD = 10;
 // Предупреждение на 5 секунде
