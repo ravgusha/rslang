@@ -4,37 +4,20 @@ import { startTimer } from './timer';
 let seriesCounter = 0;
 const words = ['alcohol', 'water', 'go', 'she', 'he'];
 const translate = ['алкоголь', 'вода', 'идти', 'она', 'он'];
+let score = 0;
+let xNum = 0;
+let yNum = 0;
+
 function sprintRun() {
   startTimer();
-  let xNum = rndNumberWord(words);
-  let yNum = rndNumberWord(words);
-  let score = 0;
-
+  removeSeries();
+  xNum = rndNumberWord(words);
+  yNum = rndNumberWord(words);
+  score = 0;
+  seriesCounter = 0;
   drawWords(xNum, yNum);
 
-  document.querySelector('.sprint-button-wrapper').addEventListener('click', (event) => {
-    if (event.target.classList.contains('spring-correct')) {
-      if (xNum === yNum) {
-        score += 10;
-        document.querySelector('.sprint-score span').textContent = score;
-        addSeries();
-      } else {
-        removeSeries();
-      }
-    }
-    if (event.target.classList.contains('spring-wrong')) {
-      if (xNum !== yNum) {
-        score += 10;
-        document.querySelector('.sprint-score span').textContent = score;
-        addSeries();
-      } else {
-        removeSeries();
-      }
-    }
-    xNum = rndNumberWord(words);
-    yNum = rndNumberWord(words);
-    drawWords(xNum, yNum);
-  });
+  document.querySelector('.sprint-button-wrapper').addEventListener('click', btnLsnr);
 }
 
 function drawWords(wordNum, transNum) {
@@ -64,4 +47,27 @@ function removeSeries() {
     }
     seriesCounter = 0;
   });
+}
+export function btnLsnr(event) {
+  if (event.target.classList.contains('spring-correct')) {
+    if (xNum === yNum) {
+      score += 10;
+      document.querySelector('.sprint-score span').textContent = score;
+      addSeries();
+    } else {
+      removeSeries();
+    }
+  }
+  if (event.target.classList.contains('spring-wrong')) {
+    if (xNum !== yNum) {
+      score += 10;
+      document.querySelector('.sprint-score span').textContent = score;
+      addSeries();
+    } else {
+      removeSeries();
+    }
+  }
+  xNum = rndNumberWord(words);
+  yNum = rndNumberWord(words);
+  drawWords(xNum, yNum);
 }

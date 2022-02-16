@@ -1,8 +1,10 @@
 // eslint-disable-next-line import/no-cycle
+import { btnLsnr } from './sprint';
+// eslint-disable-next-line import/no-cycle
 import resultRender from './sprint-res';
 
 // Начинаем с исходного значения в 20 секунд
-const TIME_LIMIT = 300;
+const TIME_LIMIT = 20;
 // Оповещение на 10 секунде
 const WARNING_THRESHOLD = 10;
 // Предупреждение на 5 секунде
@@ -58,6 +60,7 @@ export function startTimer() {
       resultRender();
       document.querySelector('#base-timer-path-remaining').classList.remove('red');
       document.querySelector('#base-timer-path-remaining').classList.add('green');
+      document.querySelector('.sprint-button-wrapper').removeEventListener('click', btnLsnr);
     }
   }, 1000);
 }
@@ -65,7 +68,6 @@ export function startTimer() {
 // Делим оставшееся время на определенный временной лимит
 function calculateTimeFraction() {
   const rawTimeFraction = timeLeft / TIME_LIMIT;
-  console.log(rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction));
   return rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction);
 }
 
