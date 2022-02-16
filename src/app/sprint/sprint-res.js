@@ -36,9 +36,8 @@ function printRightAnwers() {
   });
 }
 function printWrongAnwers() {
-  wrongAnswersArr.filter((item, index) => wrongAnswersArr.indexOf(item) === index);
-
-  wrongAnswersArr.forEach((e) => {
+  const arr = deleteDoubleWordsFromWrong(wrongAnswersArr);
+  arr.forEach((e) => {
     const row = document.createElement('div');
     row.classList.add('res-row');
     row.setAttribute('data-id', `${e.id}`);
@@ -63,4 +62,14 @@ function playAudioBtnHndl() {
       }
     });
   }
+}
+
+function deleteDoubleWordsFromWrong(arr) {
+  const res = arr.reduce((o, i) => {
+    if (!o.find((v) => v.id === i.id)) {
+      o.push(i);
+    }
+    return o;
+  }, []);
+  return res;
 }
