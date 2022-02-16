@@ -21,7 +21,6 @@ async function sprintRun() {
   removeSeries();
   xNum = rndNumberWord(words);
   yNum = wrongNum(xNum);
-  console.log(xNum, yNum);
   score = 0;
   seriesCounter = 0;
   drawWords(xNum, yNum);
@@ -88,18 +87,15 @@ export function btnLsnr(event) {
 function rightAnswHndl(num) {
   rightAnswersArr.push(words[num]);
   words.splice(num, 1);
-  console.log(words.length);
 }
 
 function wrongAnswerHndl(num) {
   wrongAnswersArr.push(words[num]);
-  console.log(wrongAnswersArr);
 }
 
 function wrongNum(num) {
   const index = Math.round(Math.random() * (words.length - 1));
   const rndY = Math.round(Math.random());
   const arr = [num, index];
-  console.log(arr);
   return arr[rndY];
 }

@@ -15,12 +15,12 @@ export const sounButtonImg = `<svg width="38" height="31" viewBox="0 0 38 31" fi
 //   <span class="res-translate">алкоголь</span>
 //   ${answerIcon[0]}
 // </div>`;
-const resRowWrong = `<div class="res-row">
-<button>${sounButtonImg}</button>
-<span class="res-word">Alcohol</span>
-<span class="res-translate">алкоголь</span>
-${answerIcon[1]}
-</div>`;
+// const resRowWrong = `<div class="res-row">
+// <button>${sounButtonImg}</button>
+// <span class="res-word">Alcohol</span>
+// <span class="res-translate">алкоголь</span>
+// ${answerIcon[1]}
+// </div>`;
 
 const roundResultElement = `<div class="sprint-result">
 <h3 class="res-title">your results</h3>
@@ -30,21 +30,7 @@ const roundResultElement = `<div class="sprint-result">
 
 
 <h4 class="wrong-answ">Wrong answers</h4>
-${resRowWrong}
-${resRowWrong}
-${resRowWrong}
-${resRowWrong}
-${resRowWrong}
-${resRowWrong}
-${resRowWrong}
-${resRowWrong}
-${resRowWrong}
-${resRowWrong}
-${resRowWrong}
-${resRowWrong}
-${resRowWrong}
-${resRowWrong}
-${resRowWrong}
+
 <div class="res-buttons-wrapper">
 <a href="#/"></a>
   <h4 class="res-btn-txt">Play another round ?</h4>
