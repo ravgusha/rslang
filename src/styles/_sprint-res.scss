@@ -9,9 +9,9 @@
 
 .sprint-result {
   position: absolute;
-  width: 500px;
+  width: 700px;
   min-height: 80vh;
-  left: calc(50% - 250px);
+  left: calc(50% - 369px);
   top: 10vh;
   background-color: #fff;
   display: flex;
@@ -59,7 +59,7 @@
   }
   span {
     text-align: left;
-    min-width: 120px;
+    min-width: 180px;
     font-size: 26px;
   }
 }
@@ -72,6 +72,7 @@
 .res-buttons-wrapper {
   position: absolute;
   bottom: 60px;
+  left: 185px;
 
   button {
     height: 50px;

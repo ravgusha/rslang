@@ -1,10 +1,10 @@
 // eslint-disable-next-line import/no-cycle
-import { btnLsnr, rightAnswersArr } from './sprint';
+import { btnLsnr } from './sprint';
 // eslint-disable-next-line import/no-cycle
 import resultRender from './sprint-res';
 
 // Начинаем с исходного значения в 20 секунд
-const TIME_LIMIT = 20;
+const TIME_LIMIT = 15;
 // Оповещение на 10 секунде
 const WARNING_THRESHOLD = 10;
 // Предупреждение на 5 секунде
@@ -61,7 +61,6 @@ export function startTimer() {
       document.querySelector('#base-timer-path-remaining').classList.remove('red');
       document.querySelector('#base-timer-path-remaining').classList.add('green');
       document.querySelector('.sprint-button-wrapper').removeEventListener('click', btnLsnr);
-      console.log(rightAnswersArr);
     }
   }, 1000);
 }
