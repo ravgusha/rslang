@@ -66,6 +66,7 @@ export function btnLsnr(event) {
       rightAnswHndl(xNum);
     } else {
       removeSeries();
+      wrongAnswerHndl(xNum);
     }
   }
   if (event.target.classList.contains('spring-wrong')) {
@@ -76,7 +77,7 @@ export function btnLsnr(event) {
       rightAnswHndl(xNum);
     } else {
       removeSeries();
-      wrongAnswersArr.push(xNum);
+      wrongAnswerHndl(xNum);
     }
   }
   xNum = rndNumberWord(words);
@@ -85,9 +86,14 @@ export function btnLsnr(event) {
 }
 
 function rightAnswHndl(num) {
-  rightAnswersArr.push(words[num].id);
+  rightAnswersArr.push(words[num]);
   words.splice(num, 1);
   console.log(words.length);
+}
+
+function wrongAnswerHndl(num) {
+  wrongAnswersArr.push(words[num]);
+  console.log(wrongAnswersArr);
 }
 
 function wrongNum(num) {
