@@ -4,19 +4,24 @@ import requestUnreg from './spr-request';
 import { startTimer } from './timer';
 
 let seriesCounter = 0;
-let words = ['alcohol', 'water', 'go', 'she', 'he'];
+let words = [];
 
 let score = 0;
 let xNum = 0;
 let yNum = 0;
 
+export const rightAnswersArr = [];
+export const wrongAnswersArr = [];
+
 async function sprintRun() {
   words = await requestUnreg();
-
+  rightAnswersArr.splice(0, rightAnswersArr.length);
+  wrongAnswersArr.splice(0, rightAnswersArr.length);
   startTimer();
   removeSeries();
   xNum = rndNumberWord(words);
-  yNum = rndNumberWord(words);
+  yNum = wrongNum(xNum);
+  console.log(xNum, yNum);
   score = 0;
   seriesCounter = 0;
   drawWords(xNum, yNum);
@@ -67,11 +72,26 @@ export function btnLsnr(event) {
       score += 10;
       document.querySelector('.sprint-score span').textContent = score;
       addSeries();
+      rightAnswHndl(xNum);
     } else {
       removeSeries();
+      wrongAnswersArr.push(xNum);
     }
   }
   xNum = rndNumberWord(words);
   yNum = rndNumberWord(words);
   drawWords(xNum, yNum);
+}
+
+function rightAnswHndl(num) {
+  rightAnswersArr.push(num);
+  words.splice(num, 1);
+  console.log(words.length);
+}
+
+function wrongNum(num) {
+  const index = Math.round(Math.random() * (words.length - 1));
+  const rndY = Math.round(Math.random());
+  const arr = [num, index];
+  return arr[rndY];
 }

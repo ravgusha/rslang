@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-cycle
-import { btnLsnr } from './sprint';
+import { btnLsnr, rightAnswersArr } from './sprint';
 // eslint-disable-next-line import/no-cycle
 import resultRender from './sprint-res';
 
@@ -61,6 +61,7 @@ export function startTimer() {
       document.querySelector('#base-timer-path-remaining').classList.remove('red');
       document.querySelector('#base-timer-path-remaining').classList.add('green');
       document.querySelector('.sprint-button-wrapper').removeEventListener('click', btnLsnr);
+      console.log(rightAnswersArr);
     }
   }, 1000);
 }
