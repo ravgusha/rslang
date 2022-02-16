@@ -4,7 +4,7 @@ const { default: axios } = require('axios');
 
 async function requestUnregWords() {
   const res = [];
-  const data = await axios.get(`${BASE_URL}/words?page=2&group=0`);
+  const data = await axios.get(`${BASE_URL}/words?page=0&group=0`);
   data.data.forEach((element) => {
     res.push(element.word);
   });

@@ -63,6 +63,7 @@ export function btnLsnr(event) {
       score += 10;
       document.querySelector('.sprint-score span').textContent = score;
       addSeries();
+      rightAnswHndl(xNum);
     } else {
       removeSeries();
     }
@@ -79,12 +80,12 @@ export function btnLsnr(event) {
     }
   }
   xNum = rndNumberWord(words);
-  yNum = rndNumberWord(words);
+  yNum = wrongNum(xNum);
   drawWords(xNum, yNum);
 }
 
 function rightAnswHndl(num) {
-  rightAnswersArr.push(num);
+  rightAnswersArr.push(words[num].id);
   words.splice(num, 1);
   console.log(words.length);
 }
@@ -93,5 +94,6 @@ function wrongNum(num) {
   const index = Math.round(Math.random() * (words.length - 1));
   const rndY = Math.round(Math.random());
   const arr = [num, index];
+  console.log(arr);
   return arr[rndY];
 }
