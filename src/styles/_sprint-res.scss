@@ -47,8 +47,8 @@
 
   button {
     border: none;
-    width: 27px;
-    height: 27px;
+    width: 25px;
+    height: 25px;
     svg {
       width: 25px;
       height: 25px;
@@ -87,4 +87,10 @@
 }
 .res-btn-exit {
   background-color: tomato;
+}
+.play-btn {
+  background-image: url('../assets/images/svg/sound-on-res.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 0 4px;
 }

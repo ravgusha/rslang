@@ -1,4 +1,5 @@
-import roundResultElement, { answerIcon, sounButtonImg } from '../../render/sprin-res-el';
+import BASE_URL from '../../constants';
+import roundResultElement, { answerIcon } from '../../render/sprin-res-el';
 
 // eslint-disable-next-line import/no-cycle
 import sprintRun, { rightAnswersArr, wrongAnswersArr } from './sprint';
@@ -10,6 +11,7 @@ function resultRender() {
   document.body.append(resWrapper);
   printRightAnwers();
   printWrongAnwers();
+  playAudioBtnHndl();
   document.querySelector('.res-btn-repeat').addEventListener('click', () => {
   //  console.log('new round');
     resWrapper.remove();
@@ -24,7 +26,8 @@ function printRightAnwers() {
     const row = document.createElement('div');
     row.classList.add('res-row');
     row.setAttribute('data-id', `${e.id}`);
-    row.innerHTML += `<button>${sounButtonImg}</button>
+    row.innerHTML += `<audio class="${e.id}" src="${BASE_URL}/${e.audio}"></audio>
+    <button class="play-btn" data-id="${e.id}"></button>
   <span class="res-word">${e.word}</span>
   <span class="res-translate">${e.wordTranslate}</span>
   ${answerIcon[0]}
@@ -33,15 +36,31 @@ function printRightAnwers() {
   });
 }
 function printWrongAnwers() {
+  wrongAnswersArr.filter((item, index) => wrongAnswersArr.indexOf(item) === index);
+
   wrongAnswersArr.forEach((e) => {
     const row = document.createElement('div');
     row.classList.add('res-row');
     row.setAttribute('data-id', `${e.id}`);
-    row.innerHTML += `<button>${sounButtonImg}</button>
+    row.innerHTML += `<audio class="${e.id}" src="${BASE_URL}/${e.audio}"></audio>
+    <button class="play-btn" data-id="${e.id}"></button>
   <span class="res-word">${e.word}</span>
   <span class="res-translate">${e.wordTranslate}</span>
   ${answerIcon[1]}
 `;
     document.querySelector('.words-wrapper').append(row);
   });
+}
+
+function playAudioBtnHndl() {
+  const wrapper = document.querySelector('.words-wrapper');
+  if (wrapper) {
+    wrapper.addEventListener('click', (e) => {
+      if (e.target.classList.contains('play-btn')) {
+        const audioClassName = (e.target.getAttribute('data-id'));
+        const audio = document.getElementsByClassName(`${audioClassName}`)[0];
+        audio.play();
+      }
+    });
+  }
 }
