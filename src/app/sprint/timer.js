@@ -1,7 +1,8 @@
+// eslint-disable-next-line import/no-cycle
 import resultRender from './sprint-res';
 
 // Начинаем с исходного значения в 20 секунд
-const TIME_LIMIT = 1;
+const TIME_LIMIT = 20;
 // Оповещение на 10 секунде
 const WARNING_THRESHOLD = 10;
 // Предупреждение на 5 секунде
@@ -55,6 +56,8 @@ export function startTimer() {
     if (timeLeft === 0) {
       onTimesUp();
       resultRender();
+      document.querySelector('#base-timer-path-remaining').classList.remove('red');
+      document.querySelector('#base-timer-path-remaining').classList.add('green');
     }
   }, 1000);
 }
@@ -62,6 +65,7 @@ export function startTimer() {
 // Делим оставшееся время на определенный временной лимит
 function calculateTimeFraction() {
   const rawTimeFraction = timeLeft / TIME_LIMIT;
+  console.log(rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction));
   return rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction);
 }
 
@@ -69,6 +73,7 @@ function onTimesUp() {
   clearInterval(timerInterval);
   window.removeEventListener('hashchange', onTimesUp);
   timePassed = 0;
+  timeLeft = TIME_LIMIT;
 }
 
 // Обновляем значение свойства dasharray, начиная с 283

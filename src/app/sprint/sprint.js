@@ -1,4 +1,6 @@
+// eslint-disable-next-line import/no-cycle
 import { startTimer } from './timer';
+import { wordsArr } from './words-exemp';
 
 const words = ['alcohol', 'water', 'go', 'she', 'he'];
 const translate = ['алкоголь', 'вода', 'идти', 'она', 'он'];
@@ -25,6 +27,7 @@ function sprintRun() {
     xNum = rndNumberWord(words);
     yNum = rndNumberWord(words);
     drawWords(xNum, yNum);
+    console.log(wordsArr);
   });
 }
 
