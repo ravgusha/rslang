@@ -84,7 +84,4 @@ const renderMainScreen = {
 
     </div>`,
 };
-// function renderMainScreen() {
-//   document.body.innerHTML = containerHtmlData;
-// }
 export default renderMainScreen;

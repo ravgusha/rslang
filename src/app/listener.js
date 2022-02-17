@@ -1,10 +1,7 @@
-// import renderEbookScreen from '../render/e-book';
-// import renderMainScreen from '../render/main-screen';
 import menuOnRender from '../render/menu';
-import eBookContent from './e-book-content';
 
 function menuOnHndl() {
-  const menu = document.querySelector('.menu-on');
+  const menu = document.querySelector('.menu-on') || document.querySelector('.sprint-menu-on');
   if (menu) {
     menu.addEventListener('click', () => {
       menuOnRender();
@@ -13,25 +10,7 @@ function menuOnHndl() {
   }
 }
 
-function eBookBtnHndl() {
-  const book = document.querySelector('.e-book-btn');
-  if (book) {
-    book.addEventListener('click', () => {
-    // renderEbookScreen();
-      eBookContent();
-    });
-  }
-}
-
-// function toMainScrHndl() {
-//   document.querySelector('.to-main').addEventListener('click', () => {
-//     renderMainScreen();
-//     screenListener();
-//   });
-// }
 function screenListener() {
-  eBookBtnHndl();
-  // toMainScrHndl();
   menuOnHndl();
 }
 export default screenListener;

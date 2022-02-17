@@ -1,6 +1,13 @@
+@use 'const';
+
+button {
+  cursor: pointer;
+}
+
 .ebook {
   font-family: 'Source Sans Variable';
   background-color: #00507d;
+  min-height: calc(100vh - 150px);
 }
 
 .ebook__container {
@@ -28,6 +35,7 @@
 
   .tui-page-btn {
     border: none;
+    width: auto;
     font-size: 32px;
     font-weight: 700;
     color: white;
@@ -74,8 +82,9 @@
   }
 
   .tui-is-selected {
+    text-decoration: underline;
+    text-decoration-color: #3fa9f5;
     background-color: transparent;
-    color: #3fa9f5;
   }
 
   .tui-is-selected:hover {
@@ -106,13 +115,6 @@
 
   .ebook__sprint {
     background-color: #e84e10;
-    left: 19px;
-  }
-
-  .ebook__settings {
-    background-color: #ff971a;
-    padding: 19px 43px 17px 43px;
-    z-index: 2;
   }
 
   img {
@@ -215,31 +217,42 @@
   > :nth-child(6) {
     background-color: #ff971a;
   }
+
+  > :nth-child(7) {
+    background-color: #e43f37;
+  }
 }
 
 .content {
   font-family: 'Segoe UI';
   padding: 5%;
+  min-height: 586px;
 }
 
 .active {
   z-index: 150;
 }
 
-.hidden {
+.hide {
   display: none;
+}
+
+.done-page {
+  font-weight: 700;
+  font-size: 22px;
+  color: green;
 }
 
 .card {
   display: flex;
   margin: 0 0 40px 0;
-  height: 158px;
+  // height: 180px;
   background-color: transparent;
-  font-weight: 900;
   font-size: 22px;
 
   img {
-    width: 220px;
+    width: 260px;
+    height: 180px;
   }
 
   button {
@@ -253,6 +266,12 @@
 
   .card__header {
     display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+  }
+
+  .difficult {
+    justify-content: start;
   }
 
   .card__header_left {
@@ -268,15 +287,37 @@
     background-image: url('../assets/images/svg/list.svg');
   }
 
+  .card__list-delete {
+    background-image: url('../assets/images/svg/delete.svg');
+    background-size: cover;
+  }
+
   .card__text {
     padding-left: 25px;
+    width: 100%;
   }
 
   .card__description {
     font-size: 19px;
   }
+
+  .card__meaning-translate {
+    padding-bottom: 15px;
+  }
+  .card__done {
+    // background-image: url('../assets/images/svg/done.svg');
+    width: 48px;
+    height: 48px;
+  }
 }
 
-.difficult {
+.hard {
   box-shadow: 15px 10px 0 rgb(228 63 14);
+}
+
+.hidden {
+  opacity: 0;
+}
+.underline {
+  color: green !important;
 }
