@@ -1,5 +1,8 @@
 import axios from 'axios';
-import { BASE_URL } from '../constants';
+import BASE_URL from '../constants';
+
+export let userId;
+export let token;
 
 export const validateUser = async (user) => axios.get(`${BASE_URL}/users`, user);
 
@@ -14,21 +17,36 @@ export const createUser = async (user) => {
 };
 
 export const loginUser = async (user) => {
-  await axios.post(`${BASE_URL}/signin`, user);
+  const res = await axios.post(`${BASE_URL}/signin`, user);
+
+  token = await res.data.token;
+  userId = await res.data.userId;
+
+  localStorage.setItem('token', token);
 };
 
-export const formRegister = () => {
-  const loginForm = document.querySelector('form');
-  // eslint-disable-next-line no-unused-vars
-  const formEvent = loginForm.addEventListener('submit', (event) => {
+export const formLogin = () => {
+  const loginForm = document.querySelector('.login-form__submit');
+  loginForm.addEventListener('click', (event) => {
     event.preventDefault();
 
-    const email = document.querySelector('#email').value;
-    const password = document.querySelector('#password').value;
+    const email = document.querySelector('.login-form__email').value;
+    const password = document.querySelector('.login-form__password').value;
 
     const user = { email, password };
-    createUser(user);
+    loginUser(user)
+      .then(successLogin())
+      .catch((error) => {
+        if (error.status !== 200) {
+          document.querySelector('.login-form__error').classList.remove('hidden');
+        }
+      });
   });
 };
 
-export default createUser;
+export const successLogin = () => {
+  document.querySelector('.login-wrapper').remove();
+  document.querySelector('.to-logout').style.backgroundImage = 'url(\'../assets/images/png/logout.png\')';
+};
+
+export default loginUser;
