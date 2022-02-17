@@ -5,6 +5,8 @@ function cls() {
 }
 
 const headerElement = `<div class="sprint-wrapper">
+<audio class="right-snd" src="../assets/sounds/right-ans-soun.mp3"></audio>
+<audio class="wrong-snd" src="../assets/sounds/wrong-ans-soun.mp3"></audio>
 <header class="sprint-header">
 <img src="../assets/images/svg/burger-sprint.svg" alt="menu" title="menu" class="sprint-menu-on">
   <div class="sprint-user">User: unregistered<img

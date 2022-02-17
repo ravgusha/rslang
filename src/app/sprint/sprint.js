@@ -63,9 +63,11 @@ export function btnLsnr(event) {
       document.querySelector('.sprint-score span').textContent = score;
       addSeries();
       rightAnswHndl(xNum);
+      playSound(0);
     } else {
       removeSeries();
       wrongAnswerHndl(xNum);
+      playSound(1);
     }
   }
   if (event.target.classList.contains('spring-wrong')) {
@@ -74,9 +76,11 @@ export function btnLsnr(event) {
       document.querySelector('.sprint-score span').textContent = score;
       addSeries();
       rightAnswHndl(xNum);
+      playSound(0);
     } else {
       removeSeries();
       wrongAnswerHndl(xNum);
+      playSound(1);
     }
   }
   xNum = rndNumberWord(words);
@@ -98,4 +102,14 @@ function wrongNum(num) {
   const rndY = Math.round(Math.random());
   const arr = [num, index];
   return arr[rndY];
+}
+
+function playSound(num) {
+  let sound;
+  if (num === 0) {
+    sound = document.querySelector('.right-snd');
+  } else {
+    sound = document.querySelector('.wrong-snd');
+  }
+  sound.play();
 }
