@@ -13,7 +13,6 @@ function resultRender() {
   printWrongAnwers();
   playAudioBtnHndl();
   document.querySelector('.res-btn-repeat').addEventListener('click', () => {
-  //  console.log('new round');
     resWrapper.remove();
     sprintRun();
   });

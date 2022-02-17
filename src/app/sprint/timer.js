@@ -4,7 +4,7 @@ import { btnLsnr } from './sprint';
 import resultRender from './sprint-res';
 
 // Начинаем с исходного значения в 20 секунд
-const TIME_LIMIT = 300;
+const TIME_LIMIT = 7;
 // Оповещение на 10 секунде
 const WARNING_THRESHOLD = 10;
 // Предупреждение на 5 секунде

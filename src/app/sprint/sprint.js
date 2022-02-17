@@ -16,7 +16,7 @@ export const wrongAnswersArr = [];
 async function sprintRun() {
   words = await requestUnreg();
   rightAnswersArr.splice(0, rightAnswersArr.length);
-  wrongAnswersArr.splice(0, rightAnswersArr.length);
+  wrongAnswersArr.splice(0, wrongAnswersArr.length);
   startTimer();
   removeSeries();
   xNum = rndNumberWord(words);
@@ -95,6 +95,7 @@ function rightAnswHndl(num) {
 
 function wrongAnswerHndl(num) {
   wrongAnswersArr.push(words[num]);
+  words.splice(num, 1);
 }
 
 function wrongNum(num) {
