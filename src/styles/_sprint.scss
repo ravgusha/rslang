@@ -210,3 +210,20 @@
 .wrong-snd {
   display: none;
 }
+
+#sound-onOff {
+  display: none;
+}
+
+#sound-onOff:checked + .sound-label {
+  background-image: url('../assets/images/svg/sound-on-res.svg');
+}
+
+.sound-label {
+  width: 40px;
+  height: 27px;
+  background-image: url('../assets/images/svg/mute.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}

@@ -111,5 +111,5 @@ function playSound(num) {
   } else {
     sound = document.querySelector('.wrong-snd');
   }
-  sound.play();
+  if (document.querySelector('#sound-onOff').checked) sound.play();
 }
