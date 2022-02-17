@@ -21,7 +21,9 @@
     margin: 30px 0;
   }
   &-icon {
+    background: url('../assets/images/svg/sound.svg') no-repeat;
     width: 60px;
+    height: 60px;
     margin: 30px 0;
     cursor: pointer;
     transition: 0.3s transform;
@@ -43,6 +45,9 @@
     &:hover {
       transform: scale(0.9);
     }
+    &:active {
+      background: green;
+    }
   }
   &-button-wrapper {
     margin: 30px;
@@ -62,5 +67,10 @@
     &:hover {
       transform: scale(0.9);
     }
+  }
+}
+.wrong {
+  &:active {
+    background: red;
   }
 }

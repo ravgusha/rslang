@@ -19,10 +19,13 @@ const audiocall = () => {
   progress.innerHTML = '0/20';
   container.append(progress);
 
-  const icon = document.createElement('img');
+  const icon = document.createElement('div');
   icon.className = 'audiocall-icon off';
-  icon.src = 'assets/images/svg/sound.svg';
   container.append(icon);
+
+  const audiotag = document.createElement('audio');
+  audiotag.className = 'audiotag';
+  icon.append(audiotag);
 
   const buttonWrapper = document.createElement('div');
   buttonWrapper.className = 'audiocall-button-wrapper off';
