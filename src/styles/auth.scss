@@ -1,0 +1,78 @@
+@use 'const';
+
+.login-wrapper {
+  font-family: 'Segoe UI';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 340px;
+    height: 350px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 4px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 45px;
+  }
+
+  button {
+    width: fit-content;
+    border: none;
+    font-family: 'Segoe UI';
+  }
+
+  img {
+    padding-bottom: 23px;
+    width: 60px;
+    height: 60px;
+  }
+
+  .login-form__close {
+    align-self: flex-end;
+    background-color: transparent;
+    font-size: 24px;
+    position: relative;
+    left: 24px;
+    bottom: 30px;
+  }
+
+  .login-form__submit {
+    text-transform: uppercase;
+    outline: 0;
+    background: const.$color-darkblue;
+    width: 100%;
+    border: 0;
+    border-radius: 5px;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+  }
+
+  input {
+    outline: 0;
+    background: #f2f2f2;
+    width: -webkit-fill-available;
+    border: 0;
+    border-radius: 5px;
+    margin: 0 0 15px;
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  p {
+    padding-bottom: 7px;
+    color: const.$color-red;
+  }
+}

@@ -2,6 +2,7 @@
 import axios from 'axios';
 import Pagination from 'tui-pagination';
 import BASE_URL from '../constants';
+import { token, userId } from '../auth/authorization';
 
 function eBookContent() {
   let currentGroup = localStorage.getItem('group') || 0;
@@ -14,20 +15,6 @@ function eBookContent() {
     centerAlign: true,
     page: Number(currentPage) + 1, // Pagination starts from 0
   });
-
-  let token;
-  let userId;
-
-  async function signIn() {
-    const res = await axios.post(`${BASE_URL}/signin`, {
-      email: 'raya123456@raya.ru',
-      password: '12345678',
-    });
-    token = await res.data.token;
-    userId = await res.data.userId;
-
-    localStorage.setItem('token', token);
-  }
 
   const tabs = document.getElementById('tabs');
   const contents = document.querySelectorAll('.content');
@@ -114,7 +101,6 @@ function eBookContent() {
 
   async function getWords(group, page) {
     learntWordsOnPage = 0;
-    await signIn();
     // Для неавторизованных пользователей
     // const res = await axios(`${BASE_URL}/words?group=${group}&page=${page}`);
     // const data = await res.data;
@@ -207,8 +193,14 @@ function eBookContent() {
         if (status) {
           learntWordsOnPage++;
           if (document.getElementById(`${_id}`)) {
-            document.getElementById(`${_id}`).querySelector('.card__done').classList.remove('hidden');
-            document.getElementById(`${_id}`).querySelector('.card__todone').classList.add('hidden');
+            document
+              .getElementById(`${_id}`)
+              .querySelector('.card__done')
+              .classList.remove('hidden');
+            document
+              .getElementById(`${_id}`)
+              .querySelector('.card__todone')
+              .classList.add('hidden');
           }
         }
       }
