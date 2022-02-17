@@ -22,6 +22,7 @@ function eBookBtnHndl() {
     });
   }
 }
+
 // function toMainScrHndl() {
 //   document.querySelector('.to-main').addEventListener('click', () => {
 //     renderMainScreen();

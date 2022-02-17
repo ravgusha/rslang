@@ -1,6 +1,4 @@
 import gameHeader from '../UI/miniGamesHeader';
-// eslint-disable-next-line import/named
-import { getWords } from '../app/audiocall';
 
 const audiocall = () => {
   const gameWrapper = document.createElement('div');
@@ -36,10 +34,7 @@ const audiocall = () => {
   }
 
   container.append(buttonWrapper);
-
   gameWrapper.append(container);
-  getWords();
-
   return gameWrapper.innerHTML;
 };
 
