@@ -1,9 +1,9 @@
 import axios from 'axios';
 import BASE_URL from '../constants';
 
-export let userId;
-export let token;
-
+export let userId = localStorage.getItem('userId');
+export let token = localStorage.getItem('token');
+console.log(userId);
 export const validateUser = async (user) => axios.get(`${BASE_URL}/users`, user);
 
 export const createUser = async (user) => {
@@ -23,10 +23,12 @@ export const loginUser = async (user) => {
   userId = await res.data.userId;
 
   localStorage.setItem('token', token);
+  localStorage.setItem('userId', userId);
 };
 
 export const formLogin = () => {
   const loginForm = document.querySelector('.login-form__submit');
+
   loginForm.addEventListener('click', (event) => {
     event.preventDefault();
 
@@ -34,8 +36,9 @@ export const formLogin = () => {
     const password = document.querySelector('.login-form__password').value;
 
     const user = { email, password };
+
     loginUser(user)
-      .then(successLogin())
+      .then(successLogin)
       .catch((error) => {
         if (error.status !== 200) {
           document.querySelector('.login-form__error').classList.remove('hidden');
@@ -45,8 +48,20 @@ export const formLogin = () => {
 };
 
 export const successLogin = () => {
-  document.querySelector('.login-wrapper').remove();
-  document.querySelector('.to-logout').style.backgroundImage = 'url(\'../assets/images/png/logout.png\')';
+  const loginWrapper = document.querySelector('.login-wrapper');
+  if (loginWrapper) {
+    loginWrapper.remove();
+  }
+
+  const loginIcon = document.querySelector('.to-logout');
+
+  loginIcon.style.backgroundImage = 'url(\'../assets/images/png/logout.png\')';
+  // remove event listener opening form
+
+  loginIcon.addEventListener('click', () => {
+
+  });
+  // Выход при клике на иконку
 };
 
-export default loginUser;
+export default formLogin;

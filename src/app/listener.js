@@ -1,6 +1,6 @@
 import menuOnRender from '../render/menu';
 import authOnRender from '../render/auth';
-import formLogin from '../auth/authorization';
+import { formLogin, userId, token, successLogin} from '../auth/authorization';
 
 function menuOnHndl() {
   const menu = document.querySelector('.menu-on') || document.querySelector('.sprint-menu-on');
@@ -24,27 +24,16 @@ function authHndl() {
   }
 }
 
-// function loginHndl() {
-//   const login = document.querySelector('.login-form__submit');
-
-//   if (login) {
-//     login.addEventListener('click', () => {
-//       const email = document.querySelector('.login-form__email').value;
-//       const password = document.querySelector('.login-form__password').value;
-
-//       const user = {
-//         email: `${email}`,
-//         password: `${password}`,
-//       };
-
-//       loginUser(user);
-//     });
-//   }
-// }
+function checkLogin() {
+  if (userId && token) {
+    successLogin();
+  }
+}
 
 function screenListener() {
   menuOnHndl();
   authHndl();
+  checkLogin();
 }
 
 export function closeMenu() {
