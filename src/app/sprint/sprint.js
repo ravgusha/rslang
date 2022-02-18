@@ -15,7 +15,8 @@ export const sprintStat = {
   currentRoundScore: 0,
   maxScore: 0,
   maxSeries: 0,
-  learnedWords: [],
+  rightAnswers: [],
+  wrongAnswers: [],
 };
 
 export const rightAnswersArr = [];

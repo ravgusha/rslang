@@ -13,7 +13,7 @@ const roundResultElement = `<div class="sprint-result">
 <h3 class="res-title">your results</h3>
 <h4 class="score">Score: <span class="score-points">150</span></h4>
 <div class="words-wrapper">
-<h4 class="learned">Learned words</h4>
+<h4 class="learned">Correct answers</h4>
 
 
 <h4 class="wrong-answ">Wrong answers</h4>

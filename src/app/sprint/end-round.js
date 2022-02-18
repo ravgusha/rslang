@@ -17,6 +17,7 @@ export default endOfRound;
 
 function updateStat() {
   sprintStat.rounds++;
+  sprintStat.maxScore = Math.max(sprintStat.maxScore, sprintStat.currentRoundScore);
   console.log(sprintStat);
 }
 
