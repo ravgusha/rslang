@@ -1,7 +1,5 @@
 // eslint-disable-next-line import/no-cycle
-import { btnLsnr } from './sprint';
-// eslint-disable-next-line import/no-cycle
-import resultRender from './sprint-res';
+import endOfRound from './end-round';
 
 // Начинаем с исходного значения в 20 секунд
 const TIME_LIMIT = 7;
@@ -57,10 +55,7 @@ export function startTimer() {
     window.addEventListener('hashchange', onTimesUp);
     if (timeLeft === 0) {
       onTimesUp();
-      resultRender();
-      document.querySelector('#base-timer-path-remaining').classList.remove('red');
-      document.querySelector('#base-timer-path-remaining').classList.add('green');
-      document.querySelector('.sprint-button-wrapper').removeEventListener('click', btnLsnr);
+      endOfRound();
     }
   }, 1000);
 }

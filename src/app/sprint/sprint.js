@@ -2,6 +2,7 @@
 import requestUnreg from './spr-request';
 // eslint-disable-next-line import/no-cycle
 import { startTimer } from './timer';
+import checkBoxLsnrOn from './chbxlsnr';
 
 let seriesCounter = 0;
 let words = [];
@@ -10,6 +11,13 @@ let score = 0;
 let xNum = 0;
 let yNum = 0;
 
+export const sprintStat = {
+  rounds: 0,
+  maxScore: 0,
+  maxSeries: 0,
+  learnedWords: [],
+};
+
 export const rightAnswersArr = [];
 export const wrongAnswersArr = [];
 
@@ -17,6 +25,7 @@ async function sprintRun() {
   words = await requestUnreg();
   rightAnswersArr.splice(0, rightAnswersArr.length);
   wrongAnswersArr.splice(0, wrongAnswersArr.length);
+  checkBoxLsnrOn();
   startTimer();
   removeSeries();
   xNum = rndNumberWord(words);
