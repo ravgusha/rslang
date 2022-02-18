@@ -48,7 +48,9 @@
     bottom: 30px;
   }
 
-  .login-form__submit {
+  .login-form__submit,
+  .logout-yes,
+  .logout-no {
     text-transform: uppercase;
     outline: 0;
     background: const.$color-darkblue;
@@ -56,7 +58,7 @@
     border: 0;
     border-radius: 5px;
     padding: 15px;
-    color: #FFFFFF;
+    color: #ffffff;
     font-size: 14px;
   }
 
@@ -74,5 +76,20 @@
   p {
     padding-bottom: 7px;
     color: const.$color-red;
+  }
+
+  .logout-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: -webkit-fill-available;
+
+    button {
+      width: 150px;
+    }
+  }
+
+  .logout-text {
+    color: #00507d;
+    font-size: 35px;
   }
 }

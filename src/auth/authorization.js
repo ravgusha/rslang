@@ -4,6 +4,7 @@ import BASE_URL from '../constants';
 export let userId = localStorage.getItem('userId');
 export let token = localStorage.getItem('token');
 console.log(userId);
+
 export const validateUser = async (user) => axios.get(`${BASE_URL}/users`, user);
 
 export const createUser = async (user) => {
@@ -27,13 +28,54 @@ export const loginUser = async (user) => {
 };
 
 export const formLogin = () => {
-  const loginForm = document.querySelector('.login-form__submit');
+  const loginForm = document.querySelector('.login-form');
+  const loginModalSumbit = document.querySelector('.login-form__submit');
 
-  loginForm.addEventListener('click', (event) => {
+  if (token && userId) {
+    loginForm.innerHTML = '<img class="logout-img" src="../assets/images/svg/lock-open.svg"><p class="logout-text">Do you want to exit?</p><div class="logout-buttons"><button class="logout-yes">Yes</button><button class="logout-no">No</button></div>';
+    document.querySelector('.logout-yes').addEventListener('click', successLogout);
+    document.querySelector('.logout-no').addEventListener('click', () => {
+      document.querySelector('.login-wrapper').remove();
+    });
+  }
+
+  if (loginModalSumbit) {
+    loginModalSumbit.addEventListener('click', (event) => {
+      event.preventDefault();
+
+      const email = document.querySelector('.login-form__email').value;
+      const password = document.querySelector('.login-form__password').value;
+
+      const user = { email, password };
+
+      loginUser(user)
+        .then(successLogin)
+        .catch((error) => {
+          if (error.status < 200) {
+            document.querySelector('.login-form__error').classList.remove('hidden');
+          }
+        });
+    });
+  }
+};
+
+export const mainLogin = () => {
+  const loginIcon = document.querySelector('.to-logout');
+  const loginMainSubmit = document.querySelector('.sign-btn');
+  const loginMain = document.querySelector('.sign-in');
+
+  if (token && userId) {
+    loginIcon.style.backgroundImage = 'url(\'../assets/images/png/logout.png\')';
+    loginMain.innerHTML = '<button class="sign-btn" id="signout">Sign out</button>';
+
+    document.getElementById('signout').addEventListener('click', successLogout);
+  }
+
+  loginMainSubmit.addEventListener('click', (event) => {
     event.preventDefault();
 
-    const email = document.querySelector('.login-form__email').value;
-    const password = document.querySelector('.login-form__password').value;
+    const email = document.querySelector('.sign-email').value;
+    const password = document.querySelector('.sign-password').value;
 
     const user = { email, password };
 
@@ -41,7 +83,7 @@ export const formLogin = () => {
       .then(successLogin)
       .catch((error) => {
         if (error.status !== 200) {
-          document.querySelector('.login-form__error').classList.remove('hidden');
+          document.querySelector('.sign-error').classList.remove('hidden');
         }
       });
   });
@@ -49,19 +91,52 @@ export const formLogin = () => {
 
 export const successLogin = () => {
   const loginWrapper = document.querySelector('.login-wrapper');
+  const loginMain = document.querySelector('.sign-in');
   if (loginWrapper) {
     loginWrapper.remove();
   }
 
+  loginMain.innerHTML = '<button class="sign-btn" id="signout">Sign out</button>';
+
   const loginIcon = document.querySelector('.to-logout');
-
   loginIcon.style.backgroundImage = 'url(\'../assets/images/png/logout.png\')';
-  // remove event listener opening form
+};
 
-  loginIcon.addEventListener('click', () => {
+export const successLogout = () => {
+  const loginMain = document.querySelector('.sign-in');
+  const loginWrapper = document.querySelector('.login-wrapper');
 
-  });
-  // Выход при клике на иконку
+  if (loginWrapper) {
+    loginWrapper.innerHTML = `<form class="login-form">
+<button class="login-form__close">X</button>
+<img src="../assets/images/svg/lock.svg">
+<div class="login-form__inputs">
+<input name="email" class="login-form__email" type="email" placeholder="E-mail">
+<input id="password" value="" name="password" class="login-form__password" type="password" placeholder="Password"></div>
+<p class="login-form__error hidden">Wrong e-mail or password</p>
+<button class="login-form__submit">Sign in</button>
+<a class="login-form__signup">Don't have an account? Sign Up</a>
+</form>`;
+    loginWrapper.remove();
+  }
+
+  if (loginMain) {
+    loginMain.innerHTML = ` <span class="sign-label">E-mail</span>
+    <input class="sign-email" type="email" placeholder="E-mail:" />
+    <span class="sign-label">Password</span>
+    <input class="sign-password" type="password" placeholder="Password" />
+    <p class="sign-error hidden">Wrong e-mail or password</p>
+    <button class="sign-btn">Sign in</button>
+    <span class="btn-span">Don't have an account? Sign Up</span>;`;
+  }
+
+  const loginIcon = document.querySelector('.to-logout');
+  loginIcon.style.backgroundImage = 'url(\'../assets/images/svg/sign-logo.svg\')';
+
+  token = '';
+  userId = '';
+  localStorage.removeItem('token');
+  localStorage.removeItem('userId');
 };
 
 export default formLogin;

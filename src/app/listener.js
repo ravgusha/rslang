@@ -1,6 +1,8 @@
 import menuOnRender from '../render/menu';
 import authOnRender from '../render/auth';
-import { formLogin, userId, token, successLogin} from '../auth/authorization';
+import {
+  formLogin, mainLogin, userId, token, successLogin,
+} from '../auth/authorization';
 
 function menuOnHndl() {
   const menu = document.querySelector('.menu-on') || document.querySelector('.sprint-menu-on');
@@ -22,6 +24,8 @@ function authHndl() {
       formLogin();
     });
   }
+
+  mainLogin();
 }
 
 function checkLogin() {
