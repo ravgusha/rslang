@@ -7,12 +7,12 @@ import checkBoxLsnrOn from './chbxlsnr';
 let seriesCounter = 0;
 let words = [];
 
-let score = 0;
 let xNum = 0;
 let yNum = 0;
 
 export const sprintStat = {
   rounds: 0,
+  currentRoundScore: 0,
   maxScore: 0,
   maxSeries: 0,
   learnedWords: [],
@@ -30,10 +30,10 @@ async function sprintRun() {
   removeSeries();
   xNum = rndNumberWord(words);
   yNum = wrongNum(xNum);
-  score = 0;
+  sprintStat.currentRoundScore = 0;
   seriesCounter = 0;
   drawWords(xNum, yNum);
-  document.querySelector('.sprint-score span').textContent = score;
+  document.querySelector('.sprint-score span').textContent = sprintStat.currentRoundScore;
   document.querySelector('.sprint-button-wrapper').addEventListener('click', btnLsnr);
 }
 
@@ -68,8 +68,8 @@ function removeSeries() {
 export function btnLsnr(event) {
   if (event.target.classList.contains('spring-correct')) {
     if (xNum === yNum) {
-      score += 10;
-      document.querySelector('.sprint-score span').textContent = score;
+      sprintStat.currentRoundScore += 10;
+      document.querySelector('.sprint-score span').textContent = sprintStat.currentRoundScore;
       addSeries();
       rightAnswHndl(xNum);
       playSound(0);
@@ -81,8 +81,8 @@ export function btnLsnr(event) {
   }
   if (event.target.classList.contains('spring-wrong')) {
     if (xNum !== yNum) {
-      score += 10;
-      document.querySelector('.sprint-score span').textContent = score;
+      sprintStat.currentRoundScore += 10;
+      document.querySelector('.sprint-score span').textContent = sprintStat.currentRoundScore;
       addSeries();
       rightAnswHndl(xNum);
       playSound(0);
