@@ -39,7 +39,12 @@
     height: 60px;
   }
 
-  .login-form__close {
+  .signup-img {
+    padding-bottom: 0;
+  }
+
+  .login-form__close,
+  .signup-form__close {
     align-self: flex-end;
     background-color: transparent;
     font-size: 24px;
@@ -49,6 +54,7 @@
   }
 
   .login-form__submit,
+  .signup-form__submit,
   .logout-yes,
   .logout-no {
     text-transform: uppercase;

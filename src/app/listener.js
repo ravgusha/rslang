@@ -56,4 +56,5 @@ export function closeAuth() {
   });
 }
 
+
 export default screenListener;
