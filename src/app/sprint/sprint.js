@@ -1,10 +1,13 @@
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
 // eslint-disable-next-line import/no-cycle
 import requestUnreg from './spr-request';
 // eslint-disable-next-line import/no-cycle
 import { startTimer } from './timer';
 import checkBoxLsnrOn from './chbxlsnr';
 
-let seriesCounter = 0;
+// eslint-disable-next-line import/no-mutable-exports
+export let seriesCounter = 0;
 let words = [];
 
 let xNum = 0;
@@ -17,6 +20,7 @@ export const sprintStat = {
   maxSeries: 0,
   rightAnswers: [],
   wrongAnswers: [],
+  learned: [],
 };
 
 export const rightAnswersArr = [];
@@ -24,6 +28,7 @@ export const wrongAnswersArr = [];
 
 async function sprintRun() {
   words = await requestUnreg();
+  loadSprintState();
   rightAnswersArr.splice(0, rightAnswersArr.length);
   wrongAnswersArr.splice(0, wrongAnswersArr.length);
   checkBoxLsnrOn();
@@ -53,7 +58,11 @@ function addSeries() {
   const crArr = document.querySelectorAll('.circle');
   if (seriesCounter < 4) {
     crArr[seriesCounter].classList.add(`cr${seriesCounter}`);
+    seriesCounter++; console.log(seriesCounter);
+  }
+  if (seriesCounter > 3) {
     seriesCounter++;
+    console.log(seriesCounter);
   }
 }
 
@@ -63,6 +72,7 @@ function removeSeries() {
     if (e.classList.contains(`cr${i}`)) {
       e.classList.remove(`cr${i}`);
     }
+    sprintStat.maxSeries = Math.max(sprintStat.maxSeries, seriesCounter);
     seriesCounter = 0;
   });
 }
@@ -123,4 +133,14 @@ function playSound(num) {
     sound = document.querySelector('.wrong-snd');
   }
   if (document.querySelector('#sound-onOff').checked) sound.play();
+}
+
+function loadSprintState() {
+  if (sprintStat.rounds === 0) {
+    const loadedStat = JSON.parse(localStorage.getItem('sprintStat'));
+    for (const key in loadedStat) {
+      sprintStat[key] = loadedStat[key];
+    }
+    console.log('LOAD', loadedStat);
+  }
 }
