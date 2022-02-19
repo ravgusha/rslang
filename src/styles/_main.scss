@@ -144,7 +144,8 @@ h2 {
     font-style: italic;
   }
 
-  .sign-error  {
+  .sign-error,
+  .signup-error  {
     color: const.$color-red;
     font-size: 14px;
   }

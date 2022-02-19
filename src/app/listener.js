@@ -1,7 +1,7 @@
 import menuOnRender from '../render/menu';
 import authOnRender from '../render/auth';
 import {
-  formLogin, mainLogin, userId, token, successLogin,
+  formLogin, mainLogin, userId, token, successLogin, mainSignup
 } from '../auth/authorization';
 
 function menuOnHndl() {
@@ -26,6 +26,7 @@ function authHndl() {
   }
 
   mainLogin();
+  mainSignup();
 }
 
 function checkLogin() {
