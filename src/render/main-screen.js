@@ -39,11 +39,12 @@ const renderMainScreen = {
           </div>
           <div class="sign-in pad">
             <span class="sign-label">E-mail</span>
-            <input type="email" placeholder="E-mail:" />
+            <input class="sign-email" type="email" placeholder="E-mail:" />
             <span class="sign-label">Password</span>
-            <input type="password" placeholder="Password" />
+            <input class="sign-password" type="password" placeholder="Password" />
+            <p class="sign-error hidden">Wrong e-mail or password</p>
             <button class="sign-btn">Sign in</button>
-            <span class="btn-span">Not registered? Sign up</span>
+            <span class="btn-span">Don't have an account? Sign Up</span>
           </div>
           <div class="team-wrapper pad">
             <h3 class="team-title">Dev Team</h3>

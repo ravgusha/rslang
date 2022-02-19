@@ -6,7 +6,7 @@ button {
 
 .ebook {
   font-family: 'Source Sans Variable';
-  background-color: #00507d;
+  background-color: const.$color-darkblue;
   min-height: calc(100vh - 150px);
 }
 
@@ -21,12 +21,12 @@ button {
   font-size: 34px;
   font-weight: 700;
   padding-left: 140px;
-  color: #fff;
+  color: const.$color-white;
 }
 
 .ebook__pag {
   font-family: 'Segoe UI';
-  background-color: #c340f4;
+  background-color: const.$color-violet;
   padding: 0 27px;
   border-radius: 30px 30px 0 0;
   font-size: 32px;
@@ -83,7 +83,7 @@ button {
 
   .tui-is-selected {
     text-decoration: underline;
-    text-decoration-color: #3fa9f5;
+    text-decoration-color: const.$color-blue;
     background-color: transparent;
   }
 
@@ -100,7 +100,7 @@ button {
 .ebook__menu {
   button {
     border: 1px;
-    color: #fff;
+    color: const.$color-white;
     font-weight: 700;
     position: relative;
     padding: 8px 30px 17px 20px;
@@ -109,12 +109,12 @@ button {
   }
 
   .ebook__audiocall {
-    background-color: #3fa9f5;
+    background-color: const.$color-blue;
     left: 33px;
   }
 
   .ebook__sprint {
-    background-color: #e84e10;
+    background-color: const.$color-darkorange;
   }
 
   img {
@@ -143,27 +143,27 @@ button {
   width: 43px;
 
   :first-child {
-    background-color: #edc201;
+    background-color: const.$color-yellow;
   }
 
   :nth-child(2) {
     bottom: 8px;
-    background-color: #3fa8f9;
+    background-color: const.$color-blue;
   }
 
   :nth-child(3) {
     bottom: 13px;
-    background-color: #55d800;
+    background-color: const.$color-greenacid;
   }
 
   :nth-child(4) {
     bottom: 23px;
-    background-color: #e84e10;
+    background-color: const.$color-darkorange;
   }
 
   :nth-child(5) {
     bottom: 34px;
-    background-color: #c340f4;
+    background-color: const.$color-violet;
   }
 
   :nth-child(6) {
@@ -195,23 +195,23 @@ button {
   width: 100%;
 
   > :first-child {
-    background-color: #edc201;
+    background-color: const.$color-yellow;
   }
 
   > :nth-child(2) {
-    background-color: #3fa8f9;
+    background-color: const.$color-blue;
   }
 
   > :nth-child(3) {
-    background-color: #55d800;
+    background-color: const.$color-greenacid;
   }
 
   > :nth-child(4) {
-    background-color: #e84e10;
+    background-color: const.$color-darkorange;
   }
 
   > :nth-child(5) {
-    background-color: #c340f4;
+    background-color: const.$color-violet;
   }
 
   > :nth-child(6) {
@@ -246,7 +246,7 @@ button {
 .card {
   display: flex;
   margin: 0 0 40px 0;
-  // height: 180px;
+  position: relative;
   background-color: transparent;
   font-size: 22px;
 
@@ -262,6 +262,12 @@ button {
     background-repeat: no-repeat;
     background-color: transparent;
     margin: 0 15px;
+  }
+
+  .card__score {
+    display: flex;
+    position: relative;
+    right: 34px;
   }
 
   .card__header {
