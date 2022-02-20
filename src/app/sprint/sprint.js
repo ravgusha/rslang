@@ -1,17 +1,18 @@
 /* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
 // eslint-disable-next-line import/no-cycle
+import getUser from './get-user';
 import requestUnreg from './sprint-request';
 // eslint-disable-next-line import/no-cycle
 import { startTimer } from './timer';
 import checkBoxLsnrOn from './check-box-listener';
-
 // eslint-disable-next-line import/no-mutable-exports
 export let seriesCounter = 0;
 let words = [];
 
 let xNum = 0;
 let yNum = 0;
+let user = {};
 
 export const sprintStat = {
   rounds: 0,
@@ -28,6 +29,8 @@ export const wrongAnswersArr = [];
 
 async function sprintRun() {
   words = await requestUnreg();
+  user = await getUser();
+
   loadSprintState();
   rightAnswersArr.splice(0, rightAnswersArr.length);
   wrongAnswersArr.splice(0, wrongAnswersArr.length);

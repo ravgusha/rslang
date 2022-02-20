@@ -1,5 +1,6 @@
 /* eslint-disable import/no-cycle */
 // import { checkBoxLsnrOff } from './chbxlsnr';
+
 import {
   btnLsnr, rightAnswersArr, seriesCounter, sprintStat, wrongAnswersArr,
 } from './sprint';
@@ -26,8 +27,6 @@ function updateStat() {
   checkLearnedWords();
   // sprintStat.wrongAnswers.push(wrongAnswersArr);
   sprintStat.maxSeries = Math.max(sprintStat.maxSeries, seriesCounter);
-  // console.log(sprintStat);
-  console.log(rightAnswersArr);
 }
 
 function showRoundScore() {

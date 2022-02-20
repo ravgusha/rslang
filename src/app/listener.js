@@ -1,7 +1,7 @@
 import menuOnRender from '../render/menu';
 import authOnRender from '../render/auth';
 import {
-  formLogin, mainLogin, userId, token, successLogin, mainSignup
+  formLogin, mainLogin, userId, token, successLogin, mainSignup,
 } from '../auth/authorization';
 
 function menuOnHndl() {
@@ -56,6 +56,5 @@ export function closeAuth() {
     }
   });
 }
-
 
 export default screenListener;
