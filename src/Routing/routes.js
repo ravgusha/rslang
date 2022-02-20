@@ -1,7 +1,7 @@
 import renderEbookScreen from '../render/e-book';
 import renderMainScreen from '../render/main-screen';
 import errorPage from '../Pages/errorPage';
-import renderAudiocall from '../Pages/audiocall';
+import renderAudiocall from '../Pages/audiocallPage';
 import renderSprint from '../render/sprint-scr';
 
 export default [
