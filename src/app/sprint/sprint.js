@@ -1,10 +1,10 @@
 /* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
 // eslint-disable-next-line import/no-cycle
-import requestUnreg from './spr-request';
+import requestUnreg from './sprint-request';
 // eslint-disable-next-line import/no-cycle
 import { startTimer } from './timer';
-import checkBoxLsnrOn from './chbxlsnr';
+import checkBoxLsnrOn from './check-box-listener';
 
 // eslint-disable-next-line import/no-mutable-exports
 export let seriesCounter = 0;
