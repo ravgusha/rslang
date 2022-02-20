@@ -10,9 +10,13 @@ const audiocall = () => {
   title.innerHTML = 'Audio Challange';
   container.append(title);
   const button = document.createElement('button');
-  button.className = 'audiocall-button';
+  button.className = 'audiocall-button off';
   button.innerHTML = 'start';
   container.append(button);
+
+  const group = document.createElement('div');
+  group.className = 'audiocall-group off';
+  container.append(group);
 
   const progress = document.createElement('div');
   progress.className = 'audiocall-progress off';
@@ -29,12 +33,6 @@ const audiocall = () => {
 
   const buttonWrapper = document.createElement('div');
   buttonWrapper.className = 'audiocall-button-wrapper off';
-  for (let i = 0; i <= 3; i++) {
-    const option = document.createElement('button');
-    option.className = 'audiocall-option-btn';
-    option.innerHTML = ' ';
-    buttonWrapper.append(option);
-  }
 
   container.append(buttonWrapper);
   gameWrapper.append(container);

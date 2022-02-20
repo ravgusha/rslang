@@ -2,7 +2,7 @@ import errorPage from '../Pages/errorPage';
 import routes from './routes';
 import eBookContent from '../app/e-book-content';
 import screenListener from '../app/listener';
-import { getWords } from '../app/audiocall';
+import { defineWords } from '../app/audiocall';
 
 const Routing = () => {
 // eslint-disable-next-line no-restricted-globals
@@ -15,7 +15,7 @@ const Routing = () => {
     const { component = errorPage } = findComponentByPath(path) || {};
     document.body.innerHTML = component.render;
     if (path === '/ebook') { eBookContent(); }
-    if (path === '/audiocall') { getWords(); }
+    if (path === '/audiocall') { defineWords(); }
 
     screenListener();
   };

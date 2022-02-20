@@ -1,105 +1,244 @@
 import axios from 'axios';
 import BASE_URL from '../constants';
+import getRandomNum from '../helpers/getRandomNum';
+import shuffleArr from '../helpers/shuffleArr';
 
-const getRandomNum = () => Math.floor(Math.random() * (19 - 1 + 1)) + 1;
+let counter;
 
-const shuffleArr = (arr) => {
-  const shuffledArray = arr.slice();
+const roundData = {};
 
-  for (let i = shuffledArray.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+const user = localStorage.getItem('userId');
+const page = Number(localStorage.getItem('page'));
+const group = Number(localStorage.getItem('group'));
+
+const playAudio = () => {
+  const audio = document.querySelector('.audiotag');
+  setTimeout(() => {
+    audio.play();
+  }, 150);
+};
+
+const putToLearntWords = async (word) => {
+  if (!user) {
+    console.log('the user is unauthorized');
+  } else {
+    await axios.put(
+      `${BASE_URL}/users/${user}/words/${word.id}`,
+      { optional: { status: 'isLearnt' } },
+    );
   }
-  return shuffledArray;
 };
 
 const stopGame = () => {
-  alert('Game over!');
-};
-
-const handleResult = (result, rightWord, words, fillWords, counter) => {
-  const wrapper = document.querySelector('.audiocall-button-wrapper');
-  wrapper.removeEventListener('click', (e) => handleResult(e.target, rightWord, words, fillWords, counter));
-  const button = result;
-  console.log(result);
+  const icon = document.querySelector('.audiocall-icon');
   const progress = document.querySelector('.audiocall-progress');
-  const updateCounter = counter + 1;
-  const learntWords = [];
-  progress.innerHTML = `${updateCounter}/20`;
-  if (updateCounter === 20) {
-    stopGame(learntWords);
-  }
+  const wrapper = document.querySelector('.audiocall-button-wrapper');
+  const container = document.querySelector('.audiocall-container');
+  wrapper.classList.add('off');
+  progress.classList.add('off');
+  icon.classList.add('off');
+  const errors = roundData.questions.filter((el) => !el.correct);
+  const rights = roundData.questions.filter((el) => el.correct);
+  const result = document.createElement('div');
+  result.className = 'audiocall-result';
+  const errorTitle = document.createElement('h3');
+  errorTitle.className = 'audiocall-subtitle';
+  errorTitle.innerHTML = `Errors: ${errors.length}`;
+  result.append(errorTitle);
+  errors.forEach((question) => {
+    const line = document.createElement('div');
+    line.className = 'audiocall-result-line';
+    result.append(line);
+    const answer = document.createElement('div');
+    answer.innerHTML = `${question.word} - ${question.wordTranslate}`;
+    const sound = document.createElement('div');
+    sound.className = 'audiocall-icon-small';
+    const audio = document.createElement('audio');
+    audio.className = 'audiotag';
+    audio.src = `${BASE_URL}/${question.audio}`;
+    line.append(sound);
+    line.append(answer);
+    sound.append(audio);
+  });
+  const rightTitle = document.createElement('h3');
+  rightTitle.className = 'audiocall-subtitle';
+  rightTitle.innerHTML = `I know: ${rights.length}`;
+  result.append(rightTitle);
+  rights.forEach((question) => {
+    const line = document.createElement('div');
+    line.className = 'audiocall-result-line';
+    result.append(line);
+    const answer = document.createElement('div');
+    answer.innerHTML = `${question.word} - ${question.wordTranslate}`;
+    const sound = document.createElement('div');
+    sound.className = 'audiocall-icon-small';
+    const audio = document.createElement('audio');
+    audio.className = 'audiotag';
+    audio.src = `${BASE_URL}/${question.audio}`;
+    line.append(sound);
+    line.append(answer);
+    sound.append(audio);
+  });
+  const btns = document.createElement('div');
+  btns.className = 'audiocall-result-btns';
+  const restart = document.createElement('button');
+  restart.className = 'result-btn';
+  restart.innerHTML = 'restart';
+  btns.append(restart);
+  const contin = document.createElement('button');
+  contin.className = 'result-btn';
+  contin.innerHTML = 'continue';
+  btns.append(contin);
+  const toStat = document.createElement('button');
+  toStat.className = 'result-btn';
+  toStat.innerHTML = 'statistics';
+  btns.append(toStat);
+  result.append(btns);
+  container.append(result);
+};
 
-  if (result.innerHTML === rightWord.wordTranslate) {
-    learntWords.push(result);
-    button.classList.remove('wrong');
-    playRound(words, fillWords, updateCounter);
+const handleResult = (e) => {
+  const button = e.target;
+  const progress = document.querySelector('.audiocall-progress');
+  progress.innerHTML = `${counter}/20`;
+  if (button.innerHTML === roundData.questions[counter - 1].wordTranslate) {
+    roundData.questions[counter - 1].correct = true;
+    switch (roundData.questions[counter - 1].trueAmount) {
+    case 1:
+      roundData.questions[counter - 1].trueAmount = 2;
+      break;
+    case undefined:
+      roundData.questions[counter - 1].trueAmount = 1;
+      break;
+    case 2:
+    default:
+      roundData.questions[counter - 1].trueAmount = 3;
+      putToLearntWords(roundData.questions[counter - 1]);
+      break;
+    }
   } else {
-    button.classList.add('wrong');
-    playRound(words, fillWords, updateCounter);
+    roundData.questions[counter - 1].correct = false;
+  }
+  playRound();
+};
+
+const resetState = () => {
+  const wrapper = document.querySelector('.audiocall-button-wrapper');
+  while (wrapper.firstChild) {
+    wrapper.removeChild(wrapper.firstChild);
   }
 };
 
-const playRound = (words, fillWords, counter) => {
-  const rightWord = words[getRandomNum()];
-  // eslint-disable-next-line max-len
-  const wordsToPlay = [rightWord, fillWords[getRandomNum()], fillWords[getRandomNum()], fillWords[getRandomNum()]];
-  const shuffledWords = shuffleArr(wordsToPlay);
-  const options = document.querySelectorAll('.audiocall-option-btn');
+const showQuestion = (rightWord) => {
   const wrapper = document.querySelector('.audiocall-button-wrapper');
   const audio = document.querySelector('.audiotag');
-  const icon = document.querySelector('.audiocall-icon');
-  options.forEach((item, i) => {
-    const option = item;
-    option.innerHTML = `${shuffledWords[i].wordTranslate}`;
-  });
   audio.src = (`${BASE_URL}/${rightWord.audio}`);
-  const playAudio = () => {
-    setTimeout(() => {
-      audio.play();
-    }, 150);
-    audio.pause();
-    audio.currentTime = 0;
-  };
+  audio.pause();
+  audio.currentTime = 0;
   playAudio();
-  icon.addEventListener('click', playAudio, true);
-  wrapper.addEventListener('click', (e) => handleResult(e.target, rightWord, words, fillWords, counter));
+  const wordsToPlay = shuffleArr([{ word: rightWord.wordTranslate, correct: true },
+    { word: roundData.answers[counter].wordTranslate, correct: false },
+    { word: roundData.answers1[counter].wordTranslate, correct: false },
+    { word: roundData.answers2[counter].wordTranslate, correct: false }]);
+  wordsToPlay.forEach((answer) => {
+    const button = document.createElement('button');
+    button.innerText = answer.word;
+    button.classList.add('audiocall-option-btn', 'btn');
+    if (answer.correct) {
+      button.dataset.correct = answer.correct;
+    }
+    if (button) {
+      button.addEventListener('click', (e) => {
+        counter++;
+        handleResult(e);
+      });
+    }
+    wrapper.appendChild(button);
+  });
 };
 
-const startGame = (words, fillWords) => {
+const playRound = () => {
+  resetState();
+  if (roundData.questions[counter] === undefined) {
+    stopGame();
+  } else {
+    showQuestion(roundData.questions[counter]);
+  }
+};
+
+const startGame = () => {
   const start = document.querySelector('.audiocall-button');
-  start.classList.add('off');
-  const wrapper = document.querySelector('.audiocall-button-wrapper');
-  wrapper.classList.remove('off');
-  const progress = document.querySelector('.audiocall-progress');
-  progress.classList.remove('off');
   const icon = document.querySelector('.audiocall-icon');
+  const progress = document.querySelector('.audiocall-progress');
+  const wrapper = document.querySelector('.audiocall-button-wrapper');
+  const groupDif = document.querySelector('.audiocall-group');
+  if (start) {
+    start.classList.add('off');
+  }
+  if (groupDif) {
+    groupDif.classList.add('off');
+  }
+  wrapper.classList.remove('off');
+  progress.classList.remove('off');
   icon.classList.remove('off');
-  const counter = 0;
-  playRound(words, fillWords, counter);
+  if (icon) {
+    icon.addEventListener('click', playAudio);
+  }
+  counter = 0;
+  playRound();
 };
 
-export const getWords = async (page = 1, group = 1) => {
+const getWords = async () => {
   const words = await axios.get(`${BASE_URL}/words?page=${page}&group=${group}`);
-  let fillPage = 0;
-  let fillGroup = 0;
-  if (group >= 0 && group !== 6) {
-    fillGroup = group + 1;
+  let fillPage2 = 0;
+  let fillGroup2 = 0;
+  if (group >= 0 && group !== 5) {
+    fillGroup2 = group + 1;
   } else if (group === 5) {
-    fillGroup = group - 1;
+    fillGroup2 = group - 1;
   }
   if (page >= 0 && page !== 29) {
-    fillPage = page + 1;
+    fillPage2 = page + 3;
   } else if (page === 29) {
-    fillPage = page - 1;
+    fillPage2 = page - 3;
   }
-  const fillWords = await axios.get(`${BASE_URL}/words?page=${fillPage}&group=${fillGroup}`);
+  const fillWords2 = await axios.get(`${BASE_URL}/words?page=${fillPage2}&group=${fillGroup2}`);
+  const fillWords1 = await axios.get(`${BASE_URL}/words?page=${fillPage2 + 1}&group=${fillGroup2}`);
+  const fillWords = await axios.get(`${BASE_URL}/words?page=${fillPage2 + 2}&group=${fillGroup2}`);
+
+  const fillData2 = await fillWords2.data;
   const fillData = await fillWords.data;
+  const fillData1 = await fillWords1.data;
+
   const data = await words.data;
-  const start = document.querySelector('.audiocall-button');
-  if (start) {
-    start.addEventListener('click', () => startGame(data, fillData));
+  roundData.questions = shuffleArr(data);
+  roundData.answers = shuffleArr(fillData);
+  roundData.answers1 = shuffleArr(fillData1);
+  roundData.answers2 = shuffleArr(fillData2);
+  startGame();
+};
+
+export const defineWords = () => {
+  if (!user) {
+    const groupDiff = document.querySelector('.audiocall-group');
+    groupDiff.classList.remove('off');
+    if (groupDiff) {
+      for (let i = 0; i < 6; i++) {
+        const dif = document.createElement('div');
+        dif.className = 'audiocall-group-diff';
+        dif.innerHTML = `${i + 1}`;
+        groupDiff.append(dif);
+        const groupNum = i;
+        dif.addEventListener('click', () => getWords(groupNum, getRandomNum(29)));
+      }
+    }
+  } else {
+    const start = document.querySelector('.audiocall-button');
+    start.classList.remove('off');
+    if (start) {
+      start.addEventListener('click', () => getWords());
+    }
   }
 };
 
-export default { getWords };
+export default { defineWords };
