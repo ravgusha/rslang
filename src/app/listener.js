@@ -1,7 +1,7 @@
 import menuOnRender from '../render/menu';
 import authOnRender from '../render/auth';
 import {
-  formLogin, mainLogin, userId, token, successLogin, mainSignup,
+  headerLogin, mainLogin, userId, token, successLogin, mainSignup,
 } from '../auth/authorization';
 
 function menuOnHndl() {
@@ -21,7 +21,7 @@ function authHndl() {
     auth.addEventListener('click', () => {
       authOnRender();
       closeAuth();
-      formLogin();
+      headerLogin();
     });
   }
 
