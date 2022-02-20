@@ -14,6 +14,7 @@ function resultRender() {
   playAudioBtnHndl();
   document.querySelector('.res-btn-repeat').addEventListener('click', () => {
     resWrapper.remove();
+    document.querySelector('.preloader').classList.remove('loaded');
     sprintRun();
   });
 }

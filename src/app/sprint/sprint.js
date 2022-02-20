@@ -12,6 +12,7 @@ let words = [];
 
 let xNum = 0;
 let yNum = 0;
+// eslint-disable-next-line no-unused-vars
 let user = {};
 
 export const sprintStat = {
@@ -30,6 +31,7 @@ export const wrongAnswersArr = [];
 async function sprintRun() {
   words = await requestUnreg();
   user = await getUser();
+  deletePreloader();
 
   loadSprintState();
   rightAnswersArr.splice(0, rightAnswersArr.length);
@@ -61,11 +63,10 @@ function addSeries() {
   const crArr = document.querySelectorAll('.circle');
   if (seriesCounter < 4) {
     crArr[seriesCounter].classList.add(`cr${seriesCounter}`);
-    seriesCounter++; console.log(seriesCounter);
+    seriesCounter++;
   }
   if (seriesCounter > 3) {
     seriesCounter++;
-    console.log(seriesCounter);
   }
 }
 
@@ -145,5 +146,11 @@ function loadSprintState() {
       sprintStat[key] = loadedStat[key];
     }
     console.log('LOAD', loadedStat);
+  }
+}
+
+function deletePreloader() {
+  if (document.querySelector('.preloader')) {
+    document.querySelector('.preloader').classList.add('loaded');
   }
 }
