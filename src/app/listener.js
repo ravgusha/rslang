@@ -15,7 +15,7 @@ function menuOnHndl() {
 }
 
 function authHndl() {
-  const auth = document.querySelector('.to-logout') || document.querySelector('.sprint-user');
+  const auth = document.querySelector('.to-logout');
 
   if (auth) {
     auth.addEventListener('click', () => {

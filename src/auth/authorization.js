@@ -120,23 +120,24 @@ export const mainLogin = () => {
 
     document.getElementById('signout').addEventListener('click', successLogout);
   }
+  if (loginMainSubmit) {
+    loginMainSubmit.addEventListener('click', (event) => {
+      event.preventDefault();
 
-  loginMainSubmit.addEventListener('click', (event) => {
-    event.preventDefault();
+      const email = document.querySelector('.sign-email').value;
+      const password = document.querySelector('.sign-password').value;
 
-    const email = document.querySelector('.sign-email').value;
-    const password = document.querySelector('.sign-password').value;
+      const user = { email, password };
 
-    const user = { email, password };
-
-    loginUser(user)
-      .then(successLogin)
-      .catch((error) => {
-        if (error.status !== 200) {
-          document.querySelector('.sign-error').classList.remove('hidden');
-        }
-      });
-  });
+      loginUser(user)
+        .then(successLogin)
+        .catch((error) => {
+          if (error.status !== 200) {
+            document.querySelector('.sign-error').classList.remove('hidden');
+          }
+        });
+    });
+  }
 };
 
 export const mainSignup = () => {

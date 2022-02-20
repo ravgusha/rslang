@@ -21,12 +21,7 @@ const headerElement = `
   <div class="sprint-user"><input type="checkbox" name="sound-onOff" id="sound-onOff" checked>
   <label class="sound-label" for="sound-onOff"></label>
   <span class="sprin-header-span">User: unregistered</span>
-  <img
-  src="../assets/images/svg/sign-logo-sprint.svg"
-  alt="sign-in"
-  title="sign-in"
-  class="sprint-sign-logo"
-/></div>
+ </div>
 </header>
 <h2 class="sprint-title">sprint</h2>
 <div class="sprint-info-wrapper">
