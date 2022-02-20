@@ -11,4 +11,11 @@ export default [
   // { path: '/statistics', component: renderStatistics },
   { path: '/audiocall', component: renderAudiocall },
   { path: '/sprint', component: renderSprint },
+  { path: '/ebook/1', component: renderEbookScreen },
+  { path: '/ebook/2', component: renderEbookScreen },
+  { path: '/ebook/3', component: renderEbookScreen },
+  { path: '/ebook/4', component: renderEbookScreen },
+  { path: '/ebook/5', component: renderEbookScreen },
+  { path: '/ebook/6', component: renderEbookScreen },
+
 ];
