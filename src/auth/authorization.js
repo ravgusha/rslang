@@ -4,7 +4,7 @@ import BASE_URL from '../constants';
 
 export let userId = localStorage.getItem('userId');
 export let token = localStorage.getItem('token');
-
+export let userName = localStorage.getItem('userName');
 export const validateUser = async (user) => axios.get(`${BASE_URL}/users`, user);
 
 export const createUser = async (user) => {
@@ -16,9 +16,10 @@ export const loginUser = async (user) => {
 
   token = await res.data.token;
   userId = await res.data.userId;
-
+  userName = await res.data.name;
   localStorage.setItem('token', token);
   localStorage.setItem('userId', userId);
+  localStorage.setItem('userName', userName);
 };
 
 export const formLogin = () => {

@@ -1,7 +1,7 @@
 /* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
 // eslint-disable-next-line import/no-cycle
-import getUser from './get-user';
+import { getUserFromStorage } from './get-user';
 import requestUnreg from './sprint-request';
 // eslint-disable-next-line import/no-cycle
 import { startTimer } from './timer';
@@ -13,7 +13,7 @@ let words = [];
 let xNum = 0;
 let yNum = 0;
 // eslint-disable-next-line no-unused-vars
-let user = {};
+const user = {};
 
 export const sprintStat = {
   rounds: 0,
@@ -30,7 +30,7 @@ export const wrongAnswersArr = [];
 
 async function sprintRun() {
   words = await requestUnreg();
-  user = await getUser();
+  getUserFromStorage();
   deletePreloader();
 
   loadSprintState();
