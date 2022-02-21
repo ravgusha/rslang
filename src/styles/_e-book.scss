@@ -35,11 +35,11 @@ button {
 
   .tui-page-btn {
     border: none;
-    width: auto;
+    height: auto;
     font-size: 32px;
     font-weight: 700;
     color: white;
-    padding: 8px 6px 6px;
+    margin: 0px 6px 0px;
   }
 
   .tui-page-btn:hover {
@@ -57,9 +57,10 @@ button {
     background-size: contain;
     filter: invert(100%);
   }
+
   .tui-ico-ellip {
     background-image: url('../assets/images/svg/dots.svg');
-    margin-top: 8px;
+    margin-top: 22px;
   }
 
   .tui-ico-prev {
@@ -103,7 +104,7 @@ button {
     color: const.$color-white;
     font-weight: 700;
     position: relative;
-    padding: 8px 30px 17px 20px;
+    padding: 8px 30px 20px 20px;
     font-size: 25px;
     border-radius: 37px 27px 0 0;
   }
@@ -244,11 +245,12 @@ button {
 }
 
 .card {
-  display: flex;
+  display: inline-flex;
   margin: 0 0 40px 0;
   position: relative;
   background-color: transparent;
   font-size: 22px;
+  min-width: 100%;
 
   img {
     width: 260px;
@@ -268,21 +270,38 @@ button {
     display: flex;
     position: relative;
     right: 34px;
+    top: 15px;
+    height: fit-content;
+    font-weight: 700;
+
+    p,
+    span {
+      height: fit-content;
+    }
+  }
+
+  .card__image {
+    min-width: 260px;
+    object-fit: cover;
+    padding-top: 17px;
   }
 
   .card__header {
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-between;
     font-weight: 700;
+    flex-wrap: wrap;
   }
 
   .difficult {
     justify-content: start;
   }
 
-  .card__header_left {
+  .card__header_left,
+  .card__header_center {
     display: flex;
     padding-top: 3px;
+    white-space: nowrap;
   }
 
   .card__audio {
@@ -293,13 +312,17 @@ button {
     background-image: url('../assets/images/svg/list.svg');
   }
 
+  .card__todone {
+    background-image: url('../assets/images/svg/learnt.svg');
+    background-size: cover;
+  }
+
   .card__list-delete {
     background-image: url('../assets/images/svg/delete.svg');
     background-size: cover;
   }
 
   .card__text {
-    padding-left: 25px;
     width: 100%;
   }
 
@@ -326,4 +349,67 @@ button {
 }
 .underline {
   color: green !important;
+}
+
+@media (max-width: 1300px) {
+  .card__header {
+    flex-direction: column;
+  }
+
+  .ebook__container {
+    margin: 0 2% 0 3%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .ebook__header {
+    padding-left: 15px;
+  }
+
+  .ebook__pag .tui-page-btn {
+    margin: 0px 1px 0px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    align-items: center;
+
+    .card__header {
+      align-items: center;
+    }
+
+    .card__score {
+      position: static;
+      padding-top: 5px;
+    }
+  }
+  .ebook__header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ebook__pag {
+    margin-left: 38px;
+  }
+}
+
+@media (max-width: 520px) {
+  .card__header,
+  .ebook__menu button {
+    font-size: 14px;
+  }
+  .card .card__description {
+    font-size: 13px;
+  }
+  .card__score {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 425px) {
+  .ebook__pag {
+    padding: 0;
+  }
 }
