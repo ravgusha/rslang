@@ -111,8 +111,6 @@ export const mainLogin = () => {
     event.preventDefault();
     signIn('main');
   });
-
-
 };
 
 export const signIn = (form) => {
@@ -233,15 +231,13 @@ export const successLogout = () => {
     createLoginForm();
   }
 
-
-    loginMain.innerHTML = ` <span class="sign-label">E-mail</span>
+  loginMain.innerHTML = ` <span class="sign-label">E-mail</span>
     <input class="sign-email" type="email" placeholder="E-mail:" />
     <span class="sign-label">Password</span>
     <input class="sign-password" type="password" placeholder="Password" />
     <p class="sign-error hidden">Wrong e-mail or password</p>
     <button class="sign-btn">Sign in</button>
     <span class="btn-span" id="signin">Don't have an account? Sign Up</span>;`;
-
 
   document.querySelector('.sign-btn').addEventListener('click', (event) => {
     event.preventDefault();
