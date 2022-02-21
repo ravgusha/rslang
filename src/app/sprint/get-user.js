@@ -3,7 +3,7 @@ import axios from 'axios';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { KJUR } from 'jsrsasign';
 import BASE_URL from '../../constants';
-import user from './user';
+// import user from './user';
 
 const token = localStorage.getItem('token');
 export function getId() {
