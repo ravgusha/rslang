@@ -143,6 +143,13 @@ h2 {
     border: solid 3px const.$color-orange;
     font-style: italic;
   }
+
+  .sign-error,
+  .signup-error  {
+    color: const.$color-red;
+    font-size: 14px;
+  }
+
   button {
     @extend input;
     background-color: const.$color-orange;
@@ -279,6 +286,12 @@ footer {
   span {
     font-size: 32px;
     text-align: justify;
+  }
+
+  .btn-span:hover {
+    color: #ffffff;
+    box-shadow: 0 2px 0 0 const.$color-orange;
+    cursor: pointer;
   }
 }
 .about,

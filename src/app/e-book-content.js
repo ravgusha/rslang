@@ -28,7 +28,7 @@ function eBookContent() {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-      },
+      }
     );
     const data = await res.data[0].paginatedResults;
 
@@ -83,7 +83,7 @@ function eBookContent() {
               </p>
             </div>
           </div>
-        </div>`,
+        </div>`
       );
     });
   }
@@ -101,22 +101,25 @@ function eBookContent() {
 
   async function getWords(group, page) {
     learntWordsOnPage = 0;
-    // Для неавторизованных пользователей
-    // const res = await axios(`${BASE_URL}/words?group=${group}&page=${page}`);
-    // const data = await res.data;
+    let data;
 
-    // Для авторизованных
-    const res = await axios(
-      `${BASE_URL}/users/${userId}/aggregatedWords?group=${group}&page=${page}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-      },
-    );
-    const data = await res.data[0].paginatedResults;
+    if (token && userId) {
+      const res = await axios(
+        `${BASE_URL}/users/${userId}/aggregatedWords?group=${group}&page=${page}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      data = await res.data[0].paginatedResults;
+    } else {
+      // Для неавторизованных пользователей
+      const res = await axios(`${BASE_URL}/words?group=${group}&page=${page}`);
+      data = await res.data;
+    }
 
     contents[group].classList.remove('hide');
     contents[group].innerHTML = '<p class="done-page hidden">Страница изучена</p>';
@@ -184,7 +187,7 @@ function eBookContent() {
               </p>
             </div>
           </div>
-        </div>`,
+        </div>`
       );
 
       // if word is learnt, hide add to learnt button
@@ -205,6 +208,20 @@ function eBookContent() {
         }
       }
     });
+
+    if (!token) {
+      // delete difficult tab
+      if (contents[6] && tabs.children[6]) {
+        contents[6].remove();
+        tabs.children[6].remove();
+      }
+      document.querySelectorAll('.card__list').forEach((button) => {
+        button.remove();
+      });
+      document.querySelectorAll('.card__todone').forEach((button) => {
+        button.remove();
+      });
+    }
     checkLeantWords();
   }
   const audioCallBtn = document.querySelector('.ebook__audiocall');
@@ -266,7 +283,7 @@ function eBookContent() {
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
-        },
+        }
       )
       .catch((error) => {
         if (error.response.status !== 200) {
@@ -282,7 +299,7 @@ function eBookContent() {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
               },
-            },
+            }
           );
         }
       });
@@ -319,7 +336,7 @@ function eBookContent() {
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
-        },
+        }
       )
       .catch((error) => {
         if (error.response.status !== 200) {
@@ -335,7 +352,7 @@ function eBookContent() {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
               },
-            },
+            }
           );
         }
       });
