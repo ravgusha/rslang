@@ -158,7 +158,7 @@ h2 {
     margin-bottom: 0;
     font-weight: bold;
     cursor: pointer;
-    &:hover {
+    &:hover > {
       box-shadow: 0 0 15px 5px const.$color-white;
       transition: box-shadow 0.3s;
     }
@@ -291,11 +291,11 @@ footer {
     text-align: justify;
   }
 
-  .btn-span:hover {
-    color: #ffffff;
-    box-shadow: 0 2px 0 0 const.$color-orange;
-    cursor: pointer;
-  }
+  //   .btn-span:hover {
+  //     // color: #ffffff;
+  //     box-shadow: 0 2px 0 0 const.$color-orange;
+  //     cursor: pointer;
+  //   }
 }
 .about,
 .e-book {
