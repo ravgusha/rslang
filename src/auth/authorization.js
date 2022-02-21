@@ -128,10 +128,12 @@ export const mainLogin = () => {
         });
     });
   }
-  loginMainSubmit.addEventListener('click', (event) => {
-    event.preventDefault();
-    signIn('main');
-  });
+  if (loginMainSubmit) {
+    loginMainSubmit.addEventListener('click', (event) => {
+      event.preventDefault();
+      signIn('main');
+    });
+  }
 };
 
 export const signIn = (form) => {
@@ -270,8 +272,10 @@ export const successLogout = () => {
   const loginIcon = document.querySelector('.to-logout');
   loginIcon.style.backgroundImage = 'url(\'../assets/images/svg/sign-logo.svg\')';
 
+  userName = '';
   token = '';
   userId = '';
+  localStorage.removeItem('userName');
   localStorage.removeItem('token');
   localStorage.removeItem('userId');
   localStorage.removeItem('page');

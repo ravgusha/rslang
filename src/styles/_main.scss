@@ -68,10 +68,8 @@ h2 {
 }
 .main {
   background-color: const.$color-violet;
-  width: inherit;
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 150px);
 }
 
 .footer {
@@ -145,7 +143,7 @@ h2 {
   }
 
   .sign-error,
-  .signup-error  {
+  .signup-error {
     color: const.$color-red;
     font-size: 14px;
   }
@@ -169,8 +167,12 @@ h2 {
   }
   .btn-span {
     color: #404040;
-    font-weight: normal;
-    font-size: 18px;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
@@ -280,7 +282,7 @@ footer {
 .main-bottom-wrapper {
   display: flex;
   font-family: 'Segoe UI';
-  min-height: calc(50vh - 75px);
+  min-height: calc(50vh - 100px);
 
   p,
   span {
@@ -301,7 +303,7 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 8px;
 }
 .pad {
   padding: 40px;
@@ -353,11 +355,11 @@ footer {
   }
 
   .footer {
-    height: 50px;
+    height: 40px;
     a {
       font-size: 16px;
       img {
-        height: 35px;
+        height: 30px;
       }
     }
   }
@@ -366,10 +368,10 @@ footer {
     span,
     input,
     button {
-      font-size: 24px;
+      font-size: 18px;
     }
     button {
-      margin-top: 25px;
+      margin-top: 20px;
     }
     .btn-span {
       font-size: 14px;
@@ -384,7 +386,8 @@ footer {
     }
     h3,
     h4 {
-      font-size: 24px;
+      font-size: 22px;
+      line-height: 22px;
       font-weight: 700;
     }
     p {
@@ -393,6 +396,17 @@ footer {
   }
   .main-top-wrapper,
   .main-bottom-wrapper {
-    min-height: calc(50vh - 100px);
+    min-height: calc(50vh - 50px);
+  }
+  .pad {
+    padding: 25px;
+  }
+  .team-wrapper ul {
+    gap: 10px;
+  }
+  .sprint-action-wrapper button {
+    height: 54px;
+    width: 158px;
+    font-size: 24px;
   }
 }

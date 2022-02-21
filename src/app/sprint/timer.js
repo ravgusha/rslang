@@ -2,7 +2,7 @@
 import endOfRound from './end-round';
 
 // Начинаем с исходного значения в 20 секунд
-const TIME_LIMIT = 5;
+const TIME_LIMIT = 100;
 // Оповещение на 10 секунде
 const WARNING_THRESHOLD = 10;
 // Предупреждение на 5 секунде
