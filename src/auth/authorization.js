@@ -30,7 +30,7 @@ export const headerLogin = () => {
   const createUserBtn = document.querySelector('.login-form__signup');
 
   if (token && userId) {
-    loginForm.innerHTML = '<img class="logout-img" src="../assets/images/svg/lock-open.svg"><p class="logout-text">Do you want to exit?</p><div class="logout-buttons"><button class="logout-yes">Yes</button><button class="logout-no">No</button></div>';
+    loginForm.innerHTML = '<img class="logout-img" src="assets/images/svg/lock-open.svg"><p class="logout-text">Do you want to exit?</p><div class="logout-buttons"><button class="logout-yes">Yes</button><button class="logout-no">No</button></div>';
     document.querySelector('.logout-yes').addEventListener('click', successLogout);
     document.querySelector('.logout-no').addEventListener('click', () => {
       loginWrapper.remove();
@@ -51,7 +51,7 @@ export const headerLogin = () => {
       loginWrapper.innerHTML = `<form class="signup-form">
       <button type="button" class="signup-form__back">←</button>
       <button class="signup-form__close">X</button>
-      <img class="signup-img" src="../assets/images/svg/signup.svg">
+      <img class="signup-img" src="assets/images/svg/signup.svg">
       <div class="signup-form__inputs">
       <input type="email" name="email" class="signup-form__email"  placeholder="E-mail" required>
       <input type="text" name="name" class="signup-form__name"  placeholder="Name" required>
@@ -78,7 +78,7 @@ export const formSignup = async () => {
   signupBack.addEventListener('click', () => {
     loginWrapper.innerHTML = `<form class="login-form">
   <button class="login-form__close">X</button>
-  <img src="../assets/images/svg/lock.svg">
+  <img src="assets/images/svg/lock.svg">
   <div class="login-form__inputs">
   <input type="email" name="email" class="login-form__email"  placeholder="E-mail" required>
   <input minlength="8" id="password" value="" name="password" class="login-form__password" type="password" placeholder="Password" required ></div>
@@ -106,7 +106,7 @@ export const mainLogin = () => {
   const loginMain = document.querySelector('.sign-in');
 
   if (token && userId && GAME_STATE.mode !== 'sprint' && GAME_STATE.mode !== 'ebook') {
-    loginIcon.style.backgroundImage = 'url(\'../assets/images/png/logout.png\')';
+    loginIcon.style.backgroundImage = 'url(\'assets/images/png/logout.png\')';
     loginMain.innerHTML = '<button class="sign-btn" id="signout">Sign out</button>';
 
     document.getElementById('signout').addEventListener('click', successLogout);
@@ -187,7 +187,7 @@ export const signUp = (form) => {
   createUser(user)
     .then(() => {
       loginUser(user1);
-      loginForm.innerHTML = '<img class="logout-img" src="../assets/images/svg/lock-open.svg"><p class="logout-text">Do you want to exit?</p><div class="logout-buttons"><button class="logout-yes">Yes</button><button class="logout-no">No</button></div>';
+      loginForm.innerHTML = '<img class="logout-img" src="assets/images/svg/lock-open.svg"><p class="logout-text">Do you want to exit?</p><div class="logout-buttons"><button class="logout-yes">Yes</button><button class="logout-no">No</button></div>';
       document.querySelector('.logout-yes').addEventListener('click', successLogout);
       document.querySelector('.logout-no').addEventListener('click', () => {
         loginWrapper.remove();
@@ -242,7 +242,7 @@ export const successLogin = () => {
 
   const loginIcon = document.querySelector('.to-logout');
   if (loginIcon && loginMain) {
-    loginIcon.style.backgroundImage = 'url(\'../assets/images/png/logout.png\')';
+    loginIcon.style.backgroundImage = 'url(\'assets/images/png/logout.png\')';
     loginMain.innerHTML = '<button class="sign-btn" id="signout">Sign out</button>';
     document.getElementById('signout').addEventListener('click', successLogout);
   }
@@ -288,7 +288,7 @@ const createLoginForm = () => {
   const loginWrapper = document.querySelector('.login-wrapper');
   loginWrapper.innerHTML = `<form class="login-form">
   <button class="login-form__close">X</button>
-  <img src="../assets/images/svg/lock.svg">
+  <img src="assets/images/svg/lock.svg">
   <div class="login-form__inputs">
   <input name="email" class="login-form__email" type="email" placeholder="E-mail">
   <input id="password" value="" name="password" class="login-form__password" type="password" placeholder="Password"></div>

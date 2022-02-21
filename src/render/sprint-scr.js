@@ -14,10 +14,10 @@ const headerElement = `
 </div>
 
 <div class="sprint-wrapper">
-<audio class="right-snd" src="../assets/sounds/right-ans-soun.mp3"></audio>
-<audio class="wrong-snd" src="../assets/sounds/wrong-ans-soun.mp3"></audio>
+<audio class="right-snd" src="assets/sounds/right-ans-soun.mp3"></audio>
+<audio class="wrong-snd" src="assets/sounds/wrong-ans-soun.mp3"></audio>
 <header class="sprint-header">
-<img src="../assets/images/svg/burger-sprint.svg" alt="menu" title="menu" class="sprint-menu-on">
+<img src="assets/images/svg/burger-sprint.svg" alt="menu" title="menu" class="sprint-menu-on">
   <div class="sprint-user"><input type="checkbox" name="sound-onOff" id="sound-onOff" checked>
   <label class="sound-label" for="sound-onOff"></label>
   <span class="sprin-header-span">User: unregistered</span>
@@ -64,8 +64,8 @@ const headerElement = `
     <button class="spring-btn spring-correct">Yes</button>
   </div>
   <div class="spring-arrow-wrapper">
-    <img src="../assets/images/svg/Arrow-L.svg" alt="arrow left">
-    <img src="../assets/images/svg/Arrow-R.svg" alt="arrow right">
+    <img src="assets/images/svg/Arrow-L.svg" alt="arrow left">
+    <img src="assets/images/svg/Arrow-R.svg" alt="arrow right">
   </div>
 </div>
 </div>`;
