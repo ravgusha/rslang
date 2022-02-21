@@ -12,9 +12,7 @@ const renderMainScreen = {
           <div class="about pad">
             <h2>about</h2>
             <p>
-              Fugit nobis voluptatibus obcaecati dicta optio! Ipsum! ipsum dolor, sit amet consectetur
-              adipisicing elit. Omnis reprehenderit adipisci cupiditate ex voluptatem. Repellendus,
-            int incidunt quia ab mollitia omnis, facere ex .
+            The applications allow you to learn English through games and a e-book. The student will be offered exercises of different difficulty levels. With the help of the app you will learn new words, master the correct pronunciation.
             </p>
           </div>
           <a class="audio-call pad" href="#/audiocall">
