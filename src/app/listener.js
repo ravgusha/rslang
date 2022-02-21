@@ -1,7 +1,7 @@
 import menuOnRender from '../render/menu';
 import authOnRender from '../render/auth';
 import {
-  headerLogin, mainLogin, userId, token, successLogin, mainSignup
+  headerLogin, mainLogin, userId, token, successLogin, mainSignup,
 } from '../auth/authorization';
 
 function menuOnHndl() {
@@ -15,7 +15,7 @@ function menuOnHndl() {
 }
 
 function authHndl() {
-  const auth = document.querySelector('.to-logout') || document.querySelector('.sprint-user');
+  const auth = document.querySelector('.to-logout');
 
   if (auth) {
     auth.addEventListener('click', () => {
@@ -56,6 +56,5 @@ export function closeAuth() {
     }
   });
 }
-
 
 export default screenListener;

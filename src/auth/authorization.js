@@ -1,8 +1,11 @@
+/* eslint-disable import/no-mutable-exports */
 import axios from 'axios';
 import BASE_URL from '../constants';
 
 export let userId = localStorage.getItem('userId');
 export let token = localStorage.getItem('token');
+export let userName = localStorage.getItem('userName');
+export const validateUser = async (user) => axios.get(`${BASE_URL}/users`, user);
 
 export const createUser = async (user) => {
   await axios.post(`${BASE_URL}/users`, user);
@@ -13,9 +16,10 @@ export const loginUser = async (user) => {
 
   token = await res.data.token;
   userId = await res.data.userId;
-
+  userName = await res.data.name;
   localStorage.setItem('token', token);
   localStorage.setItem('userId', userId);
+  localStorage.setItem('userName', userName);
 };
 
 export const headerLogin = () => {
@@ -106,11 +110,30 @@ export const mainLogin = () => {
 
     document.getElementById('signout').addEventListener('click', successLogout);
   }
+  if (loginMainSubmit) {
+    loginMainSubmit.addEventListener('click', (event) => {
+      event.preventDefault();
 
-  loginMainSubmit.addEventListener('click', (event) => {
-    event.preventDefault();
-    signIn('main');
-  });
+      const email = document.querySelector('.sign-email').value;
+      const password = document.querySelector('.sign-password').value;
+
+      const user = { email, password };
+
+      loginUser(user)
+        .then(successLogin)
+        .catch((error) => {
+          if (error.status !== 200) {
+            document.querySelector('.sign-error').classList.remove('hidden');
+          }
+        });
+    });
+  }
+  if (loginMainSubmit) {
+    loginMainSubmit.addEventListener('click', (event) => {
+      event.preventDefault();
+      signIn('main');
+    });
+  }
 };
 
 export const signIn = (form) => {
@@ -249,8 +272,10 @@ export const successLogout = () => {
   const loginIcon = document.querySelector('.to-logout');
   loginIcon.style.backgroundImage = 'url(\'../assets/images/svg/sign-logo.svg\')';
 
+  userName = '';
   token = '';
   userId = '';
+  localStorage.removeItem('userName');
   localStorage.removeItem('token');
   localStorage.removeItem('userId');
   localStorage.removeItem('page');

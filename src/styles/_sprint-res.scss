@@ -1,0 +1,96 @@
+.res-wrapper {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba($color: #000000, $alpha: 0.5);
+
+  top: 0;
+}
+
+.sprint-result {
+  position: absolute;
+  width: 700px;
+  min-height: 80vh;
+  left: calc(50% - 369px);
+  top: 10vh;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
+  h4 {
+    font-size: 30px;
+    text-align: center;
+    font-family: 'Segoe UI';
+    color: #6d644e;
+  }
+}
+.res-title {
+  font-family: 'Big-book';
+  color: #6d644e;
+  font-size: 28px;
+}
+.words-wrapper {
+  overflow-y: auto;
+  width: 80%;
+  height: 48vh;
+  &::-webkit-scrollbar {
+    width: 4px;
+    background-color: #b3a176;
+    border: none;
+    box-shadow: 0 0 20px 5px #6d644e;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #363021;
+  }
+
+  button {
+    border: none;
+    width: 25px;
+    height: 25px;
+    svg {
+      width: 25px;
+      height: 25px;
+      &:hover {
+        fill: #9c9343;
+      }
+    }
+  }
+  span {
+    text-align: left;
+    min-width: 190px;
+    font-size: 26px;
+  }
+}
+.res-row {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  font-family: 'Segoe UI';
+}
+.res-buttons-wrapper {
+  position: absolute;
+  bottom: 60px;
+  left: 185px;
+
+  button {
+    height: 50px;
+    width: 150px;
+    font-size: 28px;
+    border-width: 4px;
+    margin: 10px;
+  }
+}
+.res-btn-repeat {
+  background-color: seagreen;
+}
+.res-btn-exit {
+  background-color: tomato;
+}
+.play-btn {
+  background-image: url('../assets/images/svg/sound-on-res.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 0 4px;
+}

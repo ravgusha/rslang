@@ -353,9 +353,20 @@ function eBookContent() {
                 'Content-Type': 'application/json',
               },
             },
-             },
-            }
-son',
+          );
+        }
+      });
+  }
+
+  async function removeFromDifficult(e) {
+    // mark difficult word
+    const currentCard = e.target.closest('.card');
+    const wordId = currentCard.id;
+
+    await axios.delete(`${BASE_URL}/users/${userId}/words/${wordId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
     });
