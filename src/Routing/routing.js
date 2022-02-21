@@ -4,6 +4,7 @@ import eBookContent from '../app/e-book-content';
 import screenListener from '../app/listener';
 import sprintRun from '../app/sprint/sprint';
 import { defineWords } from '../app/audiocall';
+import getSprintLevel, { getLevelFromEbook } from '../app/sprint/levels';
 
 export const GAME_STATE = {
   mode: 'main',
@@ -28,9 +29,12 @@ const Routing = () => {
       GAME_STATE.mode = 'ebook';
       eBookContent();
     }
-    if (path === '/sprint') {
+    if (path === '/sprint' && GAME_STATE.mode !== 'ebook') {
       GAME_STATE.mode = 'sprint';
-      sprintRun();
+      getSprintLevel();
+    } else if (path === '/sprint' && GAME_STATE.mode === 'ebook') {
+      GAME_STATE.mode = 'sprint';
+      getLevelFromEbook();
     }
 
     if (path === '/audiocall') {
