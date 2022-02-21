@@ -24,15 +24,16 @@ export default getSprintLevel;
 function levelBtnHndl() {
   if (document.querySelector('.level-btn-wrapper')) {
     document.querySelector('.level-btn-wrapper').addEventListener('click', (e) => {
-      console.log(e.target.getAttribute('data-level'));
-      GAME_STATE.sprintLevel = Number(e.target.getAttribute('data-level')) - 1;
-      GAME_STATE.sprintPage = 0;
-      localStorage.setItem('GAME_STATE', JSON.stringify(GAME_STATE));
-      document.querySelector('.sprint-levels').remove();
-      if (document.querySelector('.preloader')) {
-        document.querySelector('.preloader').classList.remove('loaded');
+      if (e.target.classList.contains('sprint-level-btn')) {
+        GAME_STATE.sprintLevel = Number(e.target.getAttribute('data-level')) - 1;
+        GAME_STATE.sprintPage = 0;
+        localStorage.setItem('GAME_STATE', JSON.stringify(GAME_STATE));
+        document.querySelector('.sprint-levels').remove();
+        if (document.querySelector('.preloader')) {
+          document.querySelector('.preloader').classList.remove('loaded');
+        }
+        sprintRun();
       }
-      sprintRun();
     });
   }
 }

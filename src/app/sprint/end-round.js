@@ -2,7 +2,7 @@
 // import { checkBoxLsnrOff } from './chbxlsnr';
 
 import {
-  btnLsnr, rightAnswersArr, seriesCounter, sprintStat, wrongAnswersArr,
+  btnLsnr, rightAnswersArr, seriesCounter, sprintKeyLsnr, sprintStat, wrongAnswersArr,
 } from './sprint';
 import resultRender from './sprint-res';
 
@@ -15,6 +15,7 @@ function endOfRound() {
   document.querySelector('#base-timer-path-remaining').classList.remove('red');
   document.querySelector('#base-timer-path-remaining').classList.add('green');
   document.querySelector('.sprint-button-wrapper').removeEventListener('click', btnLsnr);
+  document.removeEventListener('keydown', sprintKeyLsnr);
 }
 
 export default endOfRound;
