@@ -219,7 +219,7 @@ const getWords = async () => {
 };
 
 export const defineWords = () => {
-  if (!user) {
+  if (!page || !group) {
     const groupDiff = document.querySelector('.audiocall-group');
     groupDiff.classList.remove('off');
     if (groupDiff) {
@@ -232,7 +232,7 @@ export const defineWords = () => {
         dif.addEventListener('click', () => getWords(groupNum, getRandomNum(29)));
       }
     }
-  } else {
+  } else if (page && group) {
     const start = document.querySelector('.audiocall-button');
     start.classList.remove('off');
     if (start) {
