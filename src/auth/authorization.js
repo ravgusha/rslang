@@ -1,6 +1,7 @@
 /* eslint-disable import/no-mutable-exports */
 import axios from 'axios';
 import BASE_URL from '../constants';
+import { GAME_STATE } from '../Routing/routing';
 
 export let userId = localStorage.getItem('userId');
 export let token = localStorage.getItem('token');
@@ -104,7 +105,7 @@ export const mainLogin = () => {
   const loginMainSubmit = document.querySelector('.sign-btn');
   const loginMain = document.querySelector('.sign-in');
 
-  if (token && userId) {
+  if (token && userId && GAME_STATE.mode !== 'sprint' && GAME_STATE.mode !== 'ebook') {
     loginIcon.style.backgroundImage = 'url(\'../assets/images/png/logout.png\')';
     loginMain.innerHTML = '<button class="sign-btn" id="signout">Sign out</button>';
 
@@ -240,10 +241,11 @@ export const successLogin = () => {
   }
 
   const loginIcon = document.querySelector('.to-logout');
-  loginIcon.style.backgroundImage = 'url(\'../assets/images/png/logout.png\')';
-
-  loginMain.innerHTML = '<button class="sign-btn" id="signout">Sign out</button>';
-  document.getElementById('signout').addEventListener('click', successLogout);
+  if (loginIcon && loginMain) {
+    loginIcon.style.backgroundImage = 'url(\'../assets/images/png/logout.png\')';
+    loginMain.innerHTML = '<button class="sign-btn" id="signout">Sign out</button>';
+    document.getElementById('signout').addEventListener('click', successLogout);
+  }
 };
 
 export const successLogout = () => {

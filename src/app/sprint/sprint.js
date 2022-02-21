@@ -29,7 +29,12 @@ export const rightAnswersArr = [];
 export const wrongAnswersArr = [];
 
 async function sprintRun() {
-  words = await requestUnreg();
+  if (!localStorage.getItem('userId')) {
+    words = await requestUnreg();
+  }
+  if (localStorage.getItem('userId')) {
+    words = await requestUnreg();
+  }
   getUserFromStorage();
   deletePreloader();
 
