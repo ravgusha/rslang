@@ -28,7 +28,7 @@ function eBookContent() {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-      }
+      },
     );
     const data = await res.data[0].paginatedResults;
 
@@ -83,7 +83,7 @@ function eBookContent() {
               </p>
             </div>
           </div>
-        </div>`
+        </div>`,
       );
     });
   }
@@ -112,7 +112,7 @@ function eBookContent() {
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
-        }
+        },
       );
       data = await res.data[0].paginatedResults;
     } else {
@@ -187,7 +187,7 @@ function eBookContent() {
               </p>
             </div>
           </div>
-        </div>`
+        </div>`,
       );
 
       // if word is learnt, hide add to learnt button
@@ -283,7 +283,7 @@ function eBookContent() {
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
-        }
+        },
       )
       .catch((error) => {
         if (error.response.status !== 200) {
@@ -299,7 +299,7 @@ function eBookContent() {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
               },
-            }
+            },
           );
         }
       });
@@ -336,7 +336,7 @@ function eBookContent() {
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
-        }
+        },
       )
       .catch((error) => {
         if (error.response.status !== 200) {
@@ -352,21 +352,10 @@ function eBookContent() {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
               },
+            },
+             },
             }
-          );
-        }
-      });
-  }
-
-  async function removeFromDifficult(e) {
-    // mark difficult word
-    const currentCard = e.target.closest('.card');
-    const wordId = currentCard.id;
-
-    await axios.delete(`${BASE_URL}/users/${userId}/words/${wordId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
+son',
         'Content-Type': 'application/json',
       },
     });
