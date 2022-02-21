@@ -30,8 +30,7 @@ const renderMainScreen = {
         <div class="main-bottom-wrapper">
           <div class="e-book pad">
             <p class="main-wide-text">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis reprehenderit adipisci
-              officia reiciendis impedit cupiditate ex voluptatem. Repellendus, a.
+            The e-book consists of six sections of increasing difficulty. Each word card includes an image, transcription, word translation, and pronunciation. There you can add words to compound words and mark them as learned.
             </p>
             <a href="#/ebook"><button class="button e-book-btn">E-book</button></a>
           </div>
@@ -52,7 +51,7 @@ const renderMainScreen = {
                 <div class="team-member">
                   <h4>Sergey</h4>
                   <p class="team-member-text">
-                    Lorem ipsum ipsum amet conse ctetur amet consectetur adipisicing elit.
+                  Project build. Sprint. Main screen styles. Stats.
                   </p>
                 </div>
               </li>
@@ -61,7 +60,7 @@ const renderMainScreen = {
                 <div class="team-member">
                   <h4>Ravganiyat</h4>
                   <p class="team-member-text">
-                    Lorem ipsum ipsum amet conse ctetur amet consectetur adipisicing elit.
+                    Authorization. E-book. Word list. Debugging. 
                   </p>
                 </div>
               </li>
@@ -70,7 +69,7 @@ const renderMainScreen = {
                 <div class="team-member">
                   <h4>Natalia</h4>
                   <p class="team-member-text">
-                    Lorem ipsum ipsum amet conse ctetur amet consectetur adipisicing elit.
+                  Design. Backend. Audiochallange. UI. Routing.
                   </p>
                 </div>
               </li>

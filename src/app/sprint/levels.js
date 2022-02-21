@@ -25,7 +25,8 @@ function levelBtnHndl() {
   if (document.querySelector('.level-btn-wrapper')) {
     document.querySelector('.level-btn-wrapper').addEventListener('click', (e) => {
       console.log(e.target.getAttribute('data-level'));
-      GAME_STATE.sprintLevel = e.target.getAttribute('data-level');
+      GAME_STATE.sprintLevel = Number(e.target.getAttribute('data-level')) - 1;
+      GAME_STATE.sprintPage = 0;
       localStorage.setItem('GAME_STATE', JSON.stringify(GAME_STATE));
       document.querySelector('.sprint-levels').remove();
       if (document.querySelector('.preloader')) {
@@ -38,7 +39,10 @@ function levelBtnHndl() {
 
 export function getLevelFromEbook() {
   const currentEbookGroup = localStorage.getItem('group');
-  GAME_STATE.sprintLevel = Number(currentEbookGroup) + 1;
+  const currentEbookPage = localStorage.getItem('page');
+  GAME_STATE.sprintLevel = Number(currentEbookGroup);
+  GAME_STATE.sprintPage = Number(currentEbookPage);
+
   localStorage.setItem('GAME_STATE', JSON.stringify(GAME_STATE));
   sprintRun();
 }
