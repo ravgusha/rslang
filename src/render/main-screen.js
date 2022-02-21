@@ -12,9 +12,7 @@ const renderMainScreen = {
           <div class="about pad">
             <h2>about</h2>
             <p>
-              Fugit nobis voluptatibus obcaecati dicta optio! Ipsum! ipsum dolor, sit amet consectetur
-              adipisicing elit. Omnis reprehenderit adipisci cupiditate ex voluptatem. Repellendus,
-            int incidunt quia ab mollitia omnis, facere ex .
+            The applications allow you to learn English through games and a e-book. The student will be offered exercises of different difficulty levels. With the help of the app you will learn new words, master the correct pronunciation.
             </p>
           </div>
           <a class="audio-call pad" href="#/audiocall">
@@ -39,11 +37,12 @@ const renderMainScreen = {
           </div>
           <div class="sign-in pad">
             <span class="sign-label">E-mail</span>
-            <input type="email" placeholder="E-mail:" />
+            <input class="sign-email" type="email" placeholder="E-mail:" />
             <span class="sign-label">Password</span>
-            <input type="password" placeholder="Password" />
+            <input class="sign-password" type="password" placeholder="Password" />
+            <p class="sign-error hidden">Wrong e-mail or password</p>
             <button class="sign-btn">Sign in</button>
-            <span class="btn-span">Not registered? Sign up</span>
+            <span class="btn-span">Don't have an account? Sign Up</span>
           </div>
           <div class="team-wrapper pad">
             <h3 class="team-title">Dev Team</h3>

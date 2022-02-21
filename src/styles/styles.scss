@@ -6,6 +6,8 @@
 @use 'audiocall';
 @use 'games';
 @use 'sprint';
+@use 'auth';
+@use 'sprint-res';
 
 @font-face {
   font-family: Big-Book;
@@ -18,6 +20,7 @@ h1 {
   padding: 0;
   margin-block-start: 0;
   margin-block-end: 0;
+  box-sizing: border-box;
 }
 
 a {

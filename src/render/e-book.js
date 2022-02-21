@@ -14,11 +14,11 @@ const renderEbookScreen = {
         <div class="ebook__header">
           <div class="ebook__pag tui-pagination" id="tui-pagination-container"></div>
           <div class="ebook__menu">
-            <button class="ebook__audiocall">
+            <a href="#/audiocall"><button class="ebook__audiocall">
             Audiocall
-            <img src="../assets/images/svg/audiocall.svg"/></button>
-            <button class="ebook__sprint">Sprint
-            <img src="../assets/images/svg/sprint.svg"/></button>
+            <img src="assets/images/svg/audiocall.svg"/></button></a>
+            <a href="#/sprint"><button class="ebook__sprint">Sprint
+            <img src="assets/images/svg/sprint.svg"/></button></a>
           </div>
         </div>
         <div class="ebook__main">

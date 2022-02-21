@@ -14,13 +14,31 @@
     color: #ff931e;
     margin-bottom: 50px;
   }
+  &-progress {
+    font-family: Big-Book;
+    font-size: 35px;
+    color: white;
+    margin: 30px 0;
+  }
   &-icon {
+    background: url('../assets/images/svg/sound.svg') no-repeat;
     width: 60px;
-    margin-bottom: 30px;
+    height: 60px;
+    margin: 30px 0;
     cursor: pointer;
     transition: 0.3s transform;
     &:hover {
       transform: scale(0.9);
+    }
+    &-small {
+      background: url('../assets/images/svg/sound.svg') no-repeat;
+      width: 35px;
+      height: 20px;
+      cursor: pointer;
+      transition: 0.3s transform;
+      &:hover {
+        transform: scale(0.9);
+      }
     }
   }
   &-button {
@@ -40,14 +58,15 @@
   }
   &-button-wrapper {
     margin: 30px;
-    width: 520px;
+    width: 540px;
   }
   &-option-btn {
     font-family: 'Segoe UI';
     background-color: #3fa9f5;
-    width: 240px;
-    height: 60px;
+    width: 250px;
+    height: 80px;
     font-size: 25px;
+    line-height: 22px;
     color: white;
     border-radius: 8px;
     margin: 10px;
@@ -57,4 +76,78 @@
       transform: scale(0.9);
     }
   }
+  &-subtitle {
+    text-align: center;
+  }
+  &-result {
+    width: 650px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    color: #3fa9f5;
+    font-family: 'Segoe UI';
+    font-size: 25px;
+    &-btns {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    &-line {
+      font-size: 18px;
+      color: #ff931e;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+  }
+  &-group {
+    width: 650px;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &-diff {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background-color: white;
+      color: #ff931e;
+      font-family: 'Segoe UI';
+      font-size: 30px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      transition: 0.3s transform;
+      &:hover {
+        transform: scale(0.95);
+      }
+    }
+  }
+}
+.result-btn {
+  font-family: 'Segoe UI';
+  background-color: #3fa9f5;
+  width: 250px;
+  height: 50px;
+  font-size: 25px;
+  line-height: 22px;
+  color: white;
+  border-radius: 8px;
+  margin: 10px;
+  transition: 0.3s transform;
+  cursor: pointer;
+  &:hover {
+    transform: scale(0.9);
+  }
+}
+.btn.correct:active {
+  background-color: green;
+  color: white;
+}
+
+.btn.wrong:active {
+  background-color: red;
 }

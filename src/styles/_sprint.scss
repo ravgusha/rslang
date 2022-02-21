@@ -71,27 +71,234 @@
 }
 .sprint-series {
   display: flex;
-  width: 70px;
+  width: 90px;
   flex-wrap: wrap;
   gap: 10px;
 }
 .circle {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }
 .cr-default {
   background-color: #000000;
-  opacity: 0.3;
+  background-color: rgba($color: #000000, $alpha: 0.5);
 }
-.cr1 {
+.cr0 {
   background-color: const.$color-blue;
 }
-.cr2 {
+.cr1 {
   background-color: const.$color-red;
 }
-.cr3 {
+.cr2 {
   background-color: const.$color-greenacid;
 }
-.cr4 {
+.cr3 {
   background-color: const.$color-yellow;
+}
+.sprint-action-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 70px;
+  gap: 40px;
+  font-family: 'Segoe UI';
+  button {
+    height: 80px;
+    width: 200px;
+    font-size: 32px;
+  }
+}
+.sprint-word {
+  font-family: 'Segoe UI';
+  font-size: 48px;
+  color: #8461ad;
+}
+.sprint-translate {
+  font-size: 32px;
+  color: #072c45;
+}
+.sprint-button-wrapper,
+.spring-arrow-wrapper {
+  display: flex;
+  gap: 50px;
+}
+.spring-wrong {
+  background-color: #da5656;
+}
+.spring-correct {
+  background-color: #59a059;
+}
+.spring-btn {
+  border-width: 5px;
+}
+/* Устанавливаем высоту и ширину контейнера */
+.base-timer {
+  position: relative;
+  height: 150px;
+  width: 150px;
+}
+
+/* Удаляем стили SVG, которые могли бы скрыть временную метку */
+.base-timer__circle {
+  fill: none;
+  stroke: none;
+}
+
+/* Контур SVG, который отображает прогресс времени */
+.base-timer__path-elapsed {
+  stroke-width: 7px;
+  stroke: grey;
+}
+
+.base-timer__label {
+  position: absolute;
+
+  top: calc(50% - 37px);
+  left: calc(50% - 25px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+
+.base-timer__path-remaining {
+  /* Такая же ширина, что и у исходного кольца */
+  stroke-width: 7px;
+
+  /* Замыкаем концы линии, чтобы создать круг */
+  stroke-linecap: round;
+
+  /* Делаем так, чтобы анимация начиналась вверху */
+  transform: rotate(90deg);
+  transform-origin: center;
+
+  /* Одна секунда подгоняется под таймер обратного отсчета */
+  transition: 1s linear all;
+
+  /* Задаем смену цвета кольца, когда обновляется значение цвета */
+  stroke: currentColor;
+}
+
+.base-timer__svg {
+  /* Переворачиваем кольцо и задаем движение анимации слева направо */
+  transform: scaleX(-1);
+}
+
+.base-timer__path-remaining.green {
+  color: rgb(65, 184, 131);
+}
+
+.base-timer__path-remaining.orange {
+  color: orange;
+}
+
+.base-timer__path-remaining.red {
+  color: red;
+}
+.base-timer__path-remaining {
+  stroke-width: 7px;
+  stroke-linecap: round;
+  transform: rotate(90deg);
+  transform-origin: center;
+  transition: 1s linear all;
+  fill-rule: nonzero;
+  stroke: currentColor;
+}
+
+.right-snd,
+.wrong-snd {
+  display: none;
+}
+
+#sound-onOff {
+  display: none;
+}
+
+#sound-onOff:checked + .sound-label {
+  background-image: url('../assets/images/svg/sound-on-res.svg');
+}
+
+.sound-label {
+  width: 40px;
+  height: 27px;
+  background-image: url('../assets/images/svg/mute.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.preloader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  /* фоновый цвет */
+  background: #e0e0e0;
+  z-index: 1001;
+  opacity: 0.7;
+}
+
+.preloader__image {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  width: 70px;
+  height: 70px;
+  margin-top: -35px;
+  margin-left: -35px;
+  text-align: center;
+  animation: preloader-rotate 2s infinite linear;
+}
+
+@keyframes preloader-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loaded_hiding .preloader {
+  transition: 0.3s opacity;
+  opacity: 0;
+}
+
+.loaded {
+  display: none;
+}
+
+.sprint-levels {
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba($color: #194b58, $alpha: 1);
+  h2 {
+    color: #da5656;
+  }
+}
+.level-btn-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 22px;
+}
+
+.sprint-level-btn {
+  height: 50px;
+  width: 150px;
+  background-color: aquamarine;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 22px;
+  border-width: 4px;
+  font-weight: 700;
+  &:hover {
+    box-shadow: 0 0 5px 5px #e0e0e0;
+  }
 }
