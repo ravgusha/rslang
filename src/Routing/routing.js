@@ -2,9 +2,10 @@ import errorPage from '../Pages/errorPage';
 import routes from './routes';
 import eBookContent from '../app/e-book-content';
 import screenListener from '../app/listener';
-import sprintRun from '../app/sprint/sprint';
+
 import { defineWords } from '../app/audiocall';
 import getSprintLevel, { getLevelFromEbook } from '../app/sprint/levels';
+import statDataWrite from '../app/stat';
 
 export const GAME_STATE = {
   mode: 'main',
@@ -25,6 +26,12 @@ const Routing = () => {
     if (path === '/') {
       GAME_STATE.mode = 'main';
     }
+
+    if (path === '/statistics') {
+      GAME_STATE.mode = 'stat';
+      statDataWrite();
+    }
+
     if (path === '/ebook') {
       GAME_STATE.mode = 'ebook';
       eBookContent();
