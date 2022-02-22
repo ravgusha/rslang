@@ -1,10 +1,16 @@
 import errorPage from '../Pages/errorPage';
 import routes from './routes';
 import eBookContent from '../app/e-book-content';
-// import screenListener from '../app/listener';
-import sprintRun from '../app/sprint/sprint';
 import screenListener from '../app/listener';
+
 import { defineWords } from '../app/audiocall';
+import getSprintLevel, { getLevelFromEbook } from '../app/sprint/levels';
+import statDataWrite from '../app/stat';
+
+export const GAME_STATE = {
+  mode: 'main',
+  menu: false,
+};
 
 const Routing = () => {
 // eslint-disable-next-line no-restricted-globals
@@ -16,43 +22,68 @@ const Routing = () => {
     const path = parseLocation();
     const { component = errorPage } = findComponentByPath(path) || {};
     document.body.innerHTML = component.render;
-    if (path === '/ebook') {
-      eBookContent();
-    }
-    if (path === '/sprint') {
-      sprintRun();
+
+    if (path === '/') {
+      GAME_STATE.mode = 'main';
     }
 
-    if (path === '/audiocall') { defineWords(); }
+    if (path === '/statistics') {
+      GAME_STATE.mode = 'stat';
+      statDataWrite();
+    }
+
+    if (path === '/ebook') {
+      GAME_STATE.mode = 'ebook';
+      eBookContent();
+    }
+    if (path === '/sprint' && GAME_STATE.mode !== 'ebook') {
+      GAME_STATE.mode = 'sprint';
+      getSprintLevel();
+    } else if (path === '/sprint' && GAME_STATE.mode === 'ebook') {
+      GAME_STATE.mode = 'sprint';
+      getLevelFromEbook();
+    }
+
+    if (path === '/audiocall') {
+      GAME_STATE.mode = 'audiocall';
+      defineWords();
+    }
     if (path === '/ebook/1') {
+      GAME_STATE.mode = 'ebook';
       localStorage.setItem('group', '0');
       eBookContent();
     }
     if (path === '/ebook/2') {
+      GAME_STATE.mode = 'ebook';
       localStorage.setItem('group', '1');
       eBookContent();
     }
     if (path === '/ebook/3') {
+      GAME_STATE.mode = 'ebook';
       localStorage.setItem('group', '2');
       eBookContent();
     }
     if (path === '/ebook/4') {
+      GAME_STATE.mode = 'ebook';
       localStorage.setItem('group', '3');
       eBookContent();
     }
     if (path === '/ebook/5') {
+      GAME_STATE.mode = 'ebook';
       localStorage.setItem('group', '4');
       eBookContent();
     }
     if (path === '/ebook/6') {
+      GAME_STATE.mode = 'ebook';
       localStorage.setItem('group', '5');
       eBookContent();
     }
     if (path === '/ebook/6') {
+      GAME_STATE.mode = 'ebook';
       localStorage.setItem('group', '6');
       eBookContent();
     }
-
+    localStorage.setItem('GAME_STATE', JSON.stringify(GAME_STATE));
     screenListener();
   };
 

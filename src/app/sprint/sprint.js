@@ -4,8 +4,9 @@
 import { getUserFromStorage } from './get-user';
 import requestUnreg from './sprint-request';
 // eslint-disable-next-line import/no-cycle
-import { startTimer } from './timer';
+import { onTimesUp, startTimer } from './timer';
 import checkBoxLsnrOn from './check-box-listener';
+import endOfRound from './end-round';
 // eslint-disable-next-line import/no-mutable-exports
 export let seriesCounter = 0;
 let words = [];
@@ -29,7 +30,12 @@ export const rightAnswersArr = [];
 export const wrongAnswersArr = [];
 
 async function sprintRun() {
-  words = await requestUnreg();
+  if (!localStorage.getItem('userId')) {
+    words = await requestUnreg();
+  }
+  if (localStorage.getItem('userId')) {
+    words = await requestUnreg();
+  }
   getUserFromStorage();
   deletePreloader();
 
@@ -46,11 +52,17 @@ async function sprintRun() {
   drawWords(xNum, yNum);
   document.querySelector('.sprint-score span').textContent = sprintStat.currentRoundScore;
   document.querySelector('.sprint-button-wrapper').addEventListener('click', btnLsnr);
+  document.addEventListener('keydown', sprintKeyLsnr);
 }
 
 function drawWords(wordNum, transNum) {
-  document.querySelector('.sprint-word').textContent = `${words[wordNum].word}`;
-  document.querySelector('.sprint-translate').textContent = `${words[transNum].wordTranslate}`;
+  if (words.length > 0) {
+    document.querySelector('.sprint-word').textContent = `${words[wordNum].word}`;
+    document.querySelector('.sprint-translate').textContent = `${words[transNum].wordTranslate}`;
+  } else {
+    onTimesUp();
+    endOfRound();
+  }
 }
 
 function rndNumberWord(arr) {
@@ -81,7 +93,7 @@ function removeSeries() {
   });
 }
 export function btnLsnr(event) {
-  if (event.target.classList.contains('spring-correct')) {
+  if (event.target.classList.contains('spring-correct') || event.code === 'ArrowRight') {
     if (xNum === yNum) {
       sprintStat.currentRoundScore += 10;
       document.querySelector('.sprint-score span').textContent = sprintStat.currentRoundScore;
@@ -94,7 +106,7 @@ export function btnLsnr(event) {
       playSound(1);
     }
   }
-  if (event.target.classList.contains('spring-wrong')) {
+  if (event.target.classList.contains('spring-wrong') || event.code === 'ArrowLeft') {
     if (xNum !== yNum) {
       sprintStat.currentRoundScore += 10;
       document.querySelector('.sprint-score span').textContent = sprintStat.currentRoundScore;
@@ -153,4 +165,8 @@ function deletePreloader() {
   if (document.querySelector('.preloader')) {
     document.querySelector('.preloader').classList.add('loaded');
   }
+}
+
+export function sprintKeyLsnr(e) {
+  if (e.code === 'ArrowRight' || e.code === 'ArrowLeft') btnLsnr(e);
 }

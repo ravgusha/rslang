@@ -11,7 +11,7 @@ function eBookContent() {
   const pagination = new Pagination(document.getElementById('tui-pagination-container'), {
     totalItems: 600,
     itemsPerPage: 20,
-    visiblePages: 5,
+    visiblePages: 3,
     centerAlign: true,
     page: Number(currentPage) + 1, // Pagination starts from 0
   });
@@ -28,7 +28,7 @@ function eBookContent() {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-      },
+      }
     );
     const data = await res.data[0].paginatedResults;
     contents[6].innerHTML = '';
@@ -82,7 +82,7 @@ function eBookContent() {
               </p>
             </div>
           </div>
-        </div>`,
+        </div>`
       );
     });
     countWords();
@@ -112,7 +112,7 @@ function eBookContent() {
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
-        },
+        }
       );
       data = await res.data[0].paginatedResults;
     } else {
@@ -122,7 +122,7 @@ function eBookContent() {
     }
 
     contents[group].classList.remove('hide');
-    contents[group].innerHTML = '<p class="done-page hidden">Страница изучена</p>';
+    contents[group].innerHTML = '<p class="done-page hide">Страница изучена</p>';
     data.forEach((card) => {
       const {
         _id,
@@ -160,16 +160,17 @@ function eBookContent() {
                 <p class="card__word">${word}</p>
                 <p class="card__transcription">&nbsp- ${transcription}</p>
                 <p class="card__translate">&nbsp- ${wordTranslate}</p>
-                <button class="card__audio">
-                <audio class="card__audio-transcription" src="${BASE_URL}/${audio}"></audio>
-                <audio class="card__audio-meaning" src="${BASE_URL}/${audioMeaning}"></audio>
-                <audio class="card__audio-example" src="${BASE_URL}/${audioExample}"></audio>
-                <button title="To difficult" class="card__list"></button>
-                <button title="To learnt" class="card__todone">В изученные</button>
+
                 </button>
               </div>
-              <div class="card__header_right">
-              <img src=${require('../assets/images/svg/done.svg')} class="card__done hidden"></img>
+              <div class="card__header_center">
+              <button class="card__audio">
+              <audio class="card__audio-transcription" src="${BASE_URL}/${audio}"></audio>
+              <audio class="card__audio-meaning" src="${BASE_URL}/${audioMeaning}"></audio>
+              <audio class="card__audio-example" src="${BASE_URL}/${audioExample}"></audio>
+              <button title="To difficult" class="card__list"></button>
+              <button title="To learnt" class="card__todone"></button>
+              <img src=${require('../assets/images/svg/done.svg')} class="card__done hide">
               </div>
             </div>
             <div class="card__description">
@@ -187,7 +188,7 @@ function eBookContent() {
               </p>
             </div>
           </div>
-        </div>`,
+        </div>`
       );
 
       // if word is learnt, hide add to learnt button
@@ -196,14 +197,8 @@ function eBookContent() {
         if (status) {
           learntWordsOnPage++;
           if (document.getElementById(`${_id}`)) {
-            document
-              .getElementById(`${_id}`)
-              .querySelector('.card__done')
-              .classList.remove('hidden');
-            document
-              .getElementById(`${_id}`)
-              .querySelector('.card__todone')
-              .classList.add('hidden');
+            document.getElementById(`${_id}`).querySelector('.card__done').classList.remove('hide');
+            document.getElementById(`${_id}`).querySelector('.card__todone').classList.add('hide');
           }
         }
       }
@@ -228,7 +223,7 @@ function eBookContent() {
   const sprintBtn = document.querySelector('.ebook__sprint');
   function checkLeantWords() {
     if (learntWordsOnPage === 10) {
-      document.querySelector('.done-page').classList.remove('hidden');
+      document.querySelector('.done-page').classList.remove('hide');
 
       audioCallBtn.style.backgroundColor = 'grey';
       audioCallBtn.disabled = true;
@@ -263,8 +258,8 @@ function eBookContent() {
 
     const image = currentCard.querySelector('img');
     let difficulty = 'easy';
-    currentCard.querySelector('.card__todone').classList.add('hidden');
-    currentCard.querySelector('.card__done').classList.remove('hidden');
+    currentCard.querySelector('.card__todone').classList.add('hide');
+    currentCard.querySelector('.card__done').classList.remove('hide');
 
     if (image.classList.contains('hard')) {
       difficulty = 'hard';
@@ -283,7 +278,7 @@ function eBookContent() {
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
-        },
+        }
       )
       .catch((error) => {
         if (error.response.status !== 200) {
@@ -299,7 +294,7 @@ function eBookContent() {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
               },
-            },
+            }
           );
         }
       });
@@ -315,11 +310,11 @@ function eBookContent() {
     // mark difficult word
     image.classList.add('hard');
     // delete add to difficult button
-    currentCard.querySelector('.card__list').classList.add('hidden');
+    currentCard.querySelector('.card__list').classList.add('hide');
 
     let status;
 
-    if (currentCard.querySelector('.card__todone').classList.contains('hidden')) {
+    if (currentCard.querySelector('.card__todone').classList.contains('hide')) {
       status = 'isLearnt';
     }
 
@@ -336,7 +331,7 @@ function eBookContent() {
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
-        },
+        }
       )
       .catch((error) => {
         if (error.response.status !== 200) {
@@ -352,7 +347,7 @@ function eBookContent() {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
               },
-            },
+            }
           );
         }
       });

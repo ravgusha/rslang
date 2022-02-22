@@ -3,11 +3,11 @@ menuElement.classList.add('menu-wrapper');
 
 menuElement.innerHTML = `<button class="close-menu-btn"></button>
 <ul class="menu-list">
-  <a href="#/"><li class="menu-list-item"><img src="../assets/images/svg/home-logo.svg" alt="Home">Home</li></a>
-  <a href="#/statistics"><li class="menu-list-item"><img src="../assets/images/svg/stat-logo.svg" alt="Stat">Stat</li></a>
-  <a href="#/audiocall"><li class="menu-list-item"><img src="../assets/images/svg/audiocall.svg" alt="Audiocall">Audiocall</li></a>
-  <a href="#/sprint"><li class="menu-list-item"><img src="../assets/images/svg/sprint.svg" alt="Sprint">Sprint</li></a>
-  <a href="#/ebook"><li class="menu-list-item"><img src="../assets/images/png/book.png" alt="E-book">E-book </li></a>
+  <a href="#/"><li class="menu-list-item"><img src="assets/images/svg/home-logo.svg" alt="Home">Home</li></a>
+  <a href="#/statistics"><li class="menu-list-item"><img src="assets/images/svg/stat-logo.svg" alt="Stat">Stat</li></a>
+  <a href="#/audiocall"><li class="menu-list-item"><img src="assets/images/svg/audiocall.svg" alt="Audiocall">Audiocall</li></a>
+  <a href="#/sprint"><li class="menu-list-item"><img src="assets/images/svg/sprint.svg" alt="Sprint">Sprint</li></a>
+  <a href="#/ebook"><li class="menu-list-item"><img src="assets/images/png/book.png" alt="E-book">E-book </li></a>
   <ul class="e-book-chapters-list">
  <a href="#/ebook/1"><li data-group="0" class="e-book-chapters-list-item">Chapter 1</li></a>
  <a href="#/ebook/2"><li data-group="1" class="e-book-chapters-list-item">Chapter 2</li></a>

@@ -94,3 +94,56 @@
   background-size: contain;
   background-position: 0 4px;
 }
+.stat-wrapper {
+  background-color: #2a6772;
+  height: 100vh;
+  color: #9c2626;
+}
+.stat-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  gap: 30px;
+}
+.stat {
+  width: 40%;
+  background-color: #edeee5;
+  padding: 30px;
+  h2 {
+    font-size: 28px;
+  }
+  ul {
+    margin: 20px;
+  }
+  li {
+    font-size: 22px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Segoe UI';
+
+    span {
+    }
+  }
+}
+
+@media (max-width: 1540px) {
+  .sprint-result h4 {
+    font-size: 20px;
+  }
+  .res-title {
+    font-size: 20px;
+  }
+  .words-wrapper span {
+    font-size: 18px;
+  }
+  .res-buttons-wrapper {
+    bottom: 25px;
+  }
+  .res-buttons-wrapper button {
+    font-size: 18px;
+  }
+  .words-wrapper {
+    height: 40vh;
+  }
+}
