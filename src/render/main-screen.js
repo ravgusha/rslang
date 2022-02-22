@@ -41,7 +41,7 @@ const renderMainScreen = {
             <input class="sign-password" type="password" placeholder="Password" />
             <p class="sign-error hidden">Wrong e-mail or password</p>
             <button class="sign-btn">Sign in</button>
-            <span class="btn-span">Don't have an account? Sign Up</span>
+            <span class="btn-span">Don't have an account?  <span>Sign Up</span>      </span>
           </div>
           <div class="team-wrapper pad">
             <h3 class="team-title">Dev Team</h3>

@@ -4,8 +4,9 @@
 import { getUserFromStorage } from './get-user';
 import requestUnreg from './sprint-request';
 // eslint-disable-next-line import/no-cycle
-import { startTimer } from './timer';
+import { onTimesUp, startTimer } from './timer';
 import checkBoxLsnrOn from './check-box-listener';
+import endOfRound from './end-round';
 // eslint-disable-next-line import/no-mutable-exports
 export let seriesCounter = 0;
 let words = [];
@@ -55,8 +56,13 @@ async function sprintRun() {
 }
 
 function drawWords(wordNum, transNum) {
-  document.querySelector('.sprint-word').textContent = `${words[wordNum].word}`;
-  document.querySelector('.sprint-translate').textContent = `${words[transNum].wordTranslate}`;
+  if (words.length > 0) {
+    document.querySelector('.sprint-word').textContent = `${words[wordNum].word}`;
+    document.querySelector('.sprint-translate').textContent = `${words[transNum].wordTranslate}`;
+  } else {
+    onTimesUp();
+    endOfRound();
+  }
 }
 
 function rndNumberWord(arr) {
