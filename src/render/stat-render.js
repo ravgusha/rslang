@@ -5,7 +5,7 @@ const statContent = `
 <header class="sprint-header">
 <img src="assets/images/svg/burger-sprint.svg" alt="menu" title="menu" class="sprint-menu-on" />
 <div class="sprint-user">
-  <span class="sprin-header-span">User: unregistered</span>
+  <span class="sprin-header-span">User: ${getUser()}</span>
 </div>
 </header>
 <div class="stat-cards">
@@ -49,3 +49,8 @@ const renderStat = {
   render: stat(),
 };
 export default renderStat;
+
+export function getUser() {
+  const name = localStorage.getItem('userName');
+  return name || 'unregistered';
+}
