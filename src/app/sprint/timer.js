@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-cycle
 import endOfRound from './end-round';
 
-const TIME_LIMIT = 5;
+const TIME_LIMIT = 20;
 // Оповещение на 10 секунде
 const WARNING_THRESHOLD = 10;
 // Предупреждение на 5 секунде
