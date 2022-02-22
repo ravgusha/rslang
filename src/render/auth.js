@@ -3,7 +3,7 @@ loginElement.classList.add('login-wrapper');
 
 loginElement.innerHTML = `<form class="login-form">
 <button class="login-form__close">X</button>
-<img src="../assets/images/svg/lock.svg">
+<img src="assets/images/svg/lock.svg">
 <div class="login-form__inputs">
 <input type="email" name="email" class="login-form__email"  placeholder="E-mail" required>
 <input id="password" value="" name="password" class="login-form__password" type="password" placeholder="Password" required ></div>
