@@ -21,17 +21,16 @@ function eBookContent() {
 
   async function getDifficultWords() {
     const res = await axios(
-      `${BASE_URL}/users/${userId}/aggregatedWords?filter={"$and":[{"userWord.difficulty":"hard"}]}`,
+      `${BASE_URL}/users/${userId}/aggregatedWords?wordsPerPage=100&filter={"userWord.difficulty":"hard"}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-      }
+      },
     );
     const data = await res.data[0].paginatedResults;
-
     contents[6].innerHTML = '';
 
     data.forEach((card) => {
@@ -83,9 +82,10 @@ function eBookContent() {
               </p>
             </div>
           </div>
-        </div>`
+        </div>`,
       );
     });
+    countWords();
   }
 
   // Count of learnt words on the page
@@ -112,7 +112,7 @@ function eBookContent() {
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
-        }
+        },
       );
       data = await res.data[0].paginatedResults;
     } else {
@@ -188,7 +188,7 @@ function eBookContent() {
               </p>
             </div>
           </div>
-        </div>`
+        </div>`,
       );
 
       // if word is learnt, hide add to learnt button
@@ -278,7 +278,7 @@ function eBookContent() {
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
-        }
+        },
       )
       .catch((error) => {
         if (error.response.status !== 200) {
@@ -294,7 +294,7 @@ function eBookContent() {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
               },
-            }
+            },
           );
         }
       });
@@ -331,7 +331,7 @@ function eBookContent() {
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
-        }
+        },
       )
       .catch((error) => {
         if (error.response.status !== 200) {
@@ -347,7 +347,7 @@ function eBookContent() {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
               },
-            }
+            },
           );
         }
       });
@@ -370,12 +370,17 @@ function eBookContent() {
 
   pagination.on('beforeMove', (event) => {
     currentPage = event.page - 1;
-    if (currentGroup === '6') return;
 
     localStorage.setItem('page', currentPage);
     localStorage.setItem('group', currentGroup);
 
-    getWords(currentGroup, currentPage);
+    if (currentGroup === '6') {
+      document.querySelector('.ebook__pag').style.opacity = '0';
+      getDifficultWords();
+    } else {
+      getWords(currentGroup, currentPage);
+      document.querySelector('.ebook__pag').style.opacity = '1';
+    }
   });
 
   function chooseChapter(e) {
@@ -393,10 +398,12 @@ function eBookContent() {
     document.querySelector('.active').classList.remove('active');
     // Up choosen tab
     e.target.classList.add('active');
-    pagination.movePageTo(0);
     if (currentGroup === '6') {
       getDifficultWords();
+      document.querySelector('.ebook__pag').classList.add('hidden');
     }
+    pagination.movePageTo(0);
+    document.querySelector('.ebook__pag').classList.remove('hidden');
   }
 
   tabs.addEventListener('click', (e) => {
@@ -457,6 +464,38 @@ function eBookContent() {
       addToLearnt(e);
     }
   });
+
+  const wordsStat = { numberOfDifficult: 0, numberOfLearnt: 0 };
+
+  async function countWords() {
+    const resDiff = await axios(
+      `${BASE_URL}/users/${userId}/aggregatedWords?&filter={"userWord.difficulty":"hard"}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+    const numberOfDifficult = await resDiff.data[0].totalCount[0].count;
+    wordsStat.numberOfDifficult = numberOfDifficult;
+
+    const resLearnt = await axios(
+      `${BASE_URL}/users/${userId}/aggregatedWords?&filter={"userWord.optional.status":"isLearnt"}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+    const numberOfLearnt = await resLearnt.data[0].totalCount[0].count;
+    wordsStat.numberOfLearnt = numberOfLearnt;
+
+    localStorage.setItem('wordsStat', JSON.stringify(wordsStat));
+  }
 }
 
 export default eBookContent;
