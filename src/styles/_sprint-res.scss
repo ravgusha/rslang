@@ -94,3 +94,24 @@
   background-size: contain;
   background-position: 0 4px;
 }
+
+@media (max-width: 1540px) {
+  .sprint-result h4 {
+    font-size: 20px;
+  }
+  .res-title {
+    font-size: 20px;
+  }
+  .words-wrapper span {
+    font-size: 18px;
+  }
+  .res-buttons-wrapper {
+    bottom: 25px;
+  }
+  .res-buttons-wrapper button {
+    font-size: 18px;
+  }
+  .words-wrapper {
+    height: 40vh;
+  }
+}

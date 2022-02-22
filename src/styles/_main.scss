@@ -255,6 +255,13 @@ footer {
   }
 }
 
+.btn-span {
+  span {
+    font-size: 20px !important;
+    text-decoration: underline;
+  }
+}
+
 .gh-links {
   display: flex;
   align-items: center;
@@ -283,19 +290,13 @@ footer {
 .main-bottom-wrapper {
   display: flex;
   font-family: 'Segoe UI';
-  min-height: calc(50vh - 100px);
+  min-height: calc(50vh - 110px);
 
   p,
   span {
     font-size: 32px;
     text-align: justify;
   }
-
-  //   .btn-span:hover {
-  //     // color: #ffffff;
-  //     box-shadow: 0 2px 0 0 const.$color-orange;
-  //     cursor: pointer;
-  //   }
 }
 .about,
 .e-book {
@@ -313,7 +314,7 @@ footer {
   gap: 8px;
 }
 .pad {
-  padding: 40px;
+  padding: 37px;
 }
 .team-wrapper {
   gap: 15px;
@@ -321,6 +322,14 @@ footer {
 //---------------------Adaptive to screen 1450
 //
 @media (max-width: 1540px) {
+  .base-timer {
+    width: 100px;
+    height: 100px;
+  }
+  .sprint-word {
+    font-size: 32px;
+  }
+
   .header {
     height: 50px;
     .nav {
@@ -382,7 +391,7 @@ footer {
       margin-top: 20px;
     }
     .btn-span {
-      font-size: 14px;
+      font-size: 18px;
     }
   }
   .team-wrapper {
@@ -404,7 +413,7 @@ footer {
   }
   .main-top-wrapper,
   .main-bottom-wrapper {
-    min-height: calc(50vh - 50px);
+    min-height: calc(50vh - 45px);
   }
   .pad {
     padding: 25px;

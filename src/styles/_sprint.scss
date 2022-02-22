@@ -302,3 +302,22 @@
     box-shadow: 0 0 5px 5px #e0e0e0;
   }
 }
+@media (max-width: 1540px) {
+  .base-timer {
+    width: 100px;
+    height: 100px;
+  }
+  .sprint-word {
+    font-size: 32px;
+  }
+  .sprint-title {
+    font-size: 32px;
+  }
+  .sprint-info-wrapper {
+    margin-top: 20px;
+  }
+  .sprint-action-wrapper {
+    margin-top: 40px;
+    gap: 20px;
+  }
+}
