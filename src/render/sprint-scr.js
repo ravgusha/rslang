@@ -1,6 +1,6 @@
 import { remainingPathColor } from '../app/sprint/timer';
 
-function cls() {
+export function cls() {
   document.body.innerHTML = '';
 }
 
