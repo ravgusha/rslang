@@ -142,6 +142,10 @@
   &:hover {
     transform: scale(0.9);
   }
+  text-align: center;
+  line-height: 3rem;
+  outline: none;
+  border: none;
 }
 .btn.correct:active {
   background-color: green;
