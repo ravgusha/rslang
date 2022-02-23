@@ -282,7 +282,6 @@ export const successLogout = () => {
   localStorage.removeItem('userId');
   localStorage.removeItem('page');
   localStorage.removeItem('group');
-  localStorage.removeItem('wordsStat');
 };
 
 const createLoginForm = () => {

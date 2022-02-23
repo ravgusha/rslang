@@ -139,7 +139,7 @@ function eBookContent() {
         textExampleTranslate,
         userWord,
       } = card;
-
+      console.log(card);
       let difficulty = 'easy';
       if (userWord) {
         difficulty = card.userWord.difficulty;
@@ -202,6 +202,16 @@ function eBookContent() {
           }
         }
       }
+
+      // if word is difficult, hide add to difficult button
+      if (userWord) {
+        const { difficulty } = card.userWord;
+        if (difficulty === 'hard') {
+          if (document.getElementById(`${_id}`)) {
+            document.getElementById(`${_id}`).querySelector('.card__list').classList.add('hide');
+          }
+        }
+      }
     });
 
     if (!token) {
@@ -218,9 +228,13 @@ function eBookContent() {
       });
     }
     checkLeantWords();
-    const { rightAnswers } = JSON.parse(localStorage.getItem('sprintStat')) || 0;
-    const { wrongAnswers } = JSON.parse(localStorage.getItem('sprintStat')) || 0;
 
+    let rightAnswers = [];
+    let wrongAnswers = [];
+    if (localStorage.getItem('sprintStat')) {
+      rightAnswers = JSON.parse(localStorage.getItem('sprintStat')).rightAnswers;
+      wrongAnswers = JSON.parse(localStorage.getItem('sprintStat')).wrongAnswers;
+    }
     if (rightAnswers) {
       rightAnswers.forEach((id) => {
         if (document.getElementById(id)) {
@@ -242,7 +256,7 @@ function eBookContent() {
   const audioCallBtn = document.querySelector('.ebook__audiocall');
   const sprintBtn = document.querySelector('.ebook__sprint');
   function checkLeantWords() {
-    if (learntWordsOnPage === 10) {
+    if (learntWordsOnPage === 20) {
       document.querySelector('.done-page').classList.remove('hide');
 
       audioCallBtn.style.backgroundColor = 'grey';
