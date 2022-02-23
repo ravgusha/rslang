@@ -21,17 +21,16 @@ function eBookContent() {
 
   async function getDifficultWords() {
     const res = await axios(
-      `${BASE_URL}/users/${userId}/aggregatedWords?filter={"$and":[{"userWord.difficulty":"hard"}]}`,
+      `${BASE_URL}/users/${userId}/aggregatedWords?wordsPerPage=100&filter={"userWord.difficulty":"hard"}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-      }
+      },
     );
     const data = await res.data[0].paginatedResults;
-
     contents[6].innerHTML = '';
 
     data.forEach((card) => {
@@ -83,9 +82,10 @@ function eBookContent() {
               </p>
             </div>
           </div>
-        </div>`
+        </div>`,
       );
     });
+    countWords();
   }
 
   // Count of learnt words on the page
@@ -105,14 +105,14 @@ function eBookContent() {
 
     if (token && userId) {
       const res = await axios(
-        `${BASE_URL}/users/${userId}/aggregatedWords?group=${group}&page=${page}`,
+        `${BASE_URL}/users/${userId}/aggregatedWords?wordsPerPage=20&group=${group}&page=${page}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
-        }
+        },
       );
       data = await res.data[0].paginatedResults;
     } else {
@@ -139,7 +139,7 @@ function eBookContent() {
         textExampleTranslate,
         userWord,
       } = card;
-
+      console.log(card);
       let difficulty = 'easy';
       if (userWord) {
         difficulty = card.userWord.difficulty;
@@ -153,7 +153,7 @@ function eBookContent() {
           <div class="card__score">
           <p class="card__hit">0</p>
           <span>/</span>
-          <p class="card__miss">1</p></div>
+          <p class="card__miss">0</p></div>
           <div class="card__text">
             <div class="card__header">
               <div class="card__header_left">
@@ -188,7 +188,7 @@ function eBookContent() {
               </p>
             </div>
           </div>
-        </div>`
+        </div>`,
       );
 
       // if word is learnt, hide add to learnt button
@@ -199,6 +199,16 @@ function eBookContent() {
           if (document.getElementById(`${_id}`)) {
             document.getElementById(`${_id}`).querySelector('.card__done').classList.remove('hide');
             document.getElementById(`${_id}`).querySelector('.card__todone').classList.add('hide');
+          }
+        }
+      }
+
+      // if word is difficult, hide add to difficult button
+      if (userWord) {
+        const { difficulty } = card.userWord;
+        if (difficulty === 'hard') {
+          if (document.getElementById(`${_id}`)) {
+            document.getElementById(`${_id}`).querySelector('.card__list').classList.add('hide');
           }
         }
       }
@@ -218,11 +228,35 @@ function eBookContent() {
       });
     }
     checkLeantWords();
+
+    let rightAnswers = [];
+    let wrongAnswers = [];
+    if (localStorage.getItem('sprintStat')) {
+      rightAnswers = JSON.parse(localStorage.getItem('sprintStat')).rightAnswers;
+      wrongAnswers = JSON.parse(localStorage.getItem('sprintStat')).wrongAnswers;
+    }
+    if (rightAnswers) {
+      rightAnswers.forEach((id) => {
+        if (document.getElementById(id)) {
+          const oldNumber = document.getElementById(id).querySelector('.card__hit').innerHTML;
+          document.getElementById(id).querySelector('.card__hit').innerHTML = +oldNumber + 1;
+        }
+      });
+    }
+
+    if (wrongAnswers) {
+      wrongAnswers.forEach((id) => {
+        if (document.getElementById(id)) {
+          const oldNumber = document.getElementById(id).querySelector('.card__miss').innerHTML;
+          document.getElementById(id).querySelector('.card__miss').innerHTML = +oldNumber + 1;
+        }
+      });
+    }
   }
   const audioCallBtn = document.querySelector('.ebook__audiocall');
   const sprintBtn = document.querySelector('.ebook__sprint');
   function checkLeantWords() {
-    if (learntWordsOnPage === 10) {
+    if (learntWordsOnPage === 20) {
       document.querySelector('.done-page').classList.remove('hide');
 
       audioCallBtn.style.backgroundColor = 'grey';
@@ -278,7 +312,7 @@ function eBookContent() {
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
-        }
+        },
       )
       .catch((error) => {
         if (error.response.status !== 200) {
@@ -294,7 +328,7 @@ function eBookContent() {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
               },
-            }
+            },
           );
         }
       });
@@ -331,7 +365,7 @@ function eBookContent() {
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
-        }
+        },
       )
       .catch((error) => {
         if (error.response.status !== 200) {
@@ -347,7 +381,7 @@ function eBookContent() {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
               },
-            }
+            },
           );
         }
       });
@@ -370,12 +404,17 @@ function eBookContent() {
 
   pagination.on('beforeMove', (event) => {
     currentPage = event.page - 1;
-    if (currentGroup === '6') return;
 
     localStorage.setItem('page', currentPage);
     localStorage.setItem('group', currentGroup);
 
-    getWords(currentGroup, currentPage);
+    if (currentGroup === '6') {
+      document.querySelector('.ebook__pag').style.opacity = '0';
+      getDifficultWords();
+    } else {
+      getWords(currentGroup, currentPage);
+      document.querySelector('.ebook__pag').style.opacity = '1';
+    }
   });
 
   function chooseChapter(e) {
@@ -393,10 +432,12 @@ function eBookContent() {
     document.querySelector('.active').classList.remove('active');
     // Up choosen tab
     e.target.classList.add('active');
-    pagination.movePageTo(0);
     if (currentGroup === '6') {
       getDifficultWords();
+      document.querySelector('.ebook__pag').classList.add('hidden');
     }
+    pagination.movePageTo(0);
+    document.querySelector('.ebook__pag').classList.remove('hidden');
   }
 
   tabs.addEventListener('click', (e) => {
@@ -457,6 +498,38 @@ function eBookContent() {
       addToLearnt(e);
     }
   });
+
+  const wordsStat = { numberOfDifficult: 0, numberOfLearnt: 0 };
+
+  async function countWords() {
+    const resDiff = await axios(
+      `${BASE_URL}/users/${userId}/aggregatedWords?&filter={"userWord.difficulty":"hard"}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+    const numberOfDifficult = await resDiff.data[0].totalCount[0].count;
+    wordsStat.numberOfDifficult = numberOfDifficult;
+
+    const resLearnt = await axios(
+      `${BASE_URL}/users/${userId}/aggregatedWords?&filter={"userWord.optional.status":"isLearnt"}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+    const numberOfLearnt = await resLearnt.data[0].totalCount[0].count;
+    wordsStat.numberOfLearnt = numberOfLearnt;
+
+    localStorage.setItem('wordsStat', JSON.stringify(wordsStat));
+  }
 }
 
 export default eBookContent;

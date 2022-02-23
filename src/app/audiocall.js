@@ -9,7 +9,7 @@ const roundData = {};
 
 const user = localStorage.getItem('userId');
 const page = Number(localStorage.getItem('page'));
-const group = Number(localStorage.getItem('group'));
+let group = Number(localStorage.getItem('group'));
 
 const playAudio = () => {
   const audio = document.querySelector('.audiotag');
@@ -18,15 +18,19 @@ const playAudio = () => {
   }, 150);
 };
 
-const putToLearntWords = async (word) => {
-  if (!user) {
-    console.log('the user is unauthorized');
-  } else {
-    await axios.put(
-      `${BASE_URL}/users/${user}/words/${word.id}`,
-      { optional: { status: 'isLearnt' } },
-    );
-  }
+export const audioStat = {
+  rounds: 0,
+  currentRoundScore: 0,
+  maxScore: 0,
+  maxSeries: 0,
+  rightAnswers: [],
+  wrongAnswers: [],
+  learned: [],
+};
+
+const updateStat = () => {
+  const userStat = axios.get(`${BASE_URL}/users/${user}`);
+  console.log(userStat);
 };
 
 const stopGame = () => {
@@ -34,13 +38,19 @@ const stopGame = () => {
   const progress = document.querySelector('.audiocall-progress');
   const wrapper = document.querySelector('.audiocall-button-wrapper');
   const container = document.querySelector('.audiocall-container');
+  let result = document.querySelector('.audiocall-result');
   wrapper.classList.add('off');
   progress.classList.add('off');
   icon.classList.add('off');
   const errors = roundData.questions.filter((el) => !el.correct);
   const rights = roundData.questions.filter((el) => el.correct);
-  const result = document.createElement('div');
-  result.className = 'audiocall-result';
+  if (!result) {
+    result = document.createElement('div');
+    result.className = 'audiocall-result';
+  } else {
+    result.classList.remove('off');
+    result.innerHTML = '';
+  }
   const errorTitle = document.createElement('h3');
   errorTitle.className = 'audiocall-subtitle';
   errorTitle.innerHTML = `Errors: ${errors.length}`;
@@ -84,17 +94,29 @@ const stopGame = () => {
   const restart = document.createElement('button');
   restart.className = 'result-btn';
   restart.innerHTML = 'restart';
+  restart.onclick = startGame;
   btns.append(restart);
   const contin = document.createElement('button');
   contin.className = 'result-btn';
   contin.innerHTML = 'continue';
+  contin.onclick = () => {
+    group++;
+    if (group === 6) {
+      group = 0;
+    }
+    startGame();
+  };
   btns.append(contin);
-  const toStat = document.createElement('button');
+  const toStat = document.createElement('a');
   toStat.className = 'result-btn';
   toStat.innerHTML = 'statistics';
+  toStat.href = '#/statistics';
   btns.append(toStat);
   result.append(btns);
   container.append(result);
+  if (user) {
+    updateStat();
+  }
 };
 
 const handleResult = (e) => {
@@ -103,19 +125,6 @@ const handleResult = (e) => {
   progress.innerHTML = `${counter}/20`;
   if (button.innerHTML === roundData.questions[counter - 1].wordTranslate) {
     roundData.questions[counter - 1].correct = true;
-    switch (roundData.questions[counter - 1].trueAmount) {
-    case 1:
-      roundData.questions[counter - 1].trueAmount = 2;
-      break;
-    case undefined:
-      roundData.questions[counter - 1].trueAmount = 1;
-      break;
-    case 2:
-    default:
-      roundData.questions[counter - 1].trueAmount = 3;
-      putToLearntWords(roundData.questions[counter - 1]);
-      break;
-    }
   } else {
     roundData.questions[counter - 1].correct = false;
   }
@@ -172,6 +181,14 @@ const startGame = () => {
   const progress = document.querySelector('.audiocall-progress');
   const wrapper = document.querySelector('.audiocall-button-wrapper');
   const groupDif = document.querySelector('.audiocall-group');
+  const result = document.querySelector('.audiocall-result');
+  const rules = document.querySelector('.audiocall-rules');
+  if (rules) {
+    rules.classList.add('off');
+  }
+  if (result) {
+    result.classList.add('off');
+  }
   if (start) {
     start.classList.add('off');
   }
@@ -185,6 +202,9 @@ const startGame = () => {
     icon.addEventListener('click', playAudio);
   }
   counter = 0;
+  if (progress) {
+    progress.innerHTML = `${counter}/20`;
+  }
   playRound();
 };
 
@@ -219,7 +239,11 @@ const getWords = async () => {
 };
 
 export const defineWords = () => {
-  if (!page || !group) {
+  const LSpage = Number(localStorage.getItem('page'));
+  const LSgroup = Number(localStorage.getItem('group'));
+  const rules = document.querySelector('.audiocall-rules');
+  if (!LSpage || !LSgroup) {
+    rules.innerHTML = 'Choose difficulty from 1 to 6';
     const groupDiff = document.querySelector('.audiocall-group');
     groupDiff.classList.remove('off');
     if (groupDiff) {
@@ -232,7 +256,9 @@ export const defineWords = () => {
         dif.addEventListener('click', () => getWords(groupNum, getRandomNum(29)));
       }
     }
-  } else if (page && group) {
+  } else if (LSpage && LSgroup) {
+    rules.innerHTML = `Playing with words from page ${LSpage} <br>
+    Difficulty level is ${LSgroup}`;
     const start = document.querySelector('.audiocall-button');
     start.classList.remove('off');
     if (start) {

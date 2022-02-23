@@ -26,6 +26,7 @@
     align-items: center;
     padding: 45px;
     position: relative;
+    box-sizing: content-box;
   }
 
   a {
@@ -74,6 +75,9 @@
     color: #ffffff;
     font-size: 28px;
     align-self: flex-start;
+    position: absolute;
+    top: 10px;
+    left: 11px;
   }
 
   .login-form__submit,
@@ -120,5 +124,9 @@
   .logout-text {
     color: #00507d;
     font-size: 35px;
+  }
+
+  .login-form__link {
+    color: const.$color-orange;
   }
 }

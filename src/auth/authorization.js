@@ -1,5 +1,10 @@
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable import/no-mutable-exports */
 import axios from 'axios';
+// import { saveSprintStatToServer } from '../app/sprint/end-round';
+import { sprintStat } from '../app/sprint/sprint';
+import { loadSprintStatRequest } from '../app/stat';
 import BASE_URL from '../constants';
 import { GAME_STATE } from '../Routing/routing';
 
@@ -10,6 +15,7 @@ export const validateUser = async (user) => axios.get(`${BASE_URL}/users`, user)
 
 export const createUser = async (user) => {
   await axios.post(`${BASE_URL}/users`, user);
+  // await saveSprintStatToServer();
 };
 
 export const loginUser = async (user) => {
@@ -21,6 +27,7 @@ export const loginUser = async (user) => {
   localStorage.setItem('token', token);
   localStorage.setItem('userId', userId);
   localStorage.setItem('userName', userName);
+  await loadSprintStatRequest();
 };
 
 export const headerLogin = () => {
@@ -100,12 +107,40 @@ export const formSignup = async () => {
   });
 };
 
+export const mainSignup = () => {
+  const mainSignupBtn = document.querySelector('.btn-span');
+  const mainLoginBlock = document.querySelector('.sign-in');
+
+  if (mainSignupBtn) {
+    mainSignupBtn.addEventListener('click', () => {
+      mainLoginBlock.innerHTML = `<button class="signup-back">←</button><span class="signup-label">E-mail</span>
+    <input class="signup-email" type="email" placeholder="E-mail:" />
+    <span class="signup-label">Name</span>
+    <input class="signup-name" type="text" placeholder="Name:" />
+    <span class="signup-label">Password</span>
+    <input class="signup-password" minlength="8" type="password" placeholder="Password" />
+    <p class="signup-error hidden">Wrong e-mail or password</p>
+    <button class="signup-btn">Sign up</button>`;
+
+      document.querySelector('.signup-btn').addEventListener('click', (event) => {
+        event.preventDefault();
+        signUp('main');
+      });
+
+      document.querySelector('.signup-back').addEventListener('click', () => {
+        successLogout();
+        mainSignup();
+      });
+    });
+  }
+};
+
 export const mainLogin = () => {
   const loginIcon = document.querySelector('.to-logout');
   const loginMainSubmit = document.querySelector('.sign-btn');
   const loginMain = document.querySelector('.sign-in');
 
-  if (token && userId && GAME_STATE.mode !== 'sprint' && GAME_STATE.mode !== 'ebook') {
+  if (token && userId && GAME_STATE.mode !== 'sprint' && GAME_STATE.mode !== 'ebook' && loginIcon) {
     loginIcon.style.backgroundImage = 'url(\'assets/images/png/logout.png\')';
     loginMain.innerHTML = '<button class="sign-btn" id="signout">Sign out</button>';
 
@@ -170,6 +205,13 @@ export const signUp = (form) => {
   let name;
   let email;
   let password;
+  sprintStat.rounds = 0;
+  sprintStat.wrongAnswers = [];
+  sprintStat.rightAnswers = [];
+  sprintStat.maxSeries = 0;
+  sprintStat.maxScore = 0;
+  sprintStat.learned = [];
+  sprintStat.currentRoundScore = 0;
 
   if (form === 'main') {
     name = document.querySelector('.signup-name').value;
@@ -187,11 +229,13 @@ export const signUp = (form) => {
   createUser(user)
     .then(() => {
       loginUser(user1);
-      loginForm.innerHTML = '<img class="logout-img" src="assets/images/svg/lock-open.svg"><p class="logout-text">Do you want to exit?</p><div class="logout-buttons"><button class="logout-yes">Yes</button><button class="logout-no">No</button></div>';
-      document.querySelector('.logout-yes').addEventListener('click', successLogout);
-      document.querySelector('.logout-no').addEventListener('click', () => {
-        loginWrapper.remove();
-      });
+      if (loginForm) {
+        loginForm.innerHTML = '<img class="logout-img" src="assets/images/svg/lock-open.svg"><p class="logout-text">Do you want to exit?</p><div class="logout-buttons"><button class="logout-yes">Yes</button><button class="logout-no">No</button></div>';
+        document.querySelector('.logout-yes').addEventListener('click', successLogout);
+        document.querySelector('.logout-no').addEventListener('click', () => {
+          loginWrapper.remove();
+        });
+      }
       successLogin();
     })
     .catch((error) => {
@@ -203,34 +247,6 @@ export const signUp = (form) => {
         }
       }
     });
-};
-
-export const mainSignup = () => {
-  const mainSignupBtn = document.querySelector('.btn-span');
-  const mainLoginBlock = document.querySelector('.sign-in');
-
-  if (mainSignupBtn) {
-    mainSignupBtn.addEventListener('click', () => {
-      mainLoginBlock.innerHTML = `<button class="signup-back">←</button><span class="signup-label">E-mail</span>
-    <input class="signup-email" type="email" placeholder="E-mail:" />
-    <span class="signup-label">Name</span>
-    <input class="signup-name" type="text" placeholder="Name:" />
-    <span class="signup-label">Password</span>
-    <input class="signup-password" minlength="8" type="password" placeholder="Password" />
-    <p class="signup-error hidden">Wrong e-mail or password</p>
-    <button class="signup-btn">Sign up</button>`;
-
-      document.querySelector('.signup-btn').addEventListener('click', (event) => {
-        event.preventDefault();
-        signUp('main');
-      });
-
-      document.querySelector('.signup-back').addEventListener('click', () => {
-        successLogout();
-        mainSignup();
-      });
-    });
-  }
 };
 
 export const successLogin = () => {
@@ -272,7 +288,7 @@ export const successLogout = () => {
   mainSignup();
 
   const loginIcon = document.querySelector('.to-logout');
-  loginIcon.style.backgroundImage = 'url(\'../assets/images/svg/sign-logo.svg\')';
+  loginIcon.style.backgroundImage = 'url(\'assets/images/svg/sign-logo.svg\')';
 
   userName = '';
   token = '';
@@ -282,6 +298,11 @@ export const successLogout = () => {
   localStorage.removeItem('userId');
   localStorage.removeItem('page');
   localStorage.removeItem('group');
+  localStorage.removeItem('sprintStat');
+  for (const key in sprintStat) {
+    sprintStat[key] = 0;
+  }
+  localStorage.removeItem('wordsStat');
 };
 
 const createLoginForm = () => {

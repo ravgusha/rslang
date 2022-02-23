@@ -1,16 +1,20 @@
 /* eslint-disable import/no-cycle */
 // import { checkBoxLsnrOff } from './chbxlsnr';
 
+import axios from 'axios';
+import { token } from '../../auth/authorization';
+import BASE_URL from '../../constants';
 import {
   btnLsnr, rightAnswersArr, seriesCounter, sprintKeyLsnr, sprintStat, wrongAnswersArr,
 } from './sprint';
 import resultRender from './sprint-res';
 
-function endOfRound() {
+async function endOfRound() {
   resultRender();
   showRoundScore();
   updateStat();
   saveState();
+  await saveSprintStatToServer();
   // checkBoxLsnrOff();
   document.querySelector('#base-timer-path-remaining').classList.remove('red');
   document.querySelector('#base-timer-path-remaining').classList.add('green');
@@ -34,7 +38,7 @@ function showRoundScore() {
   document.querySelector('.score-points').textContent = sprintStat.currentRoundScore;
 }
 
-function saveState() {
+export function saveState() {
   localStorage.setItem('sprintStat', JSON.stringify(sprintStat));
 }
 function answerHndl(arr) {
@@ -68,4 +72,27 @@ function checkLearnedWords() {
 
 function deleteLearnedFromRightAnws(id) {
   sprintStat.rightAnswers = sprintStat.rightAnswers.filter((e) => e !== id);
+}
+
+export async function saveSprintStatToServer() {
+  const userID = localStorage.getItem('userId');
+
+  if (userID) {
+    await axios.put(
+      `${BASE_URL}/users/${userID}/statistics`,
+      {
+        learnedWords: sprintStat.learned.length,
+        optional: {
+          sprinStat: sprintStat,
+        },
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+  }
 }
