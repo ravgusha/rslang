@@ -101,6 +101,9 @@ const stopGame = () => {
   contin.innerHTML = 'continue';
   contin.onclick = () => {
     group++;
+    if (group === 6) {
+      group = 0;
+    }
     startGame();
   };
   btns.append(contin);
@@ -179,6 +182,10 @@ const startGame = () => {
   const wrapper = document.querySelector('.audiocall-button-wrapper');
   const groupDif = document.querySelector('.audiocall-group');
   const result = document.querySelector('.audiocall-result');
+  const rules = document.querySelector('.audiocall-rules');
+  if (rules) {
+    rules.classList.add('off');
+  }
   if (result) {
     result.classList.add('off');
   }
@@ -232,7 +239,11 @@ const getWords = async () => {
 };
 
 export const defineWords = () => {
-  if (!page || !group) {
+  const LSpage = Number(localStorage.getItem('page'));
+  const LSgroup = Number(localStorage.getItem('group'));
+  const rules = document.querySelector('.audiocall-rules');
+  if (!LSpage || !LSgroup) {
+    rules.innerHTML = 'Choose difficulty from 1 to 6';
     const groupDiff = document.querySelector('.audiocall-group');
     groupDiff.classList.remove('off');
     if (groupDiff) {
@@ -245,7 +256,9 @@ export const defineWords = () => {
         dif.addEventListener('click', () => getWords(groupNum, getRandomNum(29)));
       }
     }
-  } else if (page && group) {
+  } else if (LSpage && LSgroup) {
+    rules.innerHTML = `Playing with words from page ${LSpage} <br>
+    Difficulty level is ${LSgroup}`;
     const start = document.querySelector('.audiocall-button');
     start.classList.remove('off');
     if (start) {
