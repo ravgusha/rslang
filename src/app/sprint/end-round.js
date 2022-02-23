@@ -38,7 +38,7 @@ function showRoundScore() {
   document.querySelector('.score-points').textContent = sprintStat.currentRoundScore;
 }
 
-function saveState() {
+export function saveState() {
   localStorage.setItem('sprintStat', JSON.stringify(sprintStat));
 }
 function answerHndl(arr) {

@@ -4,7 +4,7 @@
 import axios from 'axios';
 // import { saveSprintStatToServer } from '../app/sprint/end-round';
 import { sprintStat } from '../app/sprint/sprint';
-// import { loadSprintStatRequest } from '../app/stat';
+import { loadSprintStatRequest } from '../app/stat';
 import BASE_URL from '../constants';
 import { GAME_STATE } from '../Routing/routing';
 
@@ -27,6 +27,7 @@ export const loginUser = async (user) => {
   localStorage.setItem('token', token);
   localStorage.setItem('userId', userId);
   localStorage.setItem('userName', userName);
+  await loadSprintStatRequest();
 };
 
 export const headerLogin = () => {
@@ -139,7 +140,7 @@ export const mainLogin = () => {
   const loginMainSubmit = document.querySelector('.sign-btn');
   const loginMain = document.querySelector('.sign-in');
 
-  if (token && userId && GAME_STATE.mode !== 'sprint' && GAME_STATE.mode !== 'ebook') {
+  if (token && userId && GAME_STATE.mode !== 'sprint' && GAME_STATE.mode !== 'ebook' && loginIcon) {
     loginIcon.style.backgroundImage = 'url(\'assets/images/png/logout.png\')';
     loginMain.innerHTML = '<button class="sign-btn" id="signout">Sign out</button>';
 
@@ -204,6 +205,13 @@ export const signUp = (form) => {
   let name;
   let email;
   let password;
+  sprintStat.rounds = 0;
+  sprintStat.wrongAnswers = [];
+  sprintStat.rightAnswers = [];
+  sprintStat.maxSeries = 0;
+  sprintStat.maxScore = 0;
+  sprintStat.learned = [];
+  sprintStat.currentRoundScore = 0;
 
   if (form === 'main') {
     name = document.querySelector('.signup-name').value;

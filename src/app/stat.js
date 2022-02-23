@@ -4,6 +4,7 @@ import axios from 'axios';
 import { token, userId } from '../auth/authorization';
 import BASE_URL from '../constants';
 import { getUser } from '../render/stat-render';
+import { saveState } from './sprint/end-round';
 import { sprintStat } from './sprint/sprint';
 
 async function statDataWrite() {
@@ -84,4 +85,5 @@ export async function loadSprintStatRequest() {
   for (const key in loadedSprintStat) {
     sprintStat[key] = loadedSprintStat[key];
   }
+  saveState();
 }
