@@ -92,10 +92,10 @@ export const formSignup = async () => {
   <a class="login-form__signup">Don't have an account? Sign Up</a>
   </form>`;
     headerLogin();
-    const loginForm = document.querySelector('.login-form');
-    loginForm.addEventListener('submit', (event) => {
-      event.preventDefault();
-      signIn();
+    document.querySelector('.login-form__close').addEventListener('click', () => {
+      if (document.querySelector('.login-wrapper')) {
+        document.querySelector('.login-wrapper').remove();
+      }
     });
   });
 
