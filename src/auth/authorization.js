@@ -2,6 +2,7 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable import/no-mutable-exports */
 import axios from 'axios';
+import { saveSprintStatToServer } from '../app/sprint/end-round';
 import { sprintStat } from '../app/sprint/sprint';
 import { loadSprintStatRequest } from '../app/stat';
 import BASE_URL from '../constants';
@@ -14,6 +15,7 @@ export const validateUser = async (user) => axios.get(`${BASE_URL}/users`, user)
 
 export const createUser = async (user) => {
   await axios.post(`${BASE_URL}/users`, user);
+  // await saveSprintStatToServer();
 };
 
 export const loginUser = async (user) => {
@@ -277,7 +279,7 @@ export const successLogout = () => {
   mainSignup();
 
   const loginIcon = document.querySelector('.to-logout');
-  loginIcon.style.backgroundImage = 'url(\'../assets/images/svg/sign-logo.svg\')';
+  loginIcon.style.backgroundImage = 'url(\'assets/images/svg/sign-logo.svg\')';
 
   userName = '';
   token = '';

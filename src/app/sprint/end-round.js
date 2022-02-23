@@ -74,7 +74,7 @@ function deleteLearnedFromRightAnws(id) {
   sprintStat.rightAnswers = sprintStat.rightAnswers.filter((e) => e !== id);
 }
 
-async function saveSprintStatToServer() {
+export async function saveSprintStatToServer() {
   const userID = localStorage.getItem('userId');
 
   if (userID) {

@@ -36,7 +36,7 @@ async function sprintRun() {
   }
   if (localStorage.getItem('userId')) {
     words = await requestUnreg();
-    await loadSprintStatRequest();
+  //  await loadSprintStatRequest();
   }
   getUserFromStorage();
   deletePreloader();
