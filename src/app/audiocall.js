@@ -241,8 +241,9 @@ const getWords = async () => {
 export const defineWords = () => {
   const LSpage = Number(localStorage.getItem('page'));
   const LSgroup = Number(localStorage.getItem('group'));
+
   const rules = document.querySelector('.audiocall-rules');
-  if (!LSpage || !LSgroup) {
+  if (!(LSpage + 1) || !(LSgroup + 1)) {
     rules.innerHTML = 'Choose difficulty from 1 to 6';
     const groupDiff = document.querySelector('.audiocall-group');
     groupDiff.classList.remove('off');
@@ -256,7 +257,7 @@ export const defineWords = () => {
         dif.addEventListener('click', () => getWords(groupNum, getRandomNum(29)));
       }
     }
-  } else if (LSpage && LSgroup) {
+  } else if ((LSpage + 1) && (LSgroup + 1)) {
     rules.innerHTML = `Playing with words from page ${LSpage} <br>
     Difficulty level is ${LSgroup}`;
     const start = document.querySelector('.audiocall-button');
