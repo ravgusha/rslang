@@ -294,6 +294,7 @@ export const successLogout = () => {
   for (const key in sprintStat) {
     sprintStat[key] = 0;
   }
+  localStorage.removeItem('wordsStat');
 };
 
 const createLoginForm = () => {
