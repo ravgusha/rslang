@@ -28,7 +28,7 @@ function eBookContent() {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-      },
+      }
     );
     const data = await res.data[0].paginatedResults;
     contents[6].innerHTML = '';
@@ -82,7 +82,7 @@ function eBookContent() {
               </p>
             </div>
           </div>
-        </div>`,
+        </div>`
       );
     });
     countWords();
@@ -105,14 +105,14 @@ function eBookContent() {
 
     if (token && userId) {
       const res = await axios(
-        `${BASE_URL}/users/${userId}/aggregatedWords?group=${group}&page=${page}`,
+        `${BASE_URL}/users/${userId}/aggregatedWords?wordsPerPage=20&group=${group}&page=${page}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
-        },
+        }
       );
       data = await res.data[0].paginatedResults;
     } else {
@@ -153,7 +153,7 @@ function eBookContent() {
           <div class="card__score">
           <p class="card__hit">0</p>
           <span>/</span>
-          <p class="card__miss">1</p></div>
+          <p class="card__miss">0</p></div>
           <div class="card__text">
             <div class="card__header">
               <div class="card__header_left">
@@ -188,7 +188,7 @@ function eBookContent() {
               </p>
             </div>
           </div>
-        </div>`,
+        </div>`
       );
 
       // if word is learnt, hide add to learnt button
@@ -218,6 +218,24 @@ function eBookContent() {
       });
     }
     checkLeantWords();
+    const { rightAnswers } = JSON.parse(localStorage.getItem('sprintStat'));
+    const { wrongAnswers } = JSON.parse(localStorage.getItem('sprintStat'));
+
+    rightAnswers.forEach((id) => {
+      if (document.getElementById(id)) {
+        const oldNumber = document.getElementById(id).querySelector('.card__hit').innerHTML;
+        document.getElementById(id).querySelector('.card__hit').innerHTML = +oldNumber + 1;
+      }
+    });
+
+    wrongAnswers.forEach((id) => {
+      if (document.getElementById(id)) {
+        const oldNumber = document.getElementById(id).querySelector('.card__miss').innerHTML;
+        document.getElementById(id).querySelector('.card__miss').innerHTML = +oldNumber + 1;
+      }
+    });
+    
+    console.log(rightAnswers, wrongAnswers);
   }
   const audioCallBtn = document.querySelector('.ebook__audiocall');
   const sprintBtn = document.querySelector('.ebook__sprint');
@@ -278,7 +296,7 @@ function eBookContent() {
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
-        },
+        }
       )
       .catch((error) => {
         if (error.response.status !== 200) {
@@ -294,7 +312,7 @@ function eBookContent() {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
               },
-            },
+            }
           );
         }
       });
@@ -331,7 +349,7 @@ function eBookContent() {
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
-        },
+        }
       )
       .catch((error) => {
         if (error.response.status !== 200) {
@@ -347,7 +365,7 @@ function eBookContent() {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
               },
-            },
+            }
           );
         }
       });
@@ -476,7 +494,7 @@ function eBookContent() {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-      },
+      }
     );
     const numberOfDifficult = await resDiff.data[0].totalCount[0].count;
     wordsStat.numberOfDifficult = numberOfDifficult;
@@ -489,7 +507,7 @@ function eBookContent() {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-      },
+      }
     );
     const numberOfLearnt = await resLearnt.data[0].totalCount[0].count;
     wordsStat.numberOfLearnt = numberOfLearnt;
