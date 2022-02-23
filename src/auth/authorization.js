@@ -2,9 +2,9 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable import/no-mutable-exports */
 import axios from 'axios';
-import { saveSprintStatToServer } from '../app/sprint/end-round';
+// import { saveSprintStatToServer } from '../app/sprint/end-round';
 import { sprintStat } from '../app/sprint/sprint';
-import { loadSprintStatRequest } from '../app/stat';
+// import { loadSprintStatRequest } from '../app/stat';
 import BASE_URL from '../constants';
 import { GAME_STATE } from '../Routing/routing';
 
@@ -27,7 +27,6 @@ export const loginUser = async (user) => {
   localStorage.setItem('token', token);
   localStorage.setItem('userId', userId);
   localStorage.setItem('userName', userName);
-  loadSprintStatRequest();
 };
 
 export const headerLogin = () => {
@@ -94,10 +93,10 @@ export const formSignup = async () => {
   <a class="login-form__signup">Don't have an account? Sign Up</a>
   </form>`;
     headerLogin();
-    document.querySelector('.login-form__close').addEventListener('click', () => {
-      if (document.querySelector('.login-wrapper')) {
-        document.querySelector('.login-wrapper').remove();
-      }
+    const loginForm = document.querySelector('.login-form');
+    loginForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      signIn();
     });
   });
 
@@ -105,6 +104,34 @@ export const formSignup = async () => {
     event.preventDefault();
     signUp();
   });
+};
+
+export const mainSignup = () => {
+  const mainSignupBtn = document.querySelector('.btn-span');
+  const mainLoginBlock = document.querySelector('.sign-in');
+
+  if (mainSignupBtn) {
+    mainSignupBtn.addEventListener('click', () => {
+      mainLoginBlock.innerHTML = `<button class="signup-back">←</button><span class="signup-label">E-mail</span>
+    <input class="signup-email" type="email" placeholder="E-mail:" />
+    <span class="signup-label">Name</span>
+    <input class="signup-name" type="text" placeholder="Name:" />
+    <span class="signup-label">Password</span>
+    <input class="signup-password" minlength="8" type="password" placeholder="Password" />
+    <p class="signup-error hidden">Wrong e-mail or password</p>
+    <button class="signup-btn">Sign up</button>`;
+
+      document.querySelector('.signup-btn').addEventListener('click', (event) => {
+        event.preventDefault();
+        signUp('main');
+      });
+
+      document.querySelector('.signup-back').addEventListener('click', () => {
+        successLogout();
+        mainSignup();
+      });
+    });
+  }
 };
 
 export const mainLogin = () => {
@@ -194,11 +221,13 @@ export const signUp = (form) => {
   createUser(user)
     .then(() => {
       loginUser(user1);
-      loginForm.innerHTML = '<img class="logout-img" src="assets/images/svg/lock-open.svg"><p class="logout-text">Do you want to exit?</p><div class="logout-buttons"><button class="logout-yes">Yes</button><button class="logout-no">No</button></div>';
-      document.querySelector('.logout-yes').addEventListener('click', successLogout);
-      document.querySelector('.logout-no').addEventListener('click', () => {
-        loginWrapper.remove();
-      });
+      if (loginForm) {
+        loginForm.innerHTML = '<img class="logout-img" src="assets/images/svg/lock-open.svg"><p class="logout-text">Do you want to exit?</p><div class="logout-buttons"><button class="logout-yes">Yes</button><button class="logout-no">No</button></div>';
+        document.querySelector('.logout-yes').addEventListener('click', successLogout);
+        document.querySelector('.logout-no').addEventListener('click', () => {
+          loginWrapper.remove();
+        });
+      }
       successLogin();
     })
     .catch((error) => {
@@ -210,34 +239,6 @@ export const signUp = (form) => {
         }
       }
     });
-};
-
-export const mainSignup = () => {
-  const mainSignupBtn = document.querySelector('.btn-span');
-  const mainLoginBlock = document.querySelector('.sign-in');
-
-  if (mainSignupBtn) {
-    mainSignupBtn.addEventListener('click', () => {
-      mainLoginBlock.innerHTML = `<button class="signup-back">←</button><span class="signup-label">E-mail</span>
-    <input class="signup-email" type="email" placeholder="E-mail:" />
-    <span class="signup-label">Name</span>
-    <input class="signup-name" type="text" placeholder="Name:" />
-    <span class="signup-label">Password</span>
-    <input class="signup-password" minlength="8" type="password" placeholder="Password" />
-    <p class="signup-error hidden">Wrong e-mail or password</p>
-    <button class="signup-btn">Sign up</button>`;
-
-      document.querySelector('.signup-btn').addEventListener('click', (event) => {
-        event.preventDefault();
-        signUp('main');
-      });
-
-      document.querySelector('.signup-back').addEventListener('click', () => {
-        successLogout();
-        mainSignup();
-      });
-    });
-  }
 };
 
 export const successLogin = () => {

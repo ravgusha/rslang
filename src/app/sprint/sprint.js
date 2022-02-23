@@ -7,7 +7,7 @@ import requestUnreg from './sprint-request';
 import { onTimesUp, startTimer } from './timer';
 import checkBoxLsnrOn from './check-box-listener';
 import endOfRound from './end-round';
-import { loadSprintStatRequest } from '../stat';
+// import { loadSprintStatRequest } from '../stat';
 // eslint-disable-next-line import/no-mutable-exports
 export let seriesCounter = 0;
 let words = [];
