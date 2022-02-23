@@ -7,6 +7,7 @@ import requestUnreg from './sprint-request';
 import { onTimesUp, startTimer } from './timer';
 import checkBoxLsnrOn from './check-box-listener';
 import endOfRound from './end-round';
+import { loadSprintStatRequest } from '../stat';
 // eslint-disable-next-line import/no-mutable-exports
 export let seriesCounter = 0;
 let words = [];
@@ -35,11 +36,11 @@ async function sprintRun() {
   }
   if (localStorage.getItem('userId')) {
     words = await requestUnreg();
+    loadSprintStatRequest();
   }
   getUserFromStorage();
   deletePreloader();
 
-  loadSprintState();
   rightAnswersArr.splice(0, rightAnswersArr.length);
   wrongAnswersArr.splice(0, wrongAnswersArr.length);
   checkBoxLsnrOn();
@@ -151,13 +152,12 @@ function playSound(num) {
   if (document.querySelector('#sound-onOff').checked) sound.play();
 }
 
-function loadSprintState() {
+export function loadSprintState() {
   if (sprintStat.rounds === 0) {
     const loadedStat = JSON.parse(localStorage.getItem('sprintStat'));
     for (const key in loadedStat) {
       sprintStat[key] = loadedStat[key];
     }
-    console.log('LOAD', loadedStat);
   }
 }
 

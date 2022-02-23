@@ -1,7 +1,10 @@
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
 import axios from 'axios';
 import { token, userId } from '../auth/authorization';
 import BASE_URL from '../constants';
 import { getUser } from '../render/stat-render';
+import { sprintStat } from './sprint/sprint';
 
 async function statDataWrite() {
   if (getUser() === 'unregistered') {
@@ -11,6 +14,7 @@ async function statDataWrite() {
     document.querySelector('.stat-cards').innerHTML = '';
     document.querySelector('.stat-cards').append(showUnreg);
   } else {
+    // eslint-disable-next-line no-shadow
     const sprintStat = JSON.parse(localStorage.getItem('sprintStat'));
 
     document.querySelector('.sprin-header-span').textContent = `User: ${getUser()}`;
@@ -60,4 +64,24 @@ async function countWords() {
   wordsStat.numberOfLearnt = numberOfLearnt;
 
   localStorage.setItem('wordsStat', JSON.stringify(wordsStat));
+}
+
+export async function loadSprintStatRequest() {
+  const userID = localStorage.getItem('userId');
+  const request = await axios(
+    `${BASE_URL}/users/${userID}/statistics`,
+
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    },
+  );
+  const loadedSprintStat = request.data.optional.sprinStat;
+
+  for (const key in loadedSprintStat) {
+    sprintStat[key] = loadedSprintStat[key];
+  }
 }

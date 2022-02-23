@@ -1,5 +1,9 @@
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable import/no-mutable-exports */
 import axios from 'axios';
+import { sprintStat } from '../app/sprint/sprint';
+import { loadSprintStatRequest } from '../app/stat';
 import BASE_URL from '../constants';
 import { GAME_STATE } from '../Routing/routing';
 
@@ -21,6 +25,7 @@ export const loginUser = async (user) => {
   localStorage.setItem('token', token);
   localStorage.setItem('userId', userId);
   localStorage.setItem('userName', userName);
+  loadSprintStatRequest();
 };
 
 export const headerLogin = () => {
@@ -282,6 +287,10 @@ export const successLogout = () => {
   localStorage.removeItem('userId');
   localStorage.removeItem('page');
   localStorage.removeItem('group');
+  localStorage.removeItem('sprintStat');
+  for (const key in sprintStat) {
+    sprintStat[key] = 0;
+  }
 };
 
 const createLoginForm = () => {
