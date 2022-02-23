@@ -9,14 +9,19 @@ const audiocall = () => {
   title.className = 'audiocall-title';
   title.innerHTML = 'Audio Challange';
   container.append(title);
+
+  const rules = document.createElement('div');
+  rules.className = 'audiocall-rules';
+  container.append(rules);
+
   const button = document.createElement('button');
   button.className = 'audiocall-button off';
   button.innerHTML = 'start';
   container.append(button);
 
-  const group = document.createElement('div');
-  group.className = 'audiocall-group off';
-  container.append(group);
+  const groupNum = document.createElement('div');
+  groupNum.className = 'audiocall-group off';
+  container.append(groupNum);
 
   const progress = document.createElement('div');
   progress.className = 'audiocall-progress off';
