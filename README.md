@@ -3,8 +3,8 @@ RS Lang – приложение для изучения иностранных 
 
 ### Мною сделано:
 
-## Деплой: https://sergeykagal.github.io/rslang_deploy2/#/!
-[image](https://user-images.githubusercontent.com/62184992/176743595-df6aba27-1b0c-4c01-82bb-6e5a08db5268.png)
+## Деплой: https://sergeykagal.github.io/rslang_deploy2/#/
+![image](https://user-images.githubusercontent.com/62184992/176743595-df6aba27-1b0c-4c01-82bb-6e5a08db5268.png)
 
 ## ТЗ
   ### Главная страница приложения
